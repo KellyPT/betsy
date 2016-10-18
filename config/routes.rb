@@ -11,8 +11,7 @@ Rails.application.routes.draw do
   resources :merchants do
     resources :products
   end
-  resources :categories do
-    resources :products, only: [:index, :show]
-  end
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+
+  resources :categories, except: [:edit, :update, :delete]
+
 end
