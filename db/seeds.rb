@@ -61,3 +61,4 @@ CSV.read('seed_csvs/review.csv', :headers => true).map do |line|
   review_hash[:rating] = line[2]
   review_hash[:description] = line[3]
   Review.create(review_hash)
+end
