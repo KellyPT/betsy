@@ -36,6 +36,12 @@ group :development, :test do
 end
 
 group :development do
+  # for bug bashing in the browser
+  gem "better_errors"
+  gem "binding_of_caller"
+  gem "pry-rails"
+  # for seeing our ERD for the visiual peeps
+  gem 'rails-erd'
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
   gem 'web-console'
   gem 'listen', '~> 3.0.5'
