@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+
   root 'sessions#index'
   resources :orders do
     resources :order_items
