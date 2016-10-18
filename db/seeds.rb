@@ -54,11 +54,17 @@ CSV.read('seed_csvs/orderitem.csv', :headers => true).map do |line|
 end
 
 CSV.read('seed_csvs/review.csv', :headers => true).map do |line|
-
   review_hash = {}
   review_hash[:id] = line[0]
   review_hash[:product_id] = line[1]
   review_hash[:rating] = line[2]
   review_hash[:description] = line[3]
   Review.create(review_hash)
+end
+
+CSV.read('seed_csvs/category.csv', :headers => true).map do |line|
+  category_hash = {}
+  category_hash[:id] = line[0]
+  category_hash[:name] = line[1]
+  Category.create(category_hash)
 end
