@@ -1,23 +1,23 @@
 class ReviewsController < ApplicationController
   before_action :get_review, only: [:show, :edit, :update, :destroy]
 
-  # GET /reviews
+  # product_reviews_path	GET	/products/:product_id/reviews
   def index
     @reviews = Review.all
   end
 
-  # GET /reviews/1
+  # product_review_path	GET	/products/:product_id/reviews/:id
   def show; end
 
-  # GET /reviews/new
+  # new_product_review_path	GET	/products/:product_id/reviews/new
   def new
     @review = Review.new
   end
 
-  # GET /reviews/1/edit
+  # edit_product_review_path	GET	/products/:product_id/reviews/:id/edit
   def edit; end
 
-  # POST /reviews
+  # product_review_path POST	/products/:product_id/reviews(.:format)
   def create
     @review = Review.new(review_params)
 
@@ -28,7 +28,7 @@ class ReviewsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /reviews/1
+  # product_reivew_path PATCH/PUT /products/:product_id/reviews/:id
   def update
     if @review.update(review_params)
        redirect_to @review
@@ -37,7 +37,7 @@ class ReviewsController < ApplicationController
     end
   end
 
-  # DELETE /reviews/1
+  # product_review_path DELETE	/products/:product_id/reviews/:id
   def destroy
     @review.destroy
     redirect_to reviews_url
