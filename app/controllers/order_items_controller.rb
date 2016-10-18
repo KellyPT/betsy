@@ -19,6 +19,7 @@ class OrderItemsController < ApplicationController
 
   # order_order_items_path POST	/orders/:order_id/order_items
   def create
+  # see comment about order_item_params - we should add these in the model methods or controller?
     @order_item = OrderItem.new(order_item_params)
     if @order_item.save
      redirect_to @order_item
@@ -29,6 +30,7 @@ class OrderItemsController < ApplicationController
 
   # order_order_items_path PATCH/PUT	/orders/:order_id/order_items/:id
   def update
+  # see comment about order_item_params - we should add these in the model methods or controller?
     if @order_item.update(order_item_params)
       redirect_to @order_item
     else
