@@ -29,6 +29,14 @@ class Order < ApplicationRecord
 
   private
 
+#### EXPIRATION DATE ####
+
+  def expiration_date_cannot_be_in_the_past
+    if self.cc_expiration_date > Date.today
+      errors.add(:cc_expiration_date, "can't be in the past")
+    end
+  end
+
 #### FOR CREDIT CARD NUMBER ####
 
   # Visa, MasterCard, Amex have 13-16 digits
