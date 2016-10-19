@@ -35,6 +35,10 @@ group :development, :test do
   gem 'byebug', platform: :mri
 end
 
+group :test do
+  gem 'minitest-reporters'
+end
+
 group :development do
   # for bug bashing in the browser
   gem "better_errors"
