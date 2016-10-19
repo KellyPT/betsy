@@ -6,15 +6,15 @@ class MerchantsController < ApplicationController
     @merchants = Merchant.all
   end
 
-  # merchant GET    /merchants/:id(.:format)
+  # merchant GET    /merchants/:id
   def show; end
 
-  # new_merchant GET    /merchants/new(.:format)
+  # new_merchant GET    /merchants/new
   def new
     @merchant = Merchant.new
   end
 
-  # edit_merchant GET    /merchants/:id/edit(.:format)
+  # edit_merchant GET    /merchants/:id/edit
   def edit; end
 
   # mechants POST   /merchants
@@ -28,7 +28,7 @@ class MerchantsController < ApplicationController
     end
   end
 
-  # merchant PUT    /merchants/:id(.:format)
+  # merchant PUT    /merchants/:id
   # i don't think users should be updated because this is their log-in
   def update
       if @merchant.update(merchant_params)
@@ -38,7 +38,7 @@ class MerchantsController < ApplicationController
     end
   end
 
-  # merchant DELETE /merchants/:id(.:format)
+  # merchant DELETE /merchants/:id
   def destroy
     @merchant.destroy
     redirect_to merchants_url
