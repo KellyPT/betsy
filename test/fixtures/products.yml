@@ -11,9 +11,15 @@ one:
   merchant_id: 45
   category_id: 300
 
-#
 two:
   name: savoflange
+  price: 13.52
+  quantity: 1
+  merchant_id: 46
+  category_id: 301
+
+three:
+  name: blorble
   price: 13.52
   quantity: 1
   merchant_id: 46
