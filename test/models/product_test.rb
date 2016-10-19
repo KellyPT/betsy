@@ -5,7 +5,6 @@ class ProductTest < ActiveSupport::TestCase
     product = products(:one)
     assert product.valid?
   end
-  puts "bla bla bla"
 
   test "Product must have a name" do
     product = Product.new(price: 2)
