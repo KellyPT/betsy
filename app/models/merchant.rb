@@ -1,7 +1,8 @@
 class Merchant < ApplicationRecord
   has_many :products
+
   validates :email, :user_name, presence: true
-  
+
   #  :uid, :provider,
   # def self.build_from_github(auth_hash)
   #   user          = User.new
