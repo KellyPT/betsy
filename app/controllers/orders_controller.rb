@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
   before_action :get_order, only: [:show, :edit, :update, :destroy]
-  before_action :require_cart
+  before_action :require_order, only: [:create]
 
 
   # orders_path	GET	/orders(.:format)
@@ -25,7 +25,7 @@ class OrdersController < ApplicationController
   def create
     product = Product.find(params[:id])
     order_item = OrderItem.new(quantity: 1)
-    @current_cart.order_items << order_item
+    @order.order_items << order_item
     product.order_items << order_item
 
     if order_item.save
@@ -36,7 +36,6 @@ class OrdersController < ApplicationController
     end
 
   end
-
 
   # order_path PATCH/PUT /orders/:id(.:format)
   def update
@@ -59,20 +58,18 @@ class OrdersController < ApplicationController
       @order = Order.find(params[:id])
     end
 
+     # Before create action, check if there is a cart.  If there is, it is assined as "current_cart." If not, we make a new order.
+    def current_order
+      @order ||= Order.find(session[:order_id]) if session[:order_id]
+    end
+
+    def require_order
+      Order.build_order if current_order.nil?
+    end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_params
       params.require(:order).permit(:buyer_name, :cc_expiration_date, :cc_four_digits, :city, :email, :state, :street, :zip)
     # other fields to be set in methods order_status shipped time_placed
-    end
-
-   # Before order actions, check if there is a cart.  If there is, it is assined as "current_cart." If not, we make a new order.
-    def current_cart
-      @current_cart ||= Order.find(session[:order_id]) if session[:order_id]
-    end
-
-    def require_cart
-      if current_cart.nil?
-        Order.build_order
-      end
     end
 end
