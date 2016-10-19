@@ -7,4 +7,12 @@ class Product < ApplicationRecord
 
   validates :name, presence: :true, uniqueness: :true
   validates :price, presence: :true, numericality: {greater_than: 0}
+  validates :merchant_id, presence: :true
+
+  def update_quantity(number)
+    if (self.quantity + number) < 0
+      return false
+    end
+    return self.quantity += number
+  end
 end

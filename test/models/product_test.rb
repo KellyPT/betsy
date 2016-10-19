@@ -25,6 +25,7 @@ class ProductTest < ActiveSupport::TestCase
     assert_equal product.price, 13.52
     product1 = Product.new(name: "Test product")
     assert_not product1.valid?
+    assert_includes product1.errors, :price
   end
 
   test "Prices can be the same" do
@@ -47,6 +48,29 @@ class ProductTest < ActiveSupport::TestCase
     assert_not product1.valid?
     assert_not product2.valid?
     assert procuct3.valid?
+  end
+
+  test "Product must belong to a Merchant" do
+    product1 = products(:one)
+    product2 = Product.new()
+    assert_not_nil product1.merchant_id
+    assert_not product2.valid?
+    assert_includes product2.errors, :merchant_id
+
+  end
+
+  test "Can update quantity" do
+    product = products(:one)
+    assert_equal product.update_quantity(3), 4
+    assert_equal product.update_quantity(3), 7
+
+  end
+
+  test "Cannot update quantity to below zero" do
+    product = products(:one)
+    assert_equal product.update_quantity(-1), 0
+    assert_not product.update_quantity(-4)
+
   end
 
 end
