@@ -1,32 +1,42 @@
 class OrdersController < ApplicationController
   before_action :get_order, only: [:show, :edit, :update, :destroy]
+  before_action :require_cart
+
 
   # orders_path	GET	/orders(.:format)
   def index
     @orders = Order.all
   end
 
-  # order_path	GET	/orders/:id(.:format)
-  def show; end
+  # # order_path	GET	/orders/:id(.:format)
+  # def show; end
 
   # new_order_path	GET	/orders/new(.:format)
-  def new
-    @order = Order.new
-  end
+  # def new
+  #   if sessions[]
+  #   @order = Order.new
+  # end
 
   # edit_order_path	GET	/orders/:id/edit(.:format)
   def edit; end
 
   # orders_path POST	/orders
+  # assuming we are coming form the product page that has the product_id!....
   def create
-    @order = Order.new(order_params)
+    product = Product.find(params[:id])
+    order_item = OrderItem.new(quantity: 1)
+    @current_cart.order_items << order_item
+    product.order_items << order_item
 
-    if @order.save
-      redirect_to @order
+    if order_item.save
+      redirect_to orders_path
     else
-      render :new
+      flash[:error] = "Could not add product to cart"
+      redirect_to root
     end
+
   end
+
 
   # order_path PATCH/PUT /orders/:id(.:format)
   def update
@@ -53,5 +63,16 @@ class OrdersController < ApplicationController
     def order_params
       params.require(:order).permit(:buyer_name, :cc_expiration_date, :cc_four_digits, :city, :email, :state, :street, :zip)
     # other fields to be set in methods order_status shipped time_placed
+    end
+
+   # Before order actions, check if there is a cart.  If there is, it is assined as "current_cart." If not, we make a new order.
+    def current_cart
+      @current_cart ||= Order.find(session[:order_id]) if session[:order_id]
+    end
+
+    def require_cart
+      if current_cart.nil?
+        Order.build_order
+      end
     end
 end
