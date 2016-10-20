@@ -11,17 +11,7 @@ require 'csv'
 CSV.read('seed_csvs/order.csv', :headers => true).map do |line|
   order_hash = {}
   order_hash[:id] = line[0]
-  order_hash[:buyer_name] = line[1]
-  order_hash[:email] = line[2]
-  order_hash[:street] = line[3]
-  order_hash[:city] = line[4]
-  order_hash[:state] = line[5]
-  order_hash[:zip] = line[6]
-  order_hash[:cc_four_digits] = line[7]
-  order_hash[:cc_expiration_date] = line[8]
-  order_hash[:time_placed] = line[9]
-  order_hash[:order_status] = line[10]
-  order_hash[:shipped] = line[11]
+  order_hash[:order_status] = line[1]
   Order.create(order_hash)
 end
 
@@ -67,4 +57,20 @@ CSV.read('seed_csvs/category.csv', :headers => true).map do |line|
   category_hash[:id] = line[0]
   category_hash[:name] = line[1]
   Category.create(category_hash)
+end
+
+CSV.read('seed_csvs/paymentinfo.csv', :headers => true).map do |line|
+  order_hash = {}
+  order_hash[:id] = line[0]
+  order_hash[:order_id] = line[1]
+  order_hash[:buyer_name] = line[2]
+  order_hash[:email] = line[3]
+  order_hash[:street] = line[4]
+  order_hash[:city] = line[5]
+  order_hash[:state] = line[6]
+  order_hash[:zip] = line[7]
+  order_hash[:cc_four_digits] = line[8]
+  order_hash[:cc_expiration_date] = line[9]
+  order_hash[:time_placed] = line[10]
+  PaymentDetail.create(order_hash)
 end
