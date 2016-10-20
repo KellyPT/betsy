@@ -65,7 +65,7 @@ class OrderItemsController < ApplicationController
       @order_item = OrderItem.find(params[:id])
     end
 
-    
+
 
     # Never trust parameters from the scary internet, only allow the white list through.
     # I don't think we actually need a param for this because we shouldn't set it through the view???
