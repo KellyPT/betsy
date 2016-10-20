@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
+  root 'sessions#index_log_out'
 
-
-  root 'sessions#index'
   resources :orders do
     resources :order_items, except: [:update, :destroy]
   end
@@ -15,4 +14,10 @@ Rails.application.routes.draw do
   resources :categories, except: [:edit, :update, :destroy]
 
   resources :order_items, only: [:update, :destroy]
+
+  get "/auth/:provider/callback" =>  "sessions#create"
+  get "/sessions/", to: "sessions#index_log_in", as: "sessions_log_in"
+  get "/sessions/", to: "sessions#index_log_out", as: "sessions_log_out"
+  delete "/sessions", to: "sessions#destroy"
+
 end
