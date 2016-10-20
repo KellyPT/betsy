@@ -1,4 +1,3 @@
-
 <ul>
   <li><%= image_tag("image_url", class: 'list_image') %></li>
   <li><h3><%= @product.name  %></h3></li>
@@ -25,5 +24,15 @@
   </li>
   <% end %>
 </ul>
+
+<article class="review">
+  <h1>Reviews</h1>
+  <ul>
+    <%  @reviews.each do |f| %>
+    <li>Rating:<%= f.rating %></li>
+    <li>Description: <%= f.description %></li>
+    <% end %>
+  </ul>
+</article>
 
 <%= link_to 'Back', products_path %>

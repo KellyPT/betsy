@@ -10,7 +10,8 @@ class ProductsController < ApplicationController
   # product_path	GET	/products/:id
   # merchant_product_path	GET	/merchants/:merchant_id/products/:id
   def show
-    @review = Review.new  
+    @review = Review.new
+    @reviews = Review.where product_id: @product.id
    end
 
   # new_merchant_product_path	GET	/merchants/:merchant_id/products/new

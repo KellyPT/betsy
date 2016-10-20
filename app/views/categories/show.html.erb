@@ -1,9 +1,6 @@
 <p id="notice"><%= notice %></p>
 <h3><%= @category.name %></h3>
 
-@<%# TODO: change resources to associate catogory to product %>
-<%= render prattial: 'application/products_index' %>
-
-  <%= @category.name %>
+<%= render partial: 'application/products_index' %>
 
 <%= link_to 'Back', categories_path %>
