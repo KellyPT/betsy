@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
   before_action :get_order, only: [:show]
-  before_action :require_order, only: [:create]
+  # before_action :require_order, only: [:create]
 
 
   # # orders_path	GET	/orders(.:format)
@@ -15,23 +15,23 @@ class OrdersController < ApplicationController
   end
 
   # new_order_path	GET	/orders/new(.:format)
-  def new
-    @order = Order.new
-  end
+  # def new
+  #   @order = Order.new
+  # end
 
   # # edit_order_path	GET	/orders/:id/edit(.:format)
   # def edit; end
 
   # orders_path POST	/orders
   def create
-
-    if @order.save
+    if in_stock?
+      # order will have to save - I don't think I need an if statment here?
+      require_order
       session[:order_id] = @order.id
-      # redirect_to order_order_items_path(@order) #=> post!
       redirect_to new_order_order_item_path(@order)
     else
-      flash[:error] = "Could not add product to cart"
-      redirect_to root
+      flash[:error] = "Product is out of stock"
+      redirect_to product_path(@product)
     end
 
   end
@@ -85,13 +85,20 @@ class OrdersController < ApplicationController
     end
 
      # Before create action, check if there is a cart.  If there is, it is assined as "current_cart." If not, we make a new order.
-    # def current_order
-    #   @order ||= Order.find(session[:order_id]) if session[:order_id]
-    # end
+    def current_order
+      @order ||= Order.find(session[:order_id]) if session[:order_id]
+    end
 
     def require_order
-      @order = Order.build_order # if current_order.nil?
+      @order = Order.build_order if current_order.nil?
     end
+
+    def in_stock?
+      @product = Product.find(session[:product_id])
+      @product.update_quantity(-1)
+    end
+
+
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_params

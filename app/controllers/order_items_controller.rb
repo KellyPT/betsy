@@ -12,10 +12,8 @@ class OrderItemsController < ApplicationController
 
   # new_order_order_item_path	GET	/orders/:order_id/order_items/new
   def new
+    @order_item = OrderItem.build_order_item(session[:order_id], session[:product_id] )
 
-    @order_item = OrderItem.new(quantity: 1)
-    @order_item.order_id = session[:order_id]
-    @order_item.product_id = session[:product_id]
     if @order_item.save
       redirect_to order_order_items_path
     else
@@ -66,6 +64,8 @@ class OrderItemsController < ApplicationController
     def get_order_item
       @order_item = OrderItem.find(params[:id])
     end
+
+    
 
     # Never trust parameters from the scary internet, only allow the white list through.
     # I don't think we actually need a param for this because we shouldn't set it through the view???
