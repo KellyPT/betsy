@@ -1,25 +1,4 @@
-<p id="notice"><%= notice %></p>
 
 <h1>Merchants</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @merchants.each do |merchant| %>
-      <tr>
-        <td><%= link_to 'Show', merchant %></td>
-        <td><%= link_to 'Edit', edit_merchant_path(merchant) %></td>
-        <td><%= link_to 'Destroy', merchant, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Merchant', new_merchant_path %>
+<!-- @<%# TODO: name to user_name %> -->
+<%= render partial: '/application/index', locals: { collection: @merchants, name: "user_name", item: "merchant"} %>
