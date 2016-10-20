@@ -1,7 +1,9 @@
 class SessionsController < ApplicationController
-  skip_before_action :require_login, only: [:login, :create]
+  skip_before_action :require_login, only: [:index_log_out, :login, :create]
 
-  def index; end
+  def index_log_out; end
+
+  def index_log_in; end
 
   def create
     auth_hash = request.env['omniauth.auth']
@@ -15,7 +17,7 @@ class SessionsController < ApplicationController
 
     # Save the user ID in the session
     session[:merchant_id] = @merchant.id
-    redirect_to sessions_path
+    redirect_to sessions_log_in_path
   end
 
 
@@ -26,6 +28,6 @@ class SessionsController < ApplicationController
 
   def destroy
     session.delete(:merchant_id)
-    redirect_to login_failure_path #After log in, redirect to homepage
+    redirect_to sessions_log_out_path
   end
 end

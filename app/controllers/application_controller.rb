@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
 
   def require_login
     if current_merchant.nil?
-      flash[:error] = "You must be logged in to view this section."
+      flash[:error] = "You have been logged out. You can browse our website as a Guest User."
       redirect_to root_path
     end
   end
