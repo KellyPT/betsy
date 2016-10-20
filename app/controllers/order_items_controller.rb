@@ -10,34 +10,37 @@ class OrderItemsController < ApplicationController
   def show; end
 
   # new_order_order_item_path	GET	/orders/:order_id/order_items/new
-  def new
-    @order_item = OrderItem.new
-  end
+  # def new
+  #   @order_item = OrderItem.new
+  # end
 
   # edit_order_order_item_path	GET	/orders/:order_id/order_items/:id/edit
-  def edit; end
+  # def edit; end
 
   # order_order_items_path POST	/orders/:order_id/order_items
-  def create
-  # see comment about order_item_params - we should add these in the model methods or controller?
-    @order_item = OrderItem.new(order_item_params)
-    if @order_item.save
-     redirect_to @order_item
-    else
-      render :new
-    end
-  end
+  # def create
+  # # see comment about order_item_params - we should add these in the model methods or controller?
+  #   @order_item = OrderItem.new(order_item_params)
+  #   if @order_item.save
+  #    redirect_to @order_item
+  #   else
+  #     render :new
+  #   end
+  # end
 
   # order_order_items_path PATCH/PUT	/orders/:order_id/order_items/:id
+  # should i make two separate methods or just pass a param in the button?
   def update
-  # see comment about order_item_params - we should add these in the model methods or controller?
-    if @order_item.update(order_item_params)
+    add_item(@order_item)
+    remove_item(@order_item)
+    if @order_item.update
       redirect_to @order_item
     else
       render :edit
     end
   end
 
+  # do we want to destroy items when removed form cart or set quantity = 0? would give vendors more information about the things that people might have ordered but "put back"
   # order_order_items_path DELETE	/orders/:order_id/order_items/:id
   def destroy
     @order_item.destroy

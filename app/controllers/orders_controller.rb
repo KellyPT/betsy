@@ -1,15 +1,18 @@
 class OrdersController < ApplicationController
-  before_action :get_order, only: [:show, :edit, :update, :destroy]
+  before_action :get_order, only: [:show]
   before_action :require_order, only: [:create]
 
 
-  # orders_path	GET	/orders(.:format)
-  def index
-    @orders = Order.all
-  end
+  # # orders_path	GET	/orders(.:format)
+  # def index
+  #   @orders = Order.all
+  # end
 
-  # # order_path	GET	/orders/:id(.:format)
-  # def show; end
+  # order_path	GET	/orders/:id(.:format)
+  # I think we will need this incase we purchase form the show page - do we want to expose the id to the user?
+  def show
+    sessions[:order_id] = @order.id
+  end
 
   # new_order_path	GET	/orders/new(.:format)
   # def new
@@ -17,23 +20,26 @@ class OrdersController < ApplicationController
   #   @order = Order.new
   # end
 
-  # edit_order_path	GET	/orders/:id/edit(.:format)
-  def edit; end
+  # # edit_order_path	GET	/orders/:id/edit(.:format)
+  # def edit; end
 
   # orders_path POST	/orders
   # assuming we are coming form the product page that has the product_id!....
-  def create
+
+def create
     product = Product.find(params[:id])
     order_item = OrderItem.new(quantity: 1)
     @order.order_items << order_item
     product.order_items << order_item
 
     if order_item.save
-      redirect_to orders_path
+      redirect_to order_path(@order)
     else
       flash[:error] = "Could not add product to cart"
       redirect_to root
     end
+
+    sessions[:order_id] = @order.id
 
   end
 
@@ -46,11 +52,38 @@ class OrdersController < ApplicationController
     end
   end
 
-  # order_path DELETE /orders/:id(.:format)
-  def destroy
-    @order.destroy
-    redirect_to orders_url
+  # not sure where this will come from, probably a separate route
+  # same question as with orders - separate route or pass something through the params that lets us decide, and just use that update method with modle methods?
+  def purchase
+    @order.purchase_order
+    if @order.save
+      redirect_to order_path(@order)
+    else
+      flash[:error] = "Could not purchase order"
+      redirect_to root
+    end
+
+    sessions[:order_id] = nil
+
   end
+
+  def cancel
+    @order.cancel_order
+    if @order.save
+      redirect_to order_path(@order)
+    else
+      flash[:error] = "Could not cancel order"
+      redirect_to root
+    end
+
+    sessions[:order_id] = nil
+  end
+
+  # # order_path DELETE /orders/:id(.:format)
+  # def destroy
+  #   @order.destroy
+  #   redirect_to orders_url
+  # end
 
   private
     # Use callbacks to share common setup or constraints between actions.

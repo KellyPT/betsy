@@ -2,6 +2,7 @@ class Order < ApplicationRecord
   has_many :order_items
   has_many :products, through: :order_items
 
+=begin
   before_validation(on: :create) do
     cc_long_enough?
     valid_cc_number?
@@ -20,6 +21,23 @@ class Order < ApplicationRecord
 
   validates :cc_four_digits, presence: true
   validates :cc_expiration_date, presence: true
+
+
+  def self.build_order
+      order          = Order.new
+      order.status   = "pending"
+
+    return order
+  end
+
+  def purchase_order
+    order.status     = "paid"
+    order.time_place = Time.now
+  end
+
+  def cancel_order
+    order.status   = "cancelled"
+  end
 
   # we add the below, don't need a validation
   # validates :time_placed
@@ -85,5 +103,5 @@ class Order < ApplicationRecord
   end
 
 #### END CREDIT CARD NUMBER ####
-
+=end
 end
