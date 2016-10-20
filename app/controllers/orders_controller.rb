@@ -10,9 +10,9 @@ class OrdersController < ApplicationController
 
   # order_path	GET	/orders/:id(.:format)
   # I think we will need this incase we purchase form the show page - do we want to expose the id to the user?
-  def show
-    session[:order_id] = @order.id
-  end
+  def show; end
+    # session[:order_id] = @order.id
+
 
   # new_order_path	GET	/orders/new(.:format)
   # def new
@@ -25,15 +25,12 @@ class OrdersController < ApplicationController
   # orders_path POST	/orders
   def create
     if in_stock?
-      # order will have to save - I don't think I need an if statment here?
       require_order
-      session[:order_id] = @order.id
-      redirect_to new_order_order_item_path(@order)
+      save_order
     else
       flash[:error] = "Product is out of stock"
       redirect_to product_path(@product)
     end
-
   end
 
   # order_path PATCH/PUT /orders/:id(.:format)
@@ -96,6 +93,16 @@ class OrdersController < ApplicationController
     def in_stock?
       @product = Product.find(session[:product_id])
       @product.update_quantity(-1)
+    end
+
+    def save_order
+      if @order.save
+      session[:order_id] = @order.id
+      redirect_to new_order_order_item_path(@order)
+      else
+        flash[:error] = "Something went really wrong!"
+        redirect_to root
+      end
     end
 
 
