@@ -1,25 +1,9 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Order Items</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @order_items.each do |order_item| %>
-      <tr>
-        <td><%= link_to 'Show', order_item %></td>
-        <td><%= link_to 'Edit', edit_order_item_path(order_item) %></td>
-        <td><%= link_to 'Destroy', order_item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Order Item', new_order_item_path %>
+<h1>Your Order</h1>
+<ul>
+<% @order_items.each do |item| %>
+    <!-- <li><%# image_tag(product.image_url, class: 'list_image') %> </li> -->
+      <li> <%= item.product.name %></li>
+      <li> Quantity: <%= item.quantity %></li>
+      <li> Price: <%= item.product.price %></li>
+<% end %>
+</ul>
