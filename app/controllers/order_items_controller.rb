@@ -54,8 +54,9 @@ class OrderItemsController < ApplicationController
   # do we want to destroy items when removed form cart or set quantity = 0? would give vendors more information about the things that people might have ordered but "put back"
   # order_order_items_path DELETE	/orders/:order_id/order_items/:id
   def destroy
+    order = @order_item.order
     @order_item.destroy
-    redirect_to order_items_url
+    redirect_to order_order_items_path(order)
   end
 
   private
