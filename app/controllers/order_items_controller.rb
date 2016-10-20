@@ -41,15 +41,14 @@ class OrderItemsController < ApplicationController
   # end
 
   # order_order_items_path PATCH/PUT	/orders/:order_id/order_items/:id
-  # should i make two separate methods or just pass a param in the button?
   def update
-    # add_item(@order_item)
-    # remove_item(@order_item)
-    # if @order_item.update
-    #   redirect_to @order_item
-    # else
-    #   render :edit
-    # end
+    product = @order_item.product
+    if product.update_quantity(order_item_params["quantity"])
+      @order_item.update(order_item_params)
+    else
+      flash[:error] = "Could not increase item quantity"
+    end
+    redirect_to order_order_items_path(@order_item.order)
   end
 
   # do we want to destroy items when removed form cart or set quantity = 0? would give vendors more information about the things that people might have ordered but "put back"

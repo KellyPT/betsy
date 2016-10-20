@@ -10,6 +10,8 @@ class Product < ApplicationRecord
   validates :merchant_id, presence: :true
 
   def update_quantity(number)
+    # things from the internet come through as string, change to_i
+    number = number.to_i
     if (self.quantity + number) < 0
       return false
     end
