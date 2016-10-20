@@ -11,35 +11,28 @@ class OrdersController < ApplicationController
   # order_path	GET	/orders/:id(.:format)
   # I think we will need this incase we purchase form the show page - do we want to expose the id to the user?
   def show
-    sessions[:order_id] = @order.id
+    session[:order_id] = @order.id
   end
 
   # new_order_path	GET	/orders/new(.:format)
-  # def new
-  #   if sessions[]
-  #   @order = Order.new
-  # end
+  def new
+    @order = Order.new
+  end
 
   # # edit_order_path	GET	/orders/:id/edit(.:format)
   # def edit; end
 
   # orders_path POST	/orders
-  # assuming we are coming form the product page that has the product_id!....
+  def create
 
-def create
-    product = Product.find(params[:id])
-    order_item = OrderItem.new(quantity: 1)
-    @order.order_items << order_item
-    product.order_items << order_item
-
-    if order_item.save
-      redirect_to order_path(@order)
+    if @order.save
+      session[:order_id] = @order.id
+      # redirect_to order_order_items_path(@order) #=> post!
+      redirect_to new_order_order_item_path(@order)
     else
       flash[:error] = "Could not add product to cart"
       redirect_to root
     end
-
-    sessions[:order_id] = @order.id
 
   end
 
@@ -92,12 +85,12 @@ def create
     end
 
      # Before create action, check if there is a cart.  If there is, it is assined as "current_cart." If not, we make a new order.
-    def current_order
-      @order ||= Order.find(session[:order_id]) if session[:order_id]
-    end
+    # def current_order
+    #   @order ||= Order.find(session[:order_id]) if session[:order_id]
+    # end
 
     def require_order
-      Order.build_order if current_order.nil?
+      @order = Order.build_order # if current_order.nil?
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

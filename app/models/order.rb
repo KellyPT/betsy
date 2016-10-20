@@ -21,30 +21,25 @@ class Order < ApplicationRecord
 
   validates :cc_four_digits, presence: true
   validates :cc_expiration_date, presence: true
-
+=end
 
   def self.build_order
-      order          = Order.new
-      order.status   = "pending"
+      order          = self.new
+      order.order_status  = "pending"
 
     return order
   end
 
   def purchase_order
-    order.status     = "paid"
+    order.order_status    = "paid"
     order.time_place = Time.now
   end
 
   def cancel_order
-    order.status   = "cancelled"
+    order.order_status  = "cancelled"
   end
 
-  # we add the below, don't need a validation
-  # validates :time_placed
-  # validates :order_status
-  # # maybe we can get this through order status? drop the  shipped colum?
-  # validates :shipped
-
+=begin
   private
 
 #### EXPIRATION DATE ####

@@ -17,6 +17,7 @@ class OrderItem < ApplicationRecord
       order_item.quantity -= 1
     else
       false
+    end
   end
 
 # display order item method that shows only if order items are > 0?

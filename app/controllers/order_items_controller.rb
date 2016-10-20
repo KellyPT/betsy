@@ -3,29 +3,43 @@ class OrderItemsController < ApplicationController
 
   # order_order_items_path	GET	/orders/:order_id/order_items
   def index
-    @order_items = OrderItem.all
+    order = Order.find(params[:order_id])
+    @order_items = order.order_items
   end
 
   # order_order_item_path	GET	/orders/:order_id/order_items/:id
   def show; end
 
   # new_order_order_item_path	GET	/orders/:order_id/order_items/new
-  # def new
-  #   @order_item = OrderItem.new
-  # end
+  def new
+
+    @order_item = OrderItem.new(quantity: 1)
+    @order_item.order_id = session[:order_id]
+    @order_item.product_id = session[:product_id]
+    if @order_item.save
+      redirect_to order_order_items_path
+    else
+      flash[:error] = "Could not add product to cart"
+      redirect_to root
+    end
+  end
 
   # edit_order_order_item_path	GET	/orders/:order_id/order_items/:id/edit
   # def edit; end
 
-  # order_order_items_path POST	/orders/:order_id/order_items
+  # # order_order_items_path POST	/orders/:order_id/order_items
   # def create
+  #   @order_item = OrderItem.new
+  #   @order_item.order_id = seesion[:order_id]
+  #   @order_tiem.product_id = session[:product_id]
+  # raise
   # # see comment about order_item_params - we should add these in the model methods or controller?
-  #   @order_item = OrderItem.new(order_item_params)
-  #   if @order_item.save
-  #    redirect_to @order_item
-  #   else
-  #     render :new
-  #   end
+  #   # @order_item = OrderItem.new(order_item_params)
+  #   # if @order_item.save
+  #   #  redirect_to @order_item
+  #   # else
+  #   #   render :new
+  #   # end
   # end
 
   # order_order_items_path PATCH/PUT	/orders/:order_id/order_items/:id
