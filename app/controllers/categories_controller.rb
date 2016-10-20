@@ -7,7 +7,9 @@ class CategoriesController < ApplicationController
   end
 
   # new_category GET    /categories/new
-  def show; end
+  def show
+    @products = @category.products
+  end
 
   # GET /categories/new
   def new

@@ -7,7 +7,9 @@ class MerchantsController < ApplicationController
   end
 
   # merchant GET    /merchants/:id
-  def show; end
+  def show
+    @products = @merchant.products
+   end
 
   # new_merchant GET    /merchants/new
   def new

@@ -1,4 +1,7 @@
 <p id="notice"><%= notice %></p>
 
-<%= link_to 'Edit', edit_merchant_path(@merchant) %> |
+<h3>Browse <%="#{@merchant.user_name}" %>'s Products</h3>
+
+<%= render partial: '/application/products_index' %>
+
 <%= link_to 'Back', merchants_path %>

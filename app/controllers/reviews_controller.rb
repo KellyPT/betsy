@@ -3,7 +3,8 @@ class ReviewsController < ApplicationController
 
   # product_reviews_path	GET	/products/:product_id/reviews
   def index
-    @reviews = Review.all
+    # @reviews = Review.all
+    @product = Product.find(params[:product_id])
   end
 
   # product_review_path	GET	/products/:product_id/reviews/:id
@@ -11,7 +12,10 @@ class ReviewsController < ApplicationController
 
   # new_product_review_path	GET	/products/:product_id/reviews/new
   def new
-    @review = Review.new
+    # @review = Review.new
+    @product = Product.find(params[:product_id])
+    @product_review = @product.review.build
+
   end
 
   # edit_product_review_path	GET	/products/:product_id/reviews/:id/edit
@@ -19,19 +23,17 @@ class ReviewsController < ApplicationController
 
   # product_review_path POST	/products/:product_id/reviews(.:format)
   def create
-    @review = Review.new(review_params)
+    product = Product.find(params[:product_id])
+    @review_product = product.reviews.create(review_params)
+    redirect_to product_reviews_path(product.id)
 
-    if @review.save
-      redirect_to @review
-    else
-      render :new
-    end
   end
 
   # product_reivew_path PATCH/PUT /products/:product_id/reviews/:id
   def update
+    @product = Product.find(params[:product_id])
     if @review.update(review_params)
-       redirect_to @review
+       redirect_to product_path(@product)
     else
       render :edit
     end

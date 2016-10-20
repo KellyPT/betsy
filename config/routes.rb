@@ -13,5 +13,5 @@ Rails.application.routes.draw do
   end
 
   resources :categories, except: [:edit, :update, :delete]
-
+  
 end
