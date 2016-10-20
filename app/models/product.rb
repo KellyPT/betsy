@@ -10,9 +10,11 @@ class Product < ApplicationRecord
   validates :merchant_id, presence: :true
 
   def update_quantity(number)
-    if (self.quantity + number) < 0
-      return false
-    end
-    return self.quantity += number
+    self.quantity += number
   end
+
+  def check_availability(number)
+    self.quantity >= number
+  end
+  
 end
