@@ -1,6 +1,9 @@
 class OrdersController < ApplicationController
   before_action :get_order, only: [:show, :edit, :update, :destroy]
 
+  # Kelly: I don't know how to use controller filter here yet. So I will temporarily skip authentication requirements.
+  skip_before_action :require_login
+  
   # orders_path	GET	/orders(.:format)
   def index
     @orders = Order.all

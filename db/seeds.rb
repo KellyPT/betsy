@@ -41,6 +41,8 @@ CSV.read('seed_csvs/merchant.csv', :headers => true).map do |line|
   merchant[:id] = line[0]
   merchant[:user_name] = line[1]
   merchant[:email] = line[2]
+  merchant[:uid] = line[3]
+  merchant[:provider] = line[4]
   Merchant.create(merchant)
 end
 

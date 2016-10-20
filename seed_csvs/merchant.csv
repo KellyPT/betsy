@@ -1,6 +1,6 @@
-id,username,email
-1,"Kelly","trankphuong@gmail.com"
-2,"Beylul","bkbreab8@gmail.com"
-3,"Sarah","nahmisa@gmail.com"
-4,"Guinevere","guineveresaenger@yahoo.com"
-5,"Kari","kari@adadevelopersacademy.org"
+id,username,email,uid,provider
+1,"KellyPT","trankphuong@gmail.com",8165914,"github"
+2,"KellyPT","trankphuong@gmail.com",8165914,"github"
+3,"KellyPT","trankphuong@gmail.com",8165914,"github"
+4,"KellyPT","trankphuong@gmail.com",8165914,"github"
+5,"KellyPT","trankphuong@gmail.com",8165914,"github"

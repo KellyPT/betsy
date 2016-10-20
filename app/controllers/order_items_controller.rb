@@ -1,5 +1,8 @@
 class OrderItemsController < ApplicationController
   before_action :get_order_item, only: [:show, :edit, :update, :destroy]
+  
+  # Kelly: I don't know how to use controller filter here yet. So I will temporarily skip authentication requirements.
+  skip_before_action :require_login
 
   # order_order_items_path	GET	/orders/:order_id/order_items
   def index

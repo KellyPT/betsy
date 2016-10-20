@@ -1,5 +1,8 @@
 class MerchantsController < ApplicationController
   before_action :get_merchant, only: [:show, :edit, :update, :destroy]
+  
+  # Kelly: I don't know how to use controller filter here yet. So I will temporarily skip authentication requirements.
+  skip_before_action :require_login
 
   # merchants GET    /merchants
   def index
@@ -31,10 +34,10 @@ class MerchantsController < ApplicationController
   # merchant PUT    /merchants/:id
   # i don't think users should be updated because this is their log-in
   def update
-      if @merchant.update(merchant_params)
-       redirect_to @merchant
-      else
-       render :edit
+    if @merchant.update(merchant_params)
+     redirect_to @merchant
+    else
+     render :edit
     end
   end
 
@@ -45,14 +48,14 @@ class MerchantsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def get_merchant
-      @merchant = Merchant.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def get_merchant
+    @merchant = Merchant.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    # I think this will come through the factory
-    # def merchant_params
-    #   params.require(:merchant).permit(:email, :username)
-    # end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  # I think this will come through the factory
+  def merchant_params
+    params.require(:merchant).permit(:email, :user_name, :uid, :provider)
+  end
 end
