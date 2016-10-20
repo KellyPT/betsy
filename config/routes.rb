@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   root 'sessions#index'
   resources :orders do
-    resources :order_items
+    resources :order_items, except: [:update]
   end
   resources :products, only: [:index, :show] do
     resources :reviews
@@ -13,5 +13,6 @@ Rails.application.routes.draw do
   end
 
   resources :categories, except: [:edit, :update, :delete]
-  
+
+  resources :order_items, only: [:update]
 end

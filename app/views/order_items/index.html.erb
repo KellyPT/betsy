@@ -1,9 +1,17 @@
 <h1>Your Order</h1>
 <ul>
 <% @order_items.each do |item| %>
-    <!-- <li><%# image_tag(product.image_url, class: 'list_image') %> </li> -->
+
       <li> <%= item.product.name %></li>
-      <li> Quantity: <%= item.quantity %></li>
+      <li>
+        <%= form_for(item) do |f| %>
+          <%= f.label :quantity %>
+          <%= f.number_field :quantity,
+                              in: 1.0..item.product.quantity,
+                            step: 1.0 %>
+          <%= f.submit "Update" %>
+        <% end %>
+      </li>
       <li> Price: <%= item.product.price %></li>
 <% end %>
 </ul>
