@@ -49,7 +49,7 @@ class ProductsController < ApplicationController
   #   else
   #      render :new
   #   end
-  # end
+  end
 
   # merchant_product_path PATCH/PUT /merchants/:merchant_id/products/:id
   def update
