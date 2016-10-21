@@ -16,3 +16,5 @@
       <li class= "link"><%= link_to 'Remove from Cart', order_item_path(item), method: :delete %></li>
 <% end %>
 </ul>
+
+<%= link_to 'Purchase Cart', new_order_payment_detail_path(@order) %>

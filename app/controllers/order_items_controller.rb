@@ -3,8 +3,8 @@ class OrderItemsController < ApplicationController
 
   # order_order_items_path	GET	/orders/:order_id/order_items
   def index
-    order = Order.find(params[:order_id])
-    @order_items = order.order_items
+    @order = Order.find(params[:order_id])
+    @order_items = @order.order_items
   end
 
   # order_order_item_path	GET	/orders/:order_id/order_items/:id
