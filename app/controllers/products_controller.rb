@@ -33,7 +33,7 @@ class ProductsController < ApplicationController
   # new_merchant_product_path	GET	/merchants/:merchant_id/products/new
   def new
     merchant = Merchant.find(params[:merchant_id])
-    @merchant_product = merchant.product.build
+    @merchant_product = merchant.products.build
   end
 
   # edit_merchant_product_path	GET	/merchants/:merchant_id/products/:id/edit
