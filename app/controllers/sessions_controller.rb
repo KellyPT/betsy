@@ -28,4 +28,8 @@ class SessionsController < ApplicationController
     session.delete(:merchant_id)
     redirect_to sessions_log_out_path
   end
+
+  def merchant_login
+    @merchant = Merchant.find(session[:merchant_id])
+  end
 end
