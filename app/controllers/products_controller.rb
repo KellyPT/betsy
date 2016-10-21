@@ -2,12 +2,24 @@ class ProductsController < ApplicationController
   before_action :get_product, only: [:show, :edit, :update, :destroy]
 
   # Kelly: I don't know how to use controller filter here yet. So I will temporarily skip authentication requirements.
+
   skip_before_action :require_login, except: [:new, :create]
 
   # products_path	GET	/products
   # merchant_products_path	GET	/merchants/:merchant_id/products
   def index
-    @products = Product.all
+    # @products = Product.where category_id
+    # @catogories = Category.find(params[:category_id])
+    if params[:category_id] != nil
+      category = Category.find(params[:category_id])
+      @products = category.products
+    elsif params[:merchant_id] != nil
+      merchant = Merchant.find(params[:merchant_id])
+      @products = merchant.products
+    else
+      @products = Product.all
+    end
+    # raise
   end
 
   # product_path	GET	/products/:id

@@ -9,9 +9,9 @@ class CategoriesController < ApplicationController
   end
 
   # new_category GET    /categories/new
-  def show
-    @products = @category.products
-  end
+  # def show
+  #   @products = @category.products
+  # end
 
   # GET /categories/new
   def new
@@ -26,29 +26,12 @@ class CategoriesController < ApplicationController
 
     if @category.save
       redirect_to @category
+      #redirect_to merchant_path(@user)
     else
       render :new
     end
   end
 
-
-  # def update
-  #   respond_to do |format|
-  #     if @category.update(category_params)
-  #       format.html { redirect_to @category, notice: 'Category was successfully updated.' }
-  #       format.json { render :show, status: :ok, location: @category }
-  #     else
-  #       format.html { render :edit }
-  #       format.json { render json: @category.errors, status: :unprocessable_entity }
-  #     end
-  #   end
-  # end
-
-  # catergory DELETE /categories/:id
-  def destroy
-    @category.destroy
-    redirect_to categories_url
-  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
