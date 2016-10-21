@@ -8,6 +8,15 @@ class OrdersController < ApplicationController
   #   @orders = Order.all
   # end
 
+  # Kelly: I don't know how to use controller filter here yet. So I will temporarily skip authentication requirements.
+  skip_before_action :require_login
+
+  # orders_path	GET	/orders(.:format)
+  def index
+    @orders = Order.all
+  end
+
+
   # order_path	GET	/orders/:id(.:format)
   # I think we will need this incase we purchase form the show page - do we want to expose the id to the user?
   def show; end
