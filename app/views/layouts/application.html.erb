@@ -16,7 +16,7 @@
       <h3>ROBITS</h3>
       <nav>
         <% if session[:merchant_id] %>
-          Login Successful! Welcome! <%= @current_merchant.user_name %>
+          Login Successful! Welcome! <%# @current_merchant.user_name %>
           <%= button_to "Log out", sessions_path, method: :delete %>
           <%= button_to "Merchant Control", sessions_merchant_login_path, method: :get %>
         <% else %>
