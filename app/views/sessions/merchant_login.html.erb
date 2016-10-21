@@ -1,0 +1,32 @@
+<h3>MAIN MENU:</h3>
+
+<h4>Welcome, <%= @merchant.user_name %></h4>
+<p>
+  This is what a Merchant can do:
+</p>
+
+<li>Create new categories (categories are shared between all merchants) <%= link_to "Create new categories", new_category_path, method: :get %></li>
+<li>Create a new product providing:name; description; price; photo URL; stock</li>
+<li>Assign my products to any number of categories</li>
+<li>Retire a product from being sold, which hides it from browsing</li>
+<li>View an account page to edit/update my existing products</li>
+<li>View an account page showing my order fulfillment</li>
+
+<ul>On the order fulfillment page:
+<li>Total Revenue</li>
+<li>Total Revenue by status</li>
+<li>Total number of orders by status</li>
+<li>Filter orders displayed by status</li>
+<li>Link to each individual order</li>
+</ul>
+
+<ul>A list of orders including at least one of my products:
+<li>Each order item sold by me with a quantity and line-item subtotal
+<li>A link to the item description page
+<li>DateTime the order was placed
+<li>Link to transition the order item to marked as shipped
+<li>The current status of the order ("pending", "paid", "complete", "cancelled")
+</ul>
+
+<ul>View an individual order to see the user's: Name; Email address; Mailing address; Last four digits of their credit card; Credit card expiration date
+</ul>
