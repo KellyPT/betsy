@@ -21,10 +21,6 @@ class OrdersController < ApplicationController
     end
   end
 
-=begin
- Are not using these methods yet -- need to think about:
-  how to change order status on purchase --> update or edit
-  how to cancel an order --> delete
   def update
     if @order.update(order_params)
       redirect_to @order
@@ -32,6 +28,12 @@ class OrdersController < ApplicationController
       render :edit
     end
   end
+
+=begin
+ Are not using these methods yet -- need to think about:
+  how to change order status on purchase --> update or edit
+  how to cancel an order --> delete
+
 
   # not sure where this will come from, probably a separate route
   # same question as with orders - separate route or pass something through the params that lets us decide, and just use that update method with modle methods?

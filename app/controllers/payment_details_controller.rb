@@ -13,7 +13,7 @@ class PaymentDetailsController < ApplicationController
     @payment_details.record_time_placed
     if @payment_details.save
       reset_session_values
-      Order.find(params[:order_id]).mark_order_paid
+      update_order_status
       redirect_to @payment_details
     else
        render :new
@@ -32,5 +32,13 @@ class PaymentDetailsController < ApplicationController
     def reset_session_values
       session[:order_id] = nil
       session[:product_id] = nil
+    end
+
+    def update_order_status
+      order = Order.find(params[:order_id])
+      order.mark_order_paid
+      unless order.save
+      flash[:error] = "Could not mark order paid"
+      end
     end
 end

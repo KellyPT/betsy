@@ -12,10 +12,12 @@ class Order < ApplicationRecord
 
   def mark_order_paid
     self.order_status    = "paid"
+    return self
   end
 
   def cancel_order
     self.order_status  = "cancelled"
+    return self
   end
 
 end
