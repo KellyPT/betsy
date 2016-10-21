@@ -12,8 +12,8 @@ class PaymentDetailsController < ApplicationController
     @payment_details = PaymentDetail.new(payment_details_params)
     @payment_details.record_time_placed
     if @payment_details.save
-      session[:order_id] = nil
-      session[:product_id] = nil
+      reset_session_values
+      Order.find(params[:order_id]).mark_order_paid
       redirect_to @payment_details
     else
        render :new
@@ -27,5 +27,10 @@ class PaymentDetailsController < ApplicationController
 
     def payment_details_params
       params.require(:payment_details).permit(:buyer_name, :email, :cc_expiration_date, :cc_four_digits, :city, :email, :state, :street, :zip, :order_id)
+    end
+
+    def reset_session_values
+      session[:order_id] = nil
+      session[:product_id] = nil
     end
 end

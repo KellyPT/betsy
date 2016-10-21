@@ -10,13 +10,12 @@ class Order < ApplicationRecord
     return order
   end
 
-  def purchase_order
-    order.order_status    = "paid"
-    order.time_place = Time.now
+  def mark_order_paid
+    self.order_status    = "paid"
   end
 
   def cancel_order
-    order.order_status  = "cancelled"
+    self.order_status  = "cancelled"
   end
 
 end
