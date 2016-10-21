@@ -2,4 +2,10 @@
 
 <h1>Categories</h1>
 
-<%= render partial: '/application/index', locals: {collection: @categories, field:'name'}%>
+<ul>
+  <% @categories.each do |item| %>
+  <li><%= link_to (item.name),  category_products_path(item) %></li>
+  <% end %>
+</ul>
+
+<%#render partial: '/application/index', locals: {collection: @categories, field:'name'}%>

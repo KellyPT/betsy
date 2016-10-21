@@ -11,12 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
-
-ActiveRecord::Schema.define(version: 20161020042645) do
-
-ActiveRecord::Schema.define(version: 20161020234653) do
-
+ActiveRecord::Schema.define(version: 20161021211559) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
@@ -77,7 +72,6 @@ ActiveRecord::Schema.define(version: 20161020234653) do
 
   create_table "products", force: :cascade do |t|
     t.integer  "merchant_id"
-    t.integer  "category_id"
     t.string   "name"
     t.float    "price"
     t.integer  "quantity"
@@ -85,7 +79,6 @@ ActiveRecord::Schema.define(version: 20161020234653) do
     t.datetime "updated_at"
   end
 
-  add_index "products", ["category_id"], name: "index_products_on_category_id"
   add_index "products", ["merchant_id"], name: "index_products_on_merchant_id"
 
   create_table "reviews", force: :cascade do |t|
