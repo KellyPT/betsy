@@ -10,7 +10,7 @@ class PaymentDetailsController < ApplicationController
 
   def create
     @payment_details = PaymentDetail.new(payment_details_params)
-    @payment_details.time_placed = Time.now
+    @payment_details.record_time_placed
     if @payment_details.save
       session[:order_id] = nil
       session[:product_id] = nil
