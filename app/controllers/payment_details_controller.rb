@@ -2,7 +2,11 @@ class PaymentDetailsController < ApplicationController
     before_action :get_payment_details, only: [:show]
     skip_before_action :require_login
 
-  def show; end
+  def show
+    @order = @payment_details.order
+    @order_items = @order.order_items
+    @total_order_price = sum_total_prices
+  end
 
   def new
     @payment_details = PaymentDetail.new
@@ -10,6 +14,7 @@ class PaymentDetailsController < ApplicationController
 
   def create
     @payment_details = PaymentDetail.new(payment_details_params)
+    @payment_details.set_order_id(params[:order_id])
     @payment_details.record_time_placed
     if @payment_details.save
       reset_session_values
@@ -26,7 +31,7 @@ class PaymentDetailsController < ApplicationController
     end
 
     def payment_details_params
-      params.require(:payment_details).permit(:buyer_name, :email, :cc_expiration_date, :cc_four_digits, :city, :email, :state, :street, :zip, :order_id)
+      params.require(:payment_details).permit(:buyer_name, :email, :cc_expiration_date, :cc_four_digits, :city, :email, :state, :street, :zip)
     end
 
     def reset_session_values
@@ -40,5 +45,16 @@ class PaymentDetailsController < ApplicationController
       unless order.save
       flash[:error] = "Could not mark order paid"
       end
+    end
+
+    def sum_total_prices
+      sum = 0
+      @order_items.each do |item|
+        product = item.product
+        quantity = item.quantity
+        price = product.price
+        sum  += quantity * price
+      end
+      return sum
     end
 end

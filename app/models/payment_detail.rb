@@ -27,6 +27,11 @@ class PaymentDetail < ActiveRecord::Base
     def record_time_placed
       self.time_placed = Time.now
     end
+
+    def set_order_id(this_order_id)
+      self.order_id = this_order_id
+    end
+
   private
 
   #### EXPIRATION DATE ####

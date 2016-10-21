@@ -1,1 +1,38 @@
 <h1>This is the confirmation page</h1>
+<main>
+
+  <section>
+    <ul>
+      <% @order_items.each  do |item| %>
+      <% product = item.product %>
+      <li>
+        <%= link_to product.name, product_path(product) %>
+      </li>
+      <li>
+        Price: <%= price = product.price %>
+      </li>
+      <li>
+      Quantity: <%= quantity = item.quantity %>
+      </li>
+      <li>
+        Subtotal: <%= subtotal = price * quantity %>
+      </li>
+      <% end %>
+    </ul>
+  </section>
+
+  <section>
+    <ul>
+      <li>
+        Total Price: <%= @total_order_price %>
+      </li>
+      <li>
+      Order Status: <%= @order.order_status %>
+      </li>
+      <li>
+        Time placed: <%= @payment_details.time_placed %>
+      </li>
+    </ul>
+  </section>
+
+</main>
