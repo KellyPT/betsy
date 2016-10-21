@@ -32,7 +32,8 @@ class ProductsController < ApplicationController
 
   # new_merchant_product_path	GET	/merchants/:merchant_id/products/new
   def new
-    @product = Product.new
+    merchant = Merchant.find(params[:merchant_id])
+    @merchant_product = merchant.product.build
   end
 
   # edit_merchant_product_path	GET	/merchants/:merchant_id/products/:id/edit
@@ -40,12 +41,14 @@ class ProductsController < ApplicationController
 
   # merchant_products_path POST	/merchants/:merchant_id/products
   def create
-    @product = Product.new(product_params)
-    if @product.save
-       redirect_to @product
-    else
-       render :new
-    end
+    merchant = Merchant.find(params[:merchant_id])
+    @merchant_product = merchant.products.create(product_params)
+    redirect_to merchant_path(merchant.id)
+  #   if @product.save
+  #      redirect_to @product
+  #   else
+  #      render :new
+  #   end
   end
 
   # merchant_product_path PATCH/PUT /merchants/:merchant_id/products/:id
