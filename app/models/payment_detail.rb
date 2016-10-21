@@ -19,6 +19,7 @@ class PaymentDetail < ActiveRecord::Base
 
     validates :cc_four_digits, presence: true, length: { is: 4 }
     validates :cc_expiration_date, presence: true
+    # validate :expiration_date_cannot_be_in_the_past
 
     validates :time_placed, presence: true
 
@@ -31,10 +32,11 @@ class PaymentDetail < ActiveRecord::Base
   #### EXPIRATION DATE ####
 
     def expiration_date_cannot_be_in_the_past
-      if self.cc_expiration_date > Date.today
+      if  self.cc_expiration_date >= Time.now
         errors.add(:cc_expiration_date, "can't be in the past")
       end
     end
+
 
   #### FOR CREDIT CARD NUMBER ####
 
