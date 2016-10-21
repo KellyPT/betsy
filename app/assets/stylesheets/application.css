@@ -13,3 +13,15 @@
  *= require_tree .
  *= require_self
  */
+
+body {
+  background-image: url("cute_robots.jpg");
+  background-size: auto;
+}
+
+.container {
+  background-color: #F1F2F2;
+  opacity: 0.90;
+  overflow: hidden;
+  margin: 0px;
+}

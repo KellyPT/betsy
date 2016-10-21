@@ -1,5 +1,5 @@
 <% if session[:merchant_id] %>
-  <p>Login Successful! Welcome!</p>
+  <p>Login Successful! Welcome! <%= @current_merchant.user_name %></p>
 <% end %>
 
 <h3>HOMEPAGE | WELCOME TO ROBITS </h3>

@@ -20,9 +20,7 @@ class SessionsController < ApplicationController
     redirect_to sessions_log_in_path
   end
 
-
-  def login_failure
-  end
+  def login_failure; end
 
   def login; end
 
