@@ -84,6 +84,7 @@ class OrdersController < ApplicationController
       @order = Order.build_order if current_order.nil?
     end
 
+    # maybe make self method? Ask guin
     def in_stock?
       @product = Product.find(session[:product_id])
       @product.update_quantity(-1)
