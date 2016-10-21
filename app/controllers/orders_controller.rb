@@ -106,8 +106,8 @@ class OrdersController < ApplicationController
 
     def save_order
       if @order.save
-      session[:order_id] = @order.id
-      redirect_to new_order_order_item_path(@order)
+        session[:order_id] = @order.id
+        redirect_to new_order_order_item_path(@order)
       else
         flash[:error] = "Something went really wrong!"
         redirect_to root
