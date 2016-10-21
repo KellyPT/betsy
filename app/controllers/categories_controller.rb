@@ -1,5 +1,7 @@
 class CategoriesController < ApplicationController
   before_action :get_category, only: [:show, :edit, :update, :destroy]
+  #only logged in Merchant user can create a new Category
+  skip_before_action :require_login, except: [:new, :create]
 
   # categories GET    /categories
   def index
@@ -7,7 +9,9 @@ class CategoriesController < ApplicationController
   end
 
   # new_category GET    /categories/new
-  def show; end
+  def show
+    @products = @category.products
+  end
 
   # GET /categories/new
   def new

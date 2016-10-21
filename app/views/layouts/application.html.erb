@@ -11,6 +11,16 @@
   </head>
 
   <body>
+    <header>
+      <h1>ROBITS</h1>
+      <nav>
+        <% if session[:merchant_id] %>
+          <%= button_to "Log out", sessions_path, method: :delete %>
+        <% else %>
+          <%= button_to "Log In", "/auth/github", method: :get %>
+        <% end %>
+      </nav>
+    </header>
     <%= yield %>
   </body>
 </html>

@@ -1,4 +1,38 @@
-<p id="notice"><%= notice %></p>
+<ul>
+  <li><%= image_tag("image_url", class: 'list_image') %></li>
+  <li><h3><%= @product.name  %></h3></li>
+</ul>
 
-<%= link_to 'Edit', edit_product_path(@product) %> |
+<ul class="product-price-des">
+  <li> Price: $<%= @product.price %></li>
+  <li>In Stock: <%= @product.quantity %></li>
+  <li class= "link"><%= link_to 'Purchase', orders_path, method: :post %></li>
+</ul>
+
+<ul>
+  <%= form_for [@product, @review] do |f| %>
+  <li class="field">
+    <%= f.label :rating %>
+    <%= f.text_field :rating %>
+  </li>
+  <li class="field">
+    <%= f.label :description %>
+    <%= f.text_field :description %>
+  </li>
+  <li class="actions">
+    <%= f.submit "Submit Review" %>
+  </li>
+  <% end %>
+</ul>
+
+<article class="review">
+  <h1>Reviews</h1>
+  <ul>
+    <%  @reviews.each do |f| %>
+    <li>Rating:<%= f.rating %></li>
+    <li>Description: <%= f.description %></li>
+    <% end %>
+  </ul>
+</article>
+
 <%= link_to 'Back', products_path %>

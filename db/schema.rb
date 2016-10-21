@@ -11,7 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161018213025) do
+
+
+ActiveRecord::Schema.define(version: 20161020042645) do
+
+ActiveRecord::Schema.define(version: 20161020234653) do
+
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
@@ -19,11 +24,21 @@ ActiveRecord::Schema.define(version: 20161018213025) do
     t.datetime "updated_at"
   end
 
+  create_table "categories_products", id: false, force: :cascade do |t|
+    t.integer "category_id"
+    t.integer "product_id"
+  end
+
+  add_index "categories_products", ["category_id"], name: "index_categories_products_on_category_id"
+  add_index "categories_products", ["product_id"], name: "index_categories_products_on_product_id"
+
   create_table "merchants", force: :cascade do |t|
     t.string   "user_name"
     t.string   "email"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "uid"
+    t.string   "provider"
   end
 
   create_table "order_items", force: :cascade do |t|
@@ -38,6 +53,13 @@ ActiveRecord::Schema.define(version: 20161018213025) do
   add_index "order_items", ["product_id"], name: "index_order_items_on_product_id"
 
   create_table "orders", force: :cascade do |t|
+    t.string   "order_status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "payment_details", force: :cascade do |t|
+    t.integer  "order_id"
     t.string   "buyer_name"
     t.string   "email"
     t.string   "street"
@@ -45,13 +67,13 @@ ActiveRecord::Schema.define(version: 20161018213025) do
     t.string   "state"
     t.integer  "zip"
     t.integer  "cc_four_digits"
-    t.datetime "cc_expiration_date"
+    t.integer  "cc_expiration_date"
     t.datetime "time_placed"
-    t.string   "order_status"
-    t.boolean  "shipped"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
   end
+
+  add_index "payment_details", ["order_id"], name: "index_payment_details_on_order_id"
 
   create_table "products", force: :cascade do |t|
     t.integer  "merchant_id"
