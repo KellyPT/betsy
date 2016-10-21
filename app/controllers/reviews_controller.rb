@@ -3,7 +3,7 @@ class ReviewsController < ApplicationController
 
   # Kelly: I don't know how to use controller filter here yet. So I will temporarily skip authentication requirements.
   skip_before_action :require_login
-  
+
   # product_reviews_path	GET	/products/:product_id/reviews
   def index
     # @reviews = Review.all
@@ -16,8 +16,8 @@ class ReviewsController < ApplicationController
   # new_product_review_path	GET	/products/:product_id/reviews/new
   def new
     # @review = Review.new
-    @product = Product.find(params[:product_id])
-    @product_review = @product.review.build
+    product = Product.find(params[:product_id])
+    @product_review = product.review.build
 
   end
 
