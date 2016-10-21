@@ -17,18 +17,26 @@ class PaymentDetail < ActiveRecord::Base
       # US Zip for MA is min: 1001, AK is max: 99950
     validates :zip, presence: true, numericality: { greater_than: 1000,  less_than: 99951, only_integer: true }
 
-    validates :cc_four_digits, presence: true
+    validates :cc_four_digits, presence: true, length: { is: 4 }
     validates :cc_expiration_date, presence: true
+    # validate :expiration_date_cannot_be_in_the_past
 
-    private
+    validates :time_placed, presence: true
+
+
+    def record_time_placed
+      self.time_placed = Time.now
+    end
+  private
 
   #### EXPIRATION DATE ####
 
     def expiration_date_cannot_be_in_the_past
-      if self.cc_expiration_date > Date.today
+      if  self.cc_expiration_date >= Time.now
         errors.add(:cc_expiration_date, "can't be in the past")
       end
     end
+
 
   #### FOR CREDIT CARD NUMBER ####
 

@@ -1,6 +1,7 @@
 <h1>Pay!!!</h1>
+<main>
 
-<%= form_for :payment_details, url: {action: "create"} do |f| %>
+  <%= form_for :payment_details, url: {action: "create"} do |f| %>
   <%= f.label :buyer_name %>
   <%= f.text_field :buyer_name %>
 
@@ -28,8 +29,8 @@
   <%= f.label :cc_expiration_date %>
   <%= f.date_field :cc_expiration_date %>
 
-  <%# t.datetime :time_placed  %>
 
 
   <%= f.submit "Checkout" %>
-<% end %>
+  <% end %>
+</main>
