@@ -22,7 +22,6 @@ CSV.read('seed_csvs/product.csv', :headers => true).map do |line|
   product_hash[:quantity] = line[2]
   product_hash[:price] = line[3]
   product_hash[:merchant_id] = line[4]
-  product_hash[:category_id] = line[5]
   Product.create(product_hash)
 end
 
