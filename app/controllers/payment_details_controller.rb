@@ -21,12 +21,10 @@ class PaymentDetailsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def get_payment_details
       @payment_details = PaymentDetail.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def payment_details_params
       params.require(:payment_details).permit(:buyer_name, :email, :cc_expiration_date, :cc_four_digits, :city, :email, :state, :street, :zip, :order_id)
     end
