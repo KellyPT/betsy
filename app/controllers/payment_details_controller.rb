@@ -1,5 +1,6 @@
 class PaymentDetailsController < ApplicationController
     before_action :get_payment_details, only: [:show]
+    skip_before_action :require_login
 
   def show; end
 
