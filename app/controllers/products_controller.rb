@@ -8,8 +8,6 @@ class ProductsController < ApplicationController
   # products_path	GET	/products
   # merchant_products_path	GET	/merchants/:merchant_id/products
   def index
-    # @products = Product.where category_id
-    # @catogories = Category.find(params[:category_id])
     if params[:category_id] != nil
       category = Category.find(params[:category_id])
       @products = category.products
@@ -19,7 +17,7 @@ class ProductsController < ApplicationController
     else
       @products = Product.all
     end
-    # raise
+
   end
 
   # product_path	GET	/products/:id
@@ -32,8 +30,8 @@ class ProductsController < ApplicationController
 
   # new_merchant_product_path	GET	/merchants/:merchant_id/products/new
   def new
-    merchant = Merchant.find(params[:merchant_id])
-    @merchant_product = merchant.products.build
+    @merchant = Merchant.find(params[:merchant_id])
+    @merchant_product = @merchant.products.build
   end
 
   # edit_merchant_product_path	GET	/merchants/:merchant_id/products/:id/edit
@@ -74,6 +72,6 @@ class ProductsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def product_params
-      params.require(:products).permit(:name, :price, :quantity)
+      params.require(:product).permit(:name, :price, :quantity)
     end
 end
