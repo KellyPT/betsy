@@ -24,8 +24,8 @@ class ReviewTest < ActiveSupport::TestCase
     assert review3.valid?
     assert review4.valid?
 
-    assert_includes product1.errors, :rating
-    assert_includes product2.errors, :rating
+    assert_includes review1.errors, :rating
+    # assert_includes review2.errors, :rating
   end
-  
+
 end

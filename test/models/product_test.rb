@@ -73,4 +73,11 @@ class ProductTest < ActiveSupport::TestCase
 
   end
 
+  test "Will check availability for a quantity" do
+    product = products(:one)
+    assert product.check_availability(0)
+    assert product.check_availability(1)
+    assert_not product.check_availability(3)
+  end
+
 end
