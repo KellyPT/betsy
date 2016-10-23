@@ -11,10 +11,9 @@ class Product < ApplicationRecord
 
   def update_quantity(number)
     number = number.to_i
-    if (self.quantity + number) < 0
-      return false
+    if check_availability(number)
+      return self.quantity += number
     end
-    return self.quantity += number
   end
 
   def check_availability(number)
