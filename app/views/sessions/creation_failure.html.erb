@@ -1,15 +1,2 @@
+<!-- Might be useless at this moment -->
 <h1>This happens when you don't sign in GitHub...</h1>
-
-<!-- LOG IN: -->
-
-<% if flash[:error] %>
-  <p><%= flash[:error] %></p>
-<% end %>
-
-<h1>Please <%= link_to "Log In", "/auth/github" %></h1>
-
-<!-- LOG OUT: -->
-
-<h1>Login Successful! Welcome, <%= @current_merchant.email %></h1>
-
-<%= button_to "Log out", sessions_path, method: :delete %>

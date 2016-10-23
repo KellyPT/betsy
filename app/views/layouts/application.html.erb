@@ -1,26 +1,33 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Betsy</title>
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-    <link href="https://fonts.googleapis.com/css?family=Quando" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Didact+Gothic" rel="stylesheet">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
-    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-    <%= csrf_meta_tags %>
-  </head>
+<head>
+  <title>Betsy</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <link href="https://fonts.googleapis.com/css?family=Quando" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Didact+Gothic" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
 
-  <body>
+<body>
+  <div class="container">
     <header>
-      <h1>ROBITS</h1>
+      <h3>ROBITS</h3>
       <nav>
         <% if session[:merchant_id] %>
+          Login Successful! Welcome! <%# @current_merchant.user_name %>
           <%= button_to "Log out", sessions_path, method: :delete %>
+          <%= button_to "Merchant Control", sessions_merchant_login_path, method: :get %>
         <% else %>
+          <% if flash[:error] %>
+            <%= flash[:error] %>
+          <% end %>
           <%= button_to "Log In", "/auth/github", method: :get %>
         <% end %>
       </nav>
     </header>
     <%= yield %>
-  </body>
+  </div>
+</body>
 </html>
