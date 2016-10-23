@@ -12,4 +12,4 @@ one:
 two:
   product_id: 42
   rating: 5
-  description: "Best Product Ever"
+  description: ""
