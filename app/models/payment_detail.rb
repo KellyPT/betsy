@@ -25,6 +25,8 @@ class PaymentDetail < ActiveRecord::Base
 
     validates :time_placed, presence: true
 
+    # TODO - Guin says: validate CVV? not actually sure how that one works, heh. :)
+
     # TODO - Guin says: can we set this right when we create the PaymentDetail object?
     def record_time_placed
       self.time_placed = Time.now

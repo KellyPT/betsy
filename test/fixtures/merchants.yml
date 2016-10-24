@@ -4,8 +4,15 @@
 # model remove the '{}' from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-one: {}
-# column: value
-#
-two: {}
-# column: value
+
+one:
+  user_name: "Gandalf"
+  email: "wizard@middleearth.com"
+  uid: 1
+  provider: "github"
+
+two:
+  user_name: "Dumbledore"
+  email: "wizard@hogwarts.com"
+  uid: 2
+  provider: "github"
