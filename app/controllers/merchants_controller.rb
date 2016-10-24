@@ -1,6 +1,6 @@
 class MerchantsController < ApplicationController
   before_action :get_merchant, only: [:show, :edit, :update, :destroy]
-  
+
   # Kelly: I don't know how to use controller filter here yet. So I will temporarily skip authentication requirements.
   skip_before_action :require_login
 
@@ -44,10 +44,10 @@ class MerchantsController < ApplicationController
   end
 
   # merchant DELETE /merchants/:id
-  def destroy
-    @merchant.destroy
-    redirect_to merchants_url
-  end
+  # def destroy
+  #   @merchant.destroy
+  #   redirect_to merchants_url
+  # end
 
   private
   # Use callbacks to share common setup or constraints between actions.
