@@ -21,9 +21,6 @@ class ReviewsController < ApplicationController
 
   end
 
-  # edit_product_review_path	GET	/products/:product_id/reviews/:id/edit
-  def edit; end
-
   # product_review_path POST	/products/:product_id/reviews(.:format)
   def create
     product = Product.find(params[:product_id])
@@ -32,21 +29,24 @@ class ReviewsController < ApplicationController
 
   end
 
+  # edit_product_review_path	GET	/products/:product_id/reviews/:id/edit
+  # def edit; end
+
   # product_reivew_path PATCH/PUT /products/:product_id/reviews/:id
-  def update
-    @product = Product.find(params[:product_id])
-    if @review.update(review_params)
-       redirect_to product_path(@product)
-    else
-      render :edit
-    end
-  end
+  # def update
+  #   @product = Product.find(params[:product_id])
+  #   if @review.update(review_params)
+  #      redirect_to product_path(@product)
+  #   else
+  #     render :edit
+  #   end
+  # end
 
   # product_review_path DELETE	/products/:product_id/reviews/:id
-  def destroy
-    @review.destroy
-    redirect_to reviews_url
-  end
+  # def destroy
+  #   @review.destroy
+  #   redirect_to reviews_url
+  # end
 
   private
     # Use callbacks to share common setup or constraints between actions.
