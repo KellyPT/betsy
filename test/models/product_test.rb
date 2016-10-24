@@ -7,14 +7,14 @@ class ProductTest < ActiveSupport::TestCase
   end
 
   test "Product must have a name" do
-    product = Product.new(price: 2)
+    product = Product.new(price: 2, merchant_id: 4)
     assert_not product.valid?
     assert_includes product.errors, :name
   end
 
   test "Name must be unique" do
     product1 = products(:one)
-    product2 = Product.new(name: "broomstick", price: 2)
+    product2 = Product.new(name: "broomstick", price: 2, merchant_id: 4)
 
     assert_not product2.valid?
   end
@@ -23,7 +23,7 @@ class ProductTest < ActiveSupport::TestCase
     product = products(:two)
     assert product.valid?
     assert_equal product.price, 13.52
-    product1 = Product.new(name: "Test product")
+    product1 = Product.new(name: "Test product", merchant_id: 4)
     assert_not product1.valid?
     assert_includes product1.errors, :price
   end
@@ -42,8 +42,8 @@ class ProductTest < ActiveSupport::TestCase
   end
 
   test "Price must be greater than zero" do
-    product1 = Product.new(name: "bad price", price: 0)
-    product2 = Product.new(name: "another bad price", price: -2.1)
+    product1 = Product.new(name: "bad price", price: 0, merchant_id: 4)
+    product2 = Product.new(name: "another bad price", price: -2.1, merchant_id: 4)
     procuct3 = products(:one)
     assert_not product1.valid?
     assert_not product2.valid?

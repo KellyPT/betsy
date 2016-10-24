@@ -1,6 +1,8 @@
 class PaymentDetail < ActiveRecord::Base
   belongs_to :order
 
+    #TODO: create tests related to credit card number.
+
     before_validation(on: :create) do
       cc_long_enough?
       valid_cc_number?
@@ -23,7 +25,7 @@ class PaymentDetail < ActiveRecord::Base
 
     validates :time_placed, presence: true
 
-
+    # TODO - Guin says: can we set this right when we create the PaymentDetail object?
     def record_time_placed
       self.time_placed = Time.now
     end
@@ -35,6 +37,8 @@ class PaymentDetail < ActiveRecord::Base
   private
 
   #### EXPIRATION DATE ####
+
+    # TODO - Guin says: - cannot this be part of a regular validation? We have seen something similar with Album publications. That should add it to errors as well!
 
     def expiration_date_cannot_be_in_the_past
       if  self.cc_expiration_date >= Time.now
