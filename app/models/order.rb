@@ -4,6 +4,7 @@ class Order < ApplicationRecord
   has_one :PaymentDetail
 
   validates :order_status, presence: true
+  # TODO: only allow certain pre-defined statuses
 
   def self.build_order
     return self.new(order_status: "pending")

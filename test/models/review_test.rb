@@ -37,6 +37,7 @@ class ReviewTest < ActiveSupport::TestCase
     assert_not review2.valid?
 
     assert_includes review2.errors, :product_id
+
   end
 
 end
