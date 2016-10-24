@@ -3,7 +3,7 @@ class ProductsController < ApplicationController
 
   # Kelly: I don't know how to use controller filter here yet. So I will temporarily skip authentication requirements.
 
-  skip_before_action :require_login, except: [:new, :create, :edit, :update]
+  before_action :require_login, only: [:new, :create, :edit, :update]
 
   # products_path	GET	/products
   # merchant_products_path	GET	/merchants/:merchant_id/products
