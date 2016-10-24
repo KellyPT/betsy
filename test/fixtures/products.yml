@@ -21,3 +21,15 @@ three:
   price: 13.52
   quantity: 1
   merchant_id: 46
+
+product_stock1:
+  name: stocker
+  price: 12.00
+  quantity: 2
+  merchant_id: 100
+
+product_stock2:
+  name: stockings
+  price: 13.00
+  quantity: 2
+  merchant_id: 200

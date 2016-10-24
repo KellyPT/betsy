@@ -36,6 +36,19 @@ class PaymentDetail < ActiveRecord::Base
       self.order_id = this_order_id
     end
 
+    def update_products_stock
+      this_order = self.order
+      order_id = this_order.id
+      products = this_order.products
+
+      products.each do |product|
+        order_item = product.order_items.where(order_id: order_id).first
+        # pass update_quantity a negative number for purchases
+        stock_reduction = order_item.quantity
+        product.update_quantity(-stock_reduction)
+      end
+    end
+
   private
 
   #### EXPIRATION DATE ####

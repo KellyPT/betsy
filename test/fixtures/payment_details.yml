@@ -26,3 +26,16 @@ two:
   cc_expiration_date: ????
   time_placed: $$$$
   CVV: ???
+
+payment_card:
+  order: purchasing_order
+  buyer_name: "Ada Lovelace"
+  email: "ada@adadevacademy.com"
+  street: "Fourth Avenue"
+  city: "Seattle"
+  state: "WA"
+  zip: 12345
+  cc_four_digits: xxxx
+  cc_expiration_date: ????
+  time_placed: $$$$
+  CVV: ???

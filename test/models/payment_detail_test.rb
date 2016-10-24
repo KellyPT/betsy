@@ -35,7 +35,7 @@ class PaymentDetailTest < ActiveSupport::TestCase
   end
 
   test "Can record time payment detail was placed" do
-    
+
   end
 
   test "Can set four digits of credit card number" do
@@ -44,6 +44,27 @@ class PaymentDetailTest < ActiveSupport::TestCase
 
   test "Expiration date of credit card may not be in the past" do
     #TODO put test here
+
+  end
+
+  test "Purchasing an order updates the stock of each product in the order" do
+
+    product1 = products(:product_stock1)
+    product2 = products(:product_stock2)
+
+    beginning_stock1 = product1.quantity
+    beginning_stock2 = product2.quantity
+
+    quantity_change1 = order_items(:reduce_quantity1).quantity
+    quantity_change2 = order_items(:reduce_quantity2).quantity
+
+    payment_details(:payment_card).update_products_stock
+
+    ending_stock1 = product1.reload.quantity
+    ending_stock2 = product2.reload.quantity
+
+    assert_equal(ending_stock1, beginning_stock1 - quantity_change1)
+    assert_equal(ending_stock2, beginning_stock2 - quantity_change2)
 
   end
 
