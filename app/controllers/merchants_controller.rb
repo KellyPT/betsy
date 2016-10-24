@@ -2,7 +2,7 @@ class MerchantsController < ApplicationController
   before_action :get_merchant, only: [:show, :edit, :update, :destroy]
 
   # Kelly: I don't know how to use controller filter here yet. So I will temporarily skip authentication requirements.
-  skip_before_action :require_login, except: [:show]
+  skip_before_action :require_login
 
   # merchants GET    /merchants
   def index
@@ -10,10 +10,10 @@ class MerchantsController < ApplicationController
   end
 
   # merchant GET    /merchants/:id
-  # def show
-  #   @merchant = @current_user
-  #   @products = @merchant.products
-  # end
+  def show
+    # @merchant = @current_user? authentication?
+    @products = @merchant.products
+  end
 
   # new_merchant GET    /merchants/new
   # def new
