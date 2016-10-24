@@ -10,8 +10,8 @@ one:
   state: "WA"
   zip: 12345
   cc_four_digits: xxxx
-  cc_expiration_date: ????
-  time_placed: $$$$
+  cc_expiration_date: "2017-10-24 13:53:49 -0700"
+  time_placed: "2016-10-24 13:53:49 -0700"
   CVV: ???
 
 two:
@@ -23,6 +23,6 @@ two:
   state: "Germany"
   zip: 54321
   cc_four_digits: xxxx
-  cc_expiration_date: ????
-  time_placed: $$$$
+  cc_expiration_date: "2017-10-24 13:53:49 -0700"
+  time_placed: "2016-10-24 12:53:49 -0700"
   CVV: ???

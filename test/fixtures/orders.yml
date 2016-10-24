@@ -13,4 +13,5 @@ two:
 three:
   order_status: "cancelled"
 
-#TODO: Find out if order status has a fourth value....
+four:
+  order_status: "completed"
