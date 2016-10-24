@@ -1,5 +1,8 @@
 <ul>
-  <li><%= image_tag("image_url", class: 'list_image') %></li>
+<p>
+  <strong>Image:</strong>
+   <li class="image"><%= @product.image_stored? ? image_tag(@product.image.thumb('80x60').url) : "" %></li>
+</p>
   <li><h3><%= @product.name  %></h3></li>
 </ul>
 
