@@ -3,11 +3,10 @@ class Order < ApplicationRecord
   has_many :products, through: :order_items
   has_one :PaymentDetail
 
-  def self.build_order
-      order          = self.new
-      order.order_status  = "pending"
+  validates :order_status, presence: true
 
-    return order
+  def self.build_order
+    return self.new(order_status: "pending")
   end
 
   def mark_order_paid
