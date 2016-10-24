@@ -1,14 +1,15 @@
 <h3>MAIN MENU:</h3>
 
 <h4>Welcome, <%= @merchant.user_name %></h4>
-<p>
-  This is what a Merchant can do:
-</p>
-
-<li><%= link_to "View your Profile", merchant_path, method: :get%></li>
+<h5>THIS IS WHAT A MERCHANT CAN DO:</h5>
 
 <li><%= link_to "Create a new Category", new_category_path, method: :get %></li>
 </br>
+
+<!-- /merchants/:merchant_id/products -->
+<li><%= link_to "View my Products", merchant_products_path, method: :get%></li>
+</br>
+
 
 <li>Create a new product providing:name; description; price; photo URL; stock</li>
 <li>Assign my products to any number of categories</li>

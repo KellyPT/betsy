@@ -3,7 +3,7 @@ class ProductsController < ApplicationController
 
   # Kelly: I don't know how to use controller filter here yet. So I will temporarily skip authentication requirements.
 
-  skip_before_action :require_login, except: [:new, :create]
+  skip_before_action :require_login, except: [:new, :create, :edit, :update]
 
   # products_path	GET	/products
   # merchant_products_path	GET	/merchants/:merchant_id/products
@@ -73,10 +73,10 @@ class ProductsController < ApplicationController
   end
 
   # merchant_product_path DELETE	/merchants/:merchant_id/products/:id
-  def destroy
-    @product.destroy
-    redirect_to products_url
-  end
+  # def destroy
+  #   @product.destroy
+  #   redirect_to products_url
+  # end
 
   private
     # Use callbacks to share common setup or constraints between actions.
