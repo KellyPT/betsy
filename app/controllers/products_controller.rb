@@ -30,24 +30,38 @@ class ProductsController < ApplicationController
 
   # new_merchant_product_path	GET	/merchants/:merchant_id/products/new
   def new
-    @merchant = Merchant.find(params[:merchant_id])
-    @merchant_product = @merchant.products.build
+    # someone's beautiful code that Kelly don't want to delete ^_^
+    # @merchant = Merchant.find(params[:merchant_id])
+    # @merchant_product = @merchant.products.build
+
+    # Kelly's code:
+    @merchant_product = @current_merchant.products.new
+  end
+
+
+  # merchant_products_path POST	/merchants/:merchant_id/products
+  def create
+    # someone's beautiful code that Kelly don't want to delete ^_^
+    # merchant = Merchant.find(params[:merchant_id])
+    # @merchant_product = merchant.products.create(product_params)
+    # redirect_to merchant_path(merchant.id)
+    #   if @product.save
+    #      redirect_to @product
+    #   else
+    #      render :new
+    #   end
+
+    # Kelly's code:
+    @merchant_product = @current_merchant.products.new(product_params)
+    if @merchant_product.save
+      redirect_to merchant_product_path(@merchant_product)
+    else
+      render :new
+    end
   end
 
   # edit_merchant_product_path	GET	/merchants/:merchant_id/products/:id/edit
   def edit; end
-
-  # merchant_products_path POST	/merchants/:merchant_id/products
-  def create
-    merchant = Merchant.find(params[:merchant_id])
-    @merchant_product = merchant.products.create(product_params)
-    redirect_to merchant_path(merchant.id)
-  #   if @product.save
-  #      redirect_to @product
-  #   else
-  #      render :new
-  #   end
-  end
 
   # merchant_product_path PATCH/PUT /merchants/:merchant_id/products/:id
   def update
