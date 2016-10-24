@@ -10,7 +10,7 @@ Rails.application.routes.draw do
     resources :reviews, except: [:edit, :update, :destroy]
   end
 
-  resources :merchants, except: [:new, :create, :destroy] do
+  resources :merchants, only: [:index] do
     resources :products, except: [:destroy]
   end
 

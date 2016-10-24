@@ -10,10 +10,10 @@ class MerchantsController < ApplicationController
   end
 
   # merchant GET    /merchants/:id
-  def show
-    @merchant = @current_user
-    @products = @merchant.products
-  end
+  # def show
+  #   @merchant = @current_user
+  #   @products = @merchant.products
+  # end
 
   # new_merchant GET    /merchants/new
   # def new
@@ -32,17 +32,17 @@ class MerchantsController < ApplicationController
   # end
 
   # edit_merchant GET    /merchants/:id/edit
-  def edit; end
+  # def edit; end
 
   # merchant PUT    /merchants/:id
   # i don't think users should be updated because this is their log-in
-  def update
-    if @merchant.update(merchant_params)
-     redirect_to @merchant
-    else
-     render :edit
-    end
-  end
+  # def update
+  #   if @merchant.update(merchant_params)
+  #    redirect_to @merchant
+  #   else
+  #    render :edit
+  #   end
+  # end
 
   # merchant DELETE /merchants/:id
   # def destroy
