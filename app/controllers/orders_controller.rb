@@ -87,7 +87,8 @@ class OrdersController < ApplicationController
     # maybe make self method? Ask guin
     def in_stock?
       @product = Product.find(session[:product_id])
-      @product.update_quantity(-1)
+      # check_availability returns true or false
+      @product.check_availability(1)
     end
 
     def save_order

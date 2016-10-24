@@ -78,8 +78,7 @@ end
 
 CSV.read('seed_csvs/category_product.csv', :headers => true).map do |line|
   category_product_hash = {}
-  category_product_hash[:id] = line[0]
-  category_product_hash[:category_id] = line[1]
-  category_product_hash[:product_id] = line[2]
+  category_product_hash[:category_id] = line[0]
+  category_product_hash[:product_id] = line[1]
   CategoriesProduct.create(category_product_hash)
 end
