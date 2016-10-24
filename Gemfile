@@ -40,6 +40,7 @@ end
 group :test do
   gem 'minitest-reporters'
 end
+gem 'simplecov', :require => false, :group => :test
 
 group :development do
   # for bug bashing in the browser
