@@ -1,9 +1,13 @@
 class SessionsController < ApplicationController
   skip_before_action :require_login, only: [:index_log_out, :login, :create]
 
-  def index_log_out; end
+  def index_log_out
+    render 'sessions/index'
+  end
 
-  def index_log_in; end
+  def index_log_in
+    render 'sessions/index'
+  end
 
   def create
     auth_hash = request.env['omniauth.auth']
