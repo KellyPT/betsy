@@ -21,7 +21,7 @@ class PaymentDetail < ActiveRecord::Base
 
     validates :cc_four_digits, presence: true, length: { is: 4 }
     validates :cc_expiration_date, presence: true
-    # validate :expiration_date_cannot_be_in_the_past
+    validate :expiration_date_cannot_be_in_the_past
 
     validates :time_placed, presence: true
 
@@ -43,7 +43,7 @@ class PaymentDetail < ActiveRecord::Base
     # TODO - Guin says: - cannot this be part of a regular validation? We have seen something similar with Album publications. That should add it to errors as well!
 
     def expiration_date_cannot_be_in_the_past
-      if  self.cc_expiration_date >= Time.now
+      if  self.cc_expiration_date <= Time.now
         errors.add(:cc_expiration_date, "can't be in the past")
       end
     end
