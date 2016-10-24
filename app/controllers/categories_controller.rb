@@ -9,9 +9,9 @@ class CategoriesController < ApplicationController
   end
 
   # new_category GET    /categories/new
-  # def show
-  #   @products = @category.products
-  # end
+  def show
+    @products = @category.products
+  end
 
   # GET /categories/new
   def new
@@ -25,8 +25,8 @@ class CategoriesController < ApplicationController
     @category = Category.new(category_params)
 
     if @category.save
-      redirect_to @category
-      #redirect_to merchant_path(@user)
+      redirect_to categories_path
+
     else
       render :new
     end
@@ -41,7 +41,7 @@ class CategoriesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     # I don't think we should be able to edit catergories, only add so I don't think we need this
-    # def category_params
-    #   params.require(:category).permit(:name)
-    # end
+    def category_params
+      params.require(:category).permit(:name)
+    end
 end

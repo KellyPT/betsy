@@ -9,5 +9,4 @@ class OrderItem < ApplicationRecord
     order_item.quantity = 1
     return order_item
   end
-
 end
