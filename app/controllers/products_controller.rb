@@ -12,8 +12,8 @@ class ProductsController < ApplicationController
       category = Category.find(params[:category_id])
       @products = category.products
     elsif params[:merchant_id] != nil
-      merchant = Merchant.find(params[:merchant_id])
-      @products = merchant.products
+      @merchant = Merchant.find(params[:merchant_id])
+      @products = @merchant.products
     else
       @products = Product.all
     end

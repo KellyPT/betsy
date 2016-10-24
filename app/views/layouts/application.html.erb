@@ -24,6 +24,7 @@
             <%= flash[:error] %>
           <% end %>
           <%= button_to "Log In", "/auth/github", method: :get %>
+          <%= button_to "Sign Up", "https://github.com/join?source=header-home", method: :get %>
         <% end %>
       </nav>
     </header>
