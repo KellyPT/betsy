@@ -54,14 +54,17 @@ class ProductsController < ApplicationController
 
   # merchant_product_path PATCH/PUT /merchants/:merchant_id/products/:id
   def update
+
     if @product.merchant_id == session[:merchant_id]
       @merchant_product = @product
     else
       render :no_show
     end
 
+    merchant_id = session[:merchant_id]
+
     if @merchant_product.update(product_params)
-      redirect_to merchant_product_path(@merchant_product.id)
+      redirect_to merchant_products_path(@current_merchant)
       # TODO: the form is not working!! shallow routing is better
     else
       render :edit
