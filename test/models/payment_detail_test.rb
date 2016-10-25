@@ -157,10 +157,4 @@ class PaymentDetailTest < ActiveSupport::TestCase
 
   end
 
-  test "Will create a total sum for all the order items associated with an order upon purchasing" do
-    # @order_items.sum_total_prices
-
-  end
-
-
 end

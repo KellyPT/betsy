@@ -65,6 +65,27 @@
         null,
         null,
         null,
+        1,
+        null,
+        0,
+        0,
+        null,
+        0,
+        null,
+        0,
+        0,
+        null,
+        0,
+        0,
+        null,
+        0,
+        0,
+        null,
+        0,
+        null,
+        null,
+        null,
+        null,
         null
       ],
       "/Users/guineveresaenger/ada/project-forks/betsy/test/models/order_test.rb": [
@@ -278,12 +299,6 @@
         null,
         null,
         null,
-        1,
-        null,
-        null,
-        null,
-        null,
-        null,
         null
       ],
       "/Users/guineveresaenger/ada/project-forks/betsy/test/models/product_test.rb": [
@@ -417,6 +432,6 @@
         null
       ]
     },
-    "timestamp": 1477421172
+    "timestamp": 1477420940
   }
 }
