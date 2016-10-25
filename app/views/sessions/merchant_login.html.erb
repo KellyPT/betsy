@@ -6,23 +6,32 @@
 <li><%= link_to "Create a new Category", new_category_path, method: :get %></li>
 </br>
 
-<!-- /merchants/:merchant_id/products -->
-<!-- <li><%# link_to "View my Products", merchant_products_path, method: :get%></li>
-</br> -->
+<li><%= link_to "Create a new Product", new_merchant_product_path(@current_merchant), method: :get %> </li>
 
-<ul>These are my products:
-<% @merchant.products.each do |product| %>
-  <li>Product's name: <%= product.name %>, Price: <%= product.price %>, Quantity:<%= product.quantity %></li>
+<h3>These are my products:</h3>
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Price</th>
+    <th>Quantity</th>
+    <th>Edit</th>
+    <th>Retire</th>
+  </tr>
+
+  <% @merchant.products.each do |product| %>
+  <tr>
+  <td><%= product.name %></td>
+  <td><%= product.price %></td>
+  <td><%= product.quantity %></td>
+  <td><%= link_to "Edit this Product", edit_merchant_product_path(@current_merchant, product.id) %></td>
+  <td>Retire button</td>
+  </tr>
 <% end %>
-</ul>
 
-<li>Create a new product providing:name; description; price; photo URL; stock</li>
-
+</table>
 <li>Assign my products to any number of categories</li>
 
 <li>Retire a product from being sold, which hides it from browsing</li>
-
-<li>View an account page to edit/update my existing products</li>
 
 <li>View an account page showing my order fulfillment</li>
 
