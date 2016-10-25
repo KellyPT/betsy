@@ -56,17 +56,17 @@ class PaymentDetail < ActiveRecord::Base
       end
     end
 
-    def sum_total_prices
-      order_items = self.order.order_items
-      sum = 0
-      order_items.each do |item|
-        product = item.product
-        quantity = item.quantity
-        price = product.price
-        sum  += quantity * price
-      end
-      return sum
-    end
+    # def sum_total_prices
+    #   order_items = self.order.order_items
+    #   sum = 0
+    #   order_items.each do |item|
+    #     product = item.product
+    #     quantity = item.quantity
+    #     price = product.price
+    #     sum  += quantity * price
+    #   end
+    #   return sum
+    # end
 
   private
 

@@ -5,7 +5,7 @@ class PaymentDetailsController < ApplicationController
   def show
     @order = @payment_details.order
     @order_items = @order.order_items
-    @total_order_price = @payment_details.sum_total_prices
+    @total_order_price = OrderItem.sum_total_prices(@order_items)
   end
 
   def new
