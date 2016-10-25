@@ -29,28 +29,12 @@ class ProductsController < ApplicationController
 
   # new_merchant_product_path	GET	/merchants/:merchant_id/products/new
   def new
-    # someone's beautiful code that Kelly don't want to delete ^_^
-    # @merchant = Merchant.find(params[:merchant_id])
-    # @merchant_product = @merchant.products.build
-
-    # Kelly's code:
     @merchant_product = @current_merchant.products.new
   end
 
 
   # merchant_products_path POST	/merchants/:merchant_id/products
   def create
-    # someone's beautiful code that Kelly don't want to delete ^_^
-    # merchant = Merchant.find(params[:merchant_id])
-    # @merchant_product = merchant.products.create(product_params)
-    # redirect_to merchant_path(merchant.id)
-    #   if @product.save
-    #      redirect_to @product
-    #   else
-    #      render :new
-    #   end
-
-    # Kelly's code:
     @merchant_product = @current_merchant.products.new(product_params)
     if @merchant_product.save
       redirect_to merchant_products_path
@@ -83,12 +67,6 @@ class ProductsController < ApplicationController
       render :edit
     end
   end
-
-  # merchant_product_path DELETE	/merchants/:merchant_id/products/:id
-  # def destroy
-  #   @product.destroy
-  #   redirect_to products_url
-  # end
 
   private
     # Use callbacks to share common setup or constraints between actions.
