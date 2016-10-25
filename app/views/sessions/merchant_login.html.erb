@@ -1,16 +1,29 @@
 <h3>MAIN MENU:</h3>
 
 <h4>Welcome, <%= @merchant.user_name %></h4>
-<p>
-  This is what a Merchant can do:
-</p>
+<h5>THIS IS WHAT A MERCHANT CAN DO:</h5>
 
 <li><%= link_to "Create a new Category", new_category_path, method: :get %></li>
+</br>
+
+<!-- /merchants/:merchant_id/products -->
+<!-- <li><%# link_to "View my Products", merchant_products_path, method: :get%></li>
+</br> -->
+
+<ul>These are my products:
+<% @merchant.products.each do |product| %>
+  <li>Product's name: <%= product.name %>, Price: <%= product.price %>, Quantity:<%= product.quantity %></li>
+<% end %>
+</ul>
 
 <li>Create a new product providing:name; description; price; photo URL; stock</li>
+
 <li>Assign my products to any number of categories</li>
+
 <li>Retire a product from being sold, which hides it from browsing</li>
+
 <li>View an account page to edit/update my existing products</li>
+
 <li>View an account page showing my order fulfillment</li>
 
 <ul>On the order fulfillment page:
