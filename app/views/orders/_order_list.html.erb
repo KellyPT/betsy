@@ -9,8 +9,6 @@
       <% order_items.each do |item| %>
       <li> <%= link_to "Ordered #{item.product.name}", order_item_path(item) %></li>
       <li><%= render partial: "order_details", locals: {order_items: [item] } %></li>
-
-
       <li>Order Status: <%= item.order.order_status %></li>
       <%# will use updated at instead of time_placed so that orders that have not been paid for will work - they are equal in the case of payments anyway.  Need to think about what this field will mean for compelted orders?  %>
       <li>Time Placed: <%= item.order.updated_at %></li>

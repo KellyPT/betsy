@@ -3,8 +3,7 @@ class OrdersController < ApplicationController
   before_action :get_merchant, except: [:create, :cancel, :update, :destroy]
   skip_before_action :require_login, except: [:index]
 
-  # orders_path	GET	/orders(.:format)
-  # anticpate this will be used to show a Merchant all of their pending orders when logged in.
+
   def index
     @order_items = @merchant.get_merchant_orders
     @completed_orders = @merchant.get_merchant_orders_by_status("completed")
@@ -93,7 +92,6 @@ class OrdersController < ApplicationController
       @order = Order.build_order if current_order.nil?
     end
 
-    # maybe make self method? Ask guin
     def in_stock?
       @product = Product.find(session[:product_id])
       # check_availability returns true or false
