@@ -5,7 +5,9 @@ class PaymentDetail < ActiveRecord::Base
 
     before_validation(on: :create) do
       cc_long_enough?
-      valid_cc_number?
+      if valid_cc_number?
+        set_cc_four_digits
+      end
     end
 
     validates :buyer_name, presence: true
@@ -25,9 +27,8 @@ class PaymentDetail < ActiveRecord::Base
 
     validates :time_placed, presence: true
 
-    # TODO - Guin says: validate CVV? not actually sure how that one works, heh. :)
+    validates :CVV, presence: true, length: {is: 3}
 
-    # TODO - Guin says: can we set this right when we create the PaymentDetail object?
     def record_time_placed
       self.time_placed = Time.now
     end
@@ -60,10 +61,10 @@ class PaymentDetail < ActiveRecord::Base
 
   #### EXPIRATION DATE ####
 
-    # TODO - Guin says: - cannot this be part of a regular validation? We have seen something similar with Album publications. That should add it to errors as well!
-
     def expiration_date_cannot_be_in_the_past
-      if  self.cc_expiration_date <= Time.now
+      if self.cc_expiration_date == nil
+        errors.add(:cc_expiration_date, "can't be nil")
+      elsif self.cc_expiration_date <= Time.now
         errors.add(:cc_expiration_date, "can't be in the past")
       end
     end
@@ -74,7 +75,7 @@ class PaymentDetail < ActiveRecord::Base
     # Visa, MasterCard, Amex have 13-16 digits
     def cc_long_enough?
       digits = self.cc_four_digits.to_s.length
-      errors.add(:number, 'Sorry, the card number must be between 13 and 16 digits') unless digits.between?(13,16)
+      errors.add(:cc_four_digits, 'Sorry, the card number must be between 13 and 16 digits') unless digits.between?(13,16)
     end
 
     # Luhn from: http://en.wikipedia.org/wiki/Luhn_algorithm
@@ -103,10 +104,9 @@ class PaymentDetail < ActiveRecord::Base
       end
 
       if (sum % 10).zero?  # Step 3
-        set_cc_four_digits
         return true
       else
-        errors.add(:number, 'Sorry, an invalid cardNumber Entered')
+        errors.add(:cc_four_digits, 'Sorry, an invalid cardNumber Entered')
         return false
       end
 
