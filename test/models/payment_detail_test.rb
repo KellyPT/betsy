@@ -47,7 +47,7 @@ class PaymentDetailTest < ActiveSupport::TestCase
 
   end
 
-  test "Purchasing an order updates the stock of each product in the order" do
+  test "Purchasing an order decreases the stock of each product in the order" do
 
     product1 = products(:product_stock1)
     product2 = products(:product_stock2)
@@ -58,13 +58,39 @@ class PaymentDetailTest < ActiveSupport::TestCase
     quantity_change1 = order_items(:reduce_quantity1).quantity
     quantity_change2 = order_items(:reduce_quantity2).quantity
 
-    payment_details(:payment_card).update_products_stock
+    payment_details(:payment_card).update_products_stock("purchase")
 
     ending_stock1 = product1.reload.quantity
     ending_stock2 = product2.reload.quantity
 
     assert_equal(ending_stock1, beginning_stock1 - quantity_change1)
     assert_equal(ending_stock2, beginning_stock2 - quantity_change2)
+
+  end
+
+  test "Cancelling an order (after purchasing) increases the stock of each product in the order" do
+
+    product1 = products(:product_stock1)
+    product2 = products(:product_stock2)
+
+    beginning_stock1 = product1.quantity
+    beginning_stock2 = product2.quantity
+
+    quantity_change1 = order_items(:reduce_quantity1).quantity
+    quantity_change2 = order_items(:reduce_quantity2).quantity
+
+    payment_details(:payment_card).update_products_stock("cancelation")
+
+    ending_stock1 = product1.reload.quantity
+    ending_stock2 = product2.reload.quantity
+
+    assert_equal(ending_stock1, beginning_stock1 + quantity_change1)
+    assert_equal(ending_stock2, beginning_stock2 + quantity_change2)
+
+  end
+
+  test "Will create a total sum for all the order items associated with an order upon purchasing" do
+    # @order_items.sum_total_prices
 
   end
 

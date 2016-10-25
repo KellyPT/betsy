@@ -23,7 +23,7 @@
     </ul>
   </section>
   <section>
-
+    <%= link_to 'Cancel Order', order_path(@order), method: :delete %>
     <%= link_to 'Purchase Cart', new_order_payment_detail_path(@order) %>
   </section>
 </main>
