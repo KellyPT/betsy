@@ -1,6 +1,5 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-#TODO: Add info for valid credit cards.
 one:
   order_id: 25
   buyer_name: "Ada Lovelace"
@@ -9,10 +8,10 @@ one:
   city: "Seattle"
   state: "WA"
   zip: 12345
-  cc_four_digits: xxxx
-  cc_expiration_date: ????
-  time_placed: $$$$
-  CVV: ???
+  cc_four_digits: 4012
+  cc_expiration_date: "2017-10-24 13:53:49 -0700"
+  time_placed: "2016-10-24 13:53:49 -0700"
+  CVV: 999
 
 two:
   order_id: 20
@@ -22,10 +21,10 @@ two:
   city: "Hamburg"
   state: "Germany"
   zip: 54321
-  cc_four_digits: xxxx
-  cc_expiration_date: ????
-  time_placed: $$$$
-  CVV: ???
+  cc_four_digits: 5105
+  cc_expiration_date: "2017-10-24 13:53:49 -0700"
+  time_placed: "2016-10-24 12:53:49 -0700"
+  CVV: 111
 
 payment_card:
   order: purchasing_order

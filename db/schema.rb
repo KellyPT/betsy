@@ -62,7 +62,7 @@ ActiveRecord::Schema.define(version: 20161024204449) do
     t.string   "state"
     t.integer  "zip"
     t.integer  "cc_four_digits"
-    t.integer  "cc_expiration_date"
+    t.datetime "cc_expiration_date"
     t.datetime "time_placed"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false

@@ -20,4 +20,9 @@ class Order < ApplicationRecord
     return self
   end
 
+  def complete_order
+    self.order_status = "completed"
+    return self
+  end
+
 end

@@ -1,25 +1,25 @@
-<p id="notice"><%= notice %></p>
-<!-- may need to use this for merchants? -->
-<h1>Orders</h1>
+<h1>Order Fulfilment Page</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<main>
+  <section>
 
-  <tbody>
-    <% @orders.each do |order| %>
-      <tr>
-        <td><%= link_to 'Show', order %></td>
-        <td><%= link_to 'Edit', edit_order_path(order) %></td>
-        <td><%= link_to 'Destroy', order, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
 
-<br>
+    <ul>
+      <% @order_items.each do |item| %>
 
-<%= link_to 'New Order', new_order_path %>
+      <li> <%= item.product.name %></li>
+      <li>
+        <%= form_for(item) do |f| %>
+        <%= f.label :quantity %>
+        <%= f.number_field :quantity,
+        in: 1.0..item.product.quantity,
+        step: 1.0 %>
+        <%= f.submit "Update" %>
+        <% end %>
+      </li>
+      <li> Price: <%= item.product.price %></li>
+      <li class= "link"><%= link_to 'Remove from Cart', order_item_path(item), method: :delete %></li>
+      <% end %>
+    </ul>
+  </section>
+</main>
