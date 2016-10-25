@@ -1,6 +1,6 @@
 class Product < ApplicationRecord
   dragonfly_accessor :image
-  validates_property :mime_type, of: :image, in: %w(image)
+  # validates_property :mime_type, of: :image, in: %w(image)
   has_many :order_items
   has_many :reviews
 

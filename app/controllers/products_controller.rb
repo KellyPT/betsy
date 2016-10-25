@@ -40,7 +40,7 @@ class ProductsController < ApplicationController
   # merchant_products_path POST	/merchants/:merchant_id/products
   def create
     merchant = Merchant.find(params[:merchant_id])
-    @merchant_product = merchant.products.create(product_params)
+    @merchant_product = merchant.products.create!(product_params)
     redirect_to merchant_path(merchant.id)
   #   if @product.save
   #      redirect_to @product

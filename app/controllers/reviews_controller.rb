@@ -27,9 +27,8 @@ class ReviewsController < ApplicationController
   # product_review_path POST	/products/:product_id/reviews(.:format)
   def create
     product = Product.find(params[:product_id])
-    @review_product = product.reviews.create(review_params)
+    @review_product = product.reviews.create!(review_params)
     redirect_to product_path(product.id)
-
   end
 
   # product_reivew_path PATCH/PUT /products/:product_id/reviews/:id
