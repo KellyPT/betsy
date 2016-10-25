@@ -17,7 +17,6 @@ class ProductsController < ApplicationController
     else
       @products = Product.all
     end
-
   end
 
   # product_path	GET	/products/:id
@@ -54,21 +53,34 @@ class ProductsController < ApplicationController
     # Kelly's code:
     @merchant_product = @current_merchant.products.new(product_params)
     if @merchant_product.save
-      redirect_to merchant_product_path(@merchant_product)
+      redirect_to merchant_products_path
     else
       render :new
     end
   end
 
   # edit_merchant_product_path	GET	/merchants/:merchant_id/products/:id/edit
-  def edit; end
+  def edit
+    if @product.merchant_id == session[:merchant_id]
+      @merchant_product = @product
+    else
+      render :no_show
+    end
+  end
 
   # merchant_product_path PATCH/PUT /merchants/:merchant_id/products/:id
   def update
-    if @product.update(product_params)
-       redirect_to @product
+    if @product.merchant_id == session[:merchant_id]
+      @merchant_product = @product
     else
-       render :edit
+      render :no_show
+    end
+
+    if @merchant_product.update(product_params)
+      redirect_to merchant_product_path(@merchant_product.id)
+      # TODO: the form is not working!! shallow routing is better
+    else
+      render :edit
     end
   end
 

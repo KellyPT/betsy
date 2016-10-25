@@ -16,17 +16,30 @@ class ReviewsController < ApplicationController
   # new_product_review_path	GET	/products/:product_id/reviews/new
   def new
     # @review = Review.new
-    product = Product.find(params[:product_id])
-    @product_review = product.review.build
+    # product = Product.find(params[:product_id])
+    # @product_review = product.review.build
 
+    if product.merchant_id == session[:merchant_id]
+      render :no_show
+    else
+      product = Product.find(params[:product_id])
+      @product_review = product.review.build
+    end
   end
 
   # product_review_path POST	/products/:product_id/reviews(.:format)
   def create
-    product = Product.find(params[:product_id])
-    @review_product = product.reviews.create(review_params)
-    redirect_to product_path(product.id)
+    # product = Product.find(params[:product_id])
+    # @review_product = product.reviews.create(review_params)
+    # redirect_to product_path(product.id)
 
+    if product.merchant_id == session[:merchant_id]
+      render :no_show
+    else
+      product = Product.find(params[:product_id])
+      @review_product = product.reviews.create(review_params)
+      redirect_to product_path(product.id)
+    end
   end
 
   # edit_product_review_path	GET	/products/:product_id/reviews/:id/edit
