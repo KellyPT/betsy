@@ -27,7 +27,7 @@ class PaymentDetail < ActiveRecord::Base
 
     validates :time_placed, presence: true
 
-    # validates :CVV, presence: true, length: {is: 3}
+    validates :CVV, presence: true, length: {is: 3}
 
     def record_time_placed
       self.time_placed = Time.now
