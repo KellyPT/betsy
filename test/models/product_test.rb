@@ -80,4 +80,21 @@ class ProductTest < ActiveSupport::TestCase
     assert_not product.check_availability(3)
   end
 
+  test "Can retire Product" do
+    product = products(:two)
+    product.retire_product
+    assert_equal product.active, false
+  end
+
+  test "Can unretire Product" do
+    product = Product.new(name: "Test product", merchant_id: 4, quantity: 0, active: false)
+    product.unretire_product
+    assert product.active
+  end
+
+  test "Default sttatus of active attribute is true" do
+    product = products(:two)
+    assert product.active
+  end
+
 end

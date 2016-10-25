@@ -28,4 +28,12 @@ class Product < ApplicationRecord
     self.quantity >= number
   end
 
+  def retire_product
+    self.active = false
+  end
+
+  def unretire_product
+    self.active = true
+  end
+
 end
