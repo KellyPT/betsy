@@ -16,3 +16,9 @@ two:
   email: "wizard@hogwarts.com"
   uid: 2
   provider: "github"
+
+merchant_with_orders:
+  user_name: "Sarah"
+  email: "sarah@me.com"
+  uid: 3
+  provider: "github"
