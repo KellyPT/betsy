@@ -12,6 +12,8 @@ class OrderItem < ApplicationRecord
   end
 
   def self.sum_total_prices(order_items_group)
+    return 0 if order_items_group.nil?
+
     sum = 0
     order_items_group.each do |item|
       product = item.product
