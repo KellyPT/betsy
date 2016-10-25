@@ -16,6 +16,4 @@ class OrderItemTest < ActiveSupport::TestCase
 
   end
 
-  # TODO: cannot test Class method in Model tests, or can I? not sure
-
 end
