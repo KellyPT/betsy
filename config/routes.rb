@@ -5,17 +5,22 @@ Rails.application.routes.draw do
     resources :order_items, except: [:update, :destroy]
     resources :payment_details, only: [:new, :create]
   end
+
   resources :products, only: [:index, :show] do
-    resources :reviews
+    resources :reviews, except: [:edit, :update, :destroy]
   end
-  resources :merchants do
-    resources :products
+
+
+  resources :merchants, only: [:index, :show] do
+    resources :products, except: [:destroy]
   end
 
   resources :categories, except: [:edit, :update, :destroy]
 
+  resources :categories, except: [:edit, :update, :destroy]
 
   resources :order_items, only: [:update, :destroy]
+
   resources :payment_details, only: [:show]
 
   get "/auth/:provider/callback" =>  "sessions#create"
