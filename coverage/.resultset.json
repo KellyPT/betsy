@@ -39,6 +39,27 @@
         null,
         null,
         null,
+        1,
+        null,
+        0,
+        0,
+        null,
+        0,
+        null,
+        0,
+        0,
+        null,
+        0,
+        0,
+        null,
+        0,
+        0,
+        null,
+        0,
+        null,
+        null,
+        null,
+        null,
         null
       ],
       "/Users/nahmisa/c6/projects/betsy/test/models/order_test.rb": [
@@ -171,12 +192,6 @@
         null,
         0,
         0,
-        null,
-        null,
-        null,
-        1,
-        null,
-        null,
         null,
         null,
         null,
@@ -313,6 +328,6 @@
         null
       ]
     },
-    "timestamp": 1477417953
+    "timestamp": 1477420940
   }
 }
