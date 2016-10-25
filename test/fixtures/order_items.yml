@@ -13,3 +13,13 @@ two:
   quantity: 1
   product_id: 36
   order_id: 89
+
+reduce_quantity1:
+  quantity: 1
+  order: purchasing_order
+  product: product_stock1
+
+reduce_quantity2:
+  quantity: 1
+  order: purchasing_order
+  product: product_stock2

@@ -10,4 +10,16 @@ class OrderItem < ApplicationRecord
     order_item.product_id = this_product_id
     return order_item
   end
+
+  def self.sum_total_prices(order_items_group)
+    sum = 0
+    order_items_group.each do |item|
+      product = item.product
+      quantity = item.quantity
+      price = product.price
+      sum  += quantity * price
+    end
+    return sum
+  end
+
 end

@@ -3,7 +3,7 @@ class OrderItemsController < ApplicationController
   skip_before_action :require_login
 
   def index
-    @order = Order.find(params[:order_id])
+    @order = Order.find(session[:order_id])
     @order_items = @order.order_items
   end
 

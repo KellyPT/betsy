@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
-
+gem 'rack-cache', require: 'rack/cache', group: :production
+gem 'dragonfly'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.7'
@@ -40,6 +41,7 @@ end
 group :test do
   gem 'minitest-reporters'
 end
+gem 'simplecov', :require => false, :group => :test
 
 group :development do
   # for bug bashing in the browser
