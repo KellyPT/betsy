@@ -1,12 +1,17 @@
 class OrdersController < ApplicationController
   before_action :get_order, only: [:show, :update, :destroy]
-  skip_before_action :require_login
+  skip_before_action :require_login, except: [:index]
 
   # orders_path	GET	/orders(.:format)
   # anticpate this will be used to show a Merchant all of their pending orders when logged in.
   def index
     merchant = Merchant.find(session[:merchant_id])
-    @orders = merchant.orders
+    @order_items = merchant.get_merchant_orders
+    @completed_orders = merchant.get_merchant_orders_by_status("completed")
+    @paid_orders = merchant.get_merchant_orders_by_status("paid")
+    @pending_orders = merchant.get_merchant_orders_by_status("pending")
+    @cancelled_orders = merchant.get_merchant_orders_by_status("cancelled")
+    raise
   end
 
   def create
@@ -42,7 +47,7 @@ class OrdersController < ApplicationController
   # canceling an order before it has been purchased destroys the order
     @order.destroy
     reset_session_values
-    
+
     redirect_to cancelled_order_path
   end
 
