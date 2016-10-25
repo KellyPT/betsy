@@ -1,7 +1,7 @@
 class Order < ApplicationRecord
   has_many :order_items
   has_many :products, through: :order_items
-  has_one :PaymentDetail
+  has_one :payment_detail
 
   validates :order_status, presence: true
   # TODO: only allow certain pre-defined statuses

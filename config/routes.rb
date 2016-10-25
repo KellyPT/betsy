@@ -28,4 +28,6 @@ Rails.application.routes.draw do
   get "/sessions/", to: "sessions#index_log_out", as: "sessions_log_out"
   delete "/sessions", to: "sessions#destroy"
   get "/sessions/merchant_login", to: "sessions#merchant_login", as: "sessions_merchant_login"
+
+  get "/cancel", to: "orders#cancel", as: "cancelled_order"
 end

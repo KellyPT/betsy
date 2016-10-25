@@ -14,3 +14,6 @@ three:
   order_status: "cancelled"
 
 #TODO: Find out if order status has a fourth value....
+
+purchasing_order:
+  order_status: "pending"

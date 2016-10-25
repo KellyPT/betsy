@@ -13,11 +13,14 @@ class Product < ApplicationRecord
   validates :price, presence: :true, numericality: {greater_than: 0}
   validates :merchant_id, presence: :true
 
-
+  # when purchasing, pass a negative number
   def update_quantity(number)
     number = number.to_i
     if number > 0 || check_availability(-number)
-      return self.quantity += number
+       self.quantity += number
+       # save this to the database
+       self.save
+       return self.quantity
     end
   end
 

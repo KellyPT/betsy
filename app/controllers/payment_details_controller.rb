@@ -5,7 +5,7 @@ class PaymentDetailsController < ApplicationController
   def show
     @order = @payment_details.order
     @order_items = @order.order_items
-    @total_order_price = sum_total_prices
+    @total_order_price = OrderItem.sum_total_prices(@order_items)
   end
 
   def new
@@ -14,11 +14,12 @@ class PaymentDetailsController < ApplicationController
 
   def create
     @payment_details = PaymentDetail.new(payment_details_params)
-    @payment_details.set_order_id(params[:order_id])
+    @payment_details.set_order_id(session[:order_id])
     @payment_details.record_time_placed
     if @payment_details.save
       reset_session_values
       update_order_status
+      @payment_details.update_products_stock("purchase")
       redirect_to @payment_details
     else
        render :new
@@ -45,16 +46,5 @@ class PaymentDetailsController < ApplicationController
       unless order.save
       flash[:error] = "Could not mark order paid"
       end
-    end
-
-    def sum_total_prices
-      sum = 0
-      @order_items.each do |item|
-        product = item.product
-        quantity = item.quantity
-        price = product.price
-        sum  += quantity * price
-      end
-      return sum
     end
 end
