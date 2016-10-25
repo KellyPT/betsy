@@ -1,15 +1,17 @@
+
 <%= form_for(@merchant_product, url: merchant_products_path(@current_merchant)) do |f| %>
-<%# if product.errors.any? %>
-<!-- <div id="error_explanation"> -->
-  <!-- <h2><%# pluralize(product.errors.count, "error") %> prohibited this product from being saved:</h2>
+
+<%= if product.errors.any? %>
+<li id="error_explanation">
+  <h2><%= pluralize(product.errors.count, "error") %> prohibited this product from being saved:</h2>
   <ul>
-    <%# product.errors.full_messages.each do |message| %>
-    <li><%# message %></li>
-    <%# end %>
+    <%= product.errors.full_messages.each do |message| %>
+    <li><%= message %></li>
+    <%end %>
   </ul>
 </div>
-<%# end %>
-<ul> -->
+<% end %>
+<ul>
 
 <li class="field">
   <%= f.label :name %><br />
@@ -21,10 +23,10 @@
   <%# :categories %>
 </li>
 
-<!-- <li class="field"> -->
-  <%# f.label :image_url %><br />
-  <%# f.text_field :image_url %>
-<!-- </li> -->
+<li class="field">
+  <%= f.label :image %><br>
+  <%= f.file_field :image %>
+</li>
 
 <li class="field">
   <%= f.label :price %><br />
