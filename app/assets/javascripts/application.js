@@ -12,5 +12,16 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require foundation
 //= require turbolinks
 //= require_tree .
+
+// If it doesn't work, we take out line 20
+$(function(){ $(document).foundation(); });
+
+//= require foundation
+$(document).foundation();
+
+$(document).on('turbolinks:load', function() {
+  $(function(){ $(document).foundation(); });
+});

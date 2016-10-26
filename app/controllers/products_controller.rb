@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-  before_action :get_product, only: [:show, :edit, :update, :destroy]
+  before_action :get_product, only: [:show, :edit, :update]
 
   before_action :require_login, only: [:new, :create, :edit, :update]
 
