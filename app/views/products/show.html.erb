@@ -9,6 +9,8 @@
 <ul class="product-price-des">
   <li> Price: $<%= @product.price %></li>
   <li>In Stock: <%= @product.quantity %></li>
+  <li>Description</li>
+  <li><%= @product.description %></li>
   <li class= "link"><%= link_to 'Purchase', orders_path, method: :post %></li>
 </ul>
 
