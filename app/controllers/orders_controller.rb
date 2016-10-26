@@ -1,17 +1,40 @@
 class OrdersController < ApplicationController
   before_action :get_order, only: [:show, :update, :destroy]
+  before_action :get_merchant, except: [:create, :cancel, :update, :destroy]
   skip_before_action :require_login, except: [:index]
 
   # orders_path	GET	/orders(.:format)
   # anticpate this will be used to show a Merchant all of their pending orders when logged in.
   def index
-    merchant = Merchant.find(session[:merchant_id])
-    @order_items = merchant.get_merchant_orders
-    @completed_orders = merchant.get_merchant_orders_by_status("completed")
-    @paid_orders = merchant.get_merchant_orders_by_status("paid")
-    @pending_orders = merchant.get_merchant_orders_by_status("pending")
-    @cancelled_orders = merchant.get_merchant_orders_by_status("cancelled")
-    raise
+    @order_items = @merchant.get_merchant_orders
+    @completed_orders = @merchant.get_merchant_orders_by_status("completed")
+    @paid_orders = @merchant.get_merchant_orders_by_status("paid")
+    @pending_orders = @merchant.get_merchant_orders_by_status("pending")
+    @cancelled_orders = @merchant.get_merchant_orders_by_status("cancelled")
+  end
+
+  def paid
+    @order_items = @merchant.get_merchant_orders_by_status("paid")
+
+    render 'filtered_list'
+  end
+
+  def cancelled
+    @order_items = @merchant.get_merchant_orders_by_status("cancelled")
+
+    render 'filtered_list'
+  end
+
+  def completed
+    @order_items = @merchant.get_merchant_orders_by_status("completed")
+
+    render 'filtered_list'
+  end
+
+  def pending
+      @order_items = @merchant.get_merchant_orders_by_status("pending")
+
+    render 'filtered_list'
   end
 
   def create
@@ -55,6 +78,10 @@ class OrdersController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def get_order
       @order = Order.find(params[:id])
+    end
+
+    def get_merchant
+        @merchant = Merchant.find(session[:merchant_id])
     end
 
      # Before create action, check if there is a cart.  If there is, it is assined in "current_order." If not, we make a new order.

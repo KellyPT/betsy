@@ -14,4 +14,15 @@ class MerchantTest < ActiveSupport::TestCase
     assert_includes merchant.errors, :uid
     assert_includes merchant.errors, :provider
   end
+
+  test "get_merchant_orders will return an array of all order items associated with that merchant" do
+    merchant = merchants(:merchant_with_orders)
+
+    orders = merchant.get_merchant_orders
+    assert_kind_of  Array, orders
+    # assert_includes orders, order_items(:reduce_quantity1)
+    # assert_includes orders, order_items(:reduce_quantity2)
+
+  end
+
 end

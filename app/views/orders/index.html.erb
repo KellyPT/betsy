@@ -1,23 +1,36 @@
 <h1>Order Fulfilment Page</h1>
 
 <main>
+
   <section>
+
     <ul>
       <% @order_items.each do |item| %>
 
-      <li> <%= item.product.name %></li>
-      <li>
-        <%= form_for(item) do |f| %>
-        <%= f.label :quantity %>
-        <%= f.number_field :quantity,
-        in: 1.0..item.product.quantity,
-        step: 1.0 %>
-        <%= f.submit "Update" %>
-        <% end %>
-      </li>
-      <li> Price: <%= item.product.price %></li>
-      <li class= "link"><%= link_to 'Remove from Cart', order_item_path(item), method: :delete %></li>
-      <% end %>
-    </ul>
+      <ul>
+        <li>TOTAL REVENUE: <%= OrderItem.sum_total_prices(@order_items)  %> </li>
+        <ul>
+          <li>COMPLETED: <%= OrderItem.sum_total_prices(@completed_orders)  %> </li>
+          <li>PAID: <%= OrderItem.sum_total_prices(@paid_orders)  %></li>
+          <li>PENDING: <%= OrderItem.sum_total_prices(@pending_orders)  %></li>
+          <li>CANCELLED: <%= OrderItem.sum_total_prices(@cancelled_orders)  %></li>
+
+        </uL>
+      </ul>
   </section>
+
+  <section>
+      <ul>
+        <li>TOTAL ORDER COUNT: <%= @order_items.count %> </li>
+        <ul>
+          <li>COMPLETED: <%= @completed_orders.count %> </li>
+          <li>PAID: <%= @paid_orders.count %></li>
+          <li>PENDING: <%= @pending_orders.count %></li>
+          <li>CANCELLED: <%= @cancelled_orders.count %></li>
+
+
+        </uL>
+      </ul>
+  </section>
+  <%= render partial: "order_list", locals: {order_items: @order_items} %>
 </main>

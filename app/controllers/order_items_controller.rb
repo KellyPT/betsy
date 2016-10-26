@@ -1,10 +1,14 @@
 class OrderItemsController < ApplicationController
-  before_action :get_order_item, only: [:update, :destroy]
+  before_action :get_order_item, only: [:update, :destroy, :show]
   skip_before_action :require_login
 
   def index
     @order = Order.find(session[:order_id])
     @order_items = @order.order_items
+  end
+
+  def show
+    @payment_detail = @order_item.order.payment_detail
   end
 
   def update

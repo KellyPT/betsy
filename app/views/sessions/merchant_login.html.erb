@@ -1,15 +1,14 @@
 <h4>Welcome, <%= @merchant.user_name %></h4>
 
-<h5>MAIN MENU:</h5>
+<h6><%= link_to "Create a new Category", new_category_path, method: :get %></li>
+</h6>
 
-<li><%= link_to "Create a new Category", new_category_path, method: :get %></li>
-</br>
+<h6><%= link_to "Create a new Product", new_merchant_product_path(@current_merchant), method: :get %> </h6>
 
-<li><%= link_to "Create a new Product", new_merchant_product_path(@current_merchant), method: :get %> </li>
-
-<h3>These are my products:</h3>
+<h6>My products:</h6>
 <table>
   <tr>
+    <th>Product ID</th>
     <th>Name</th>
     <th>Price</th>
     <th>Quantity</th>
@@ -19,11 +18,33 @@
 
   <% @merchant.products.each do |product| %>
   <tr>
-    <td><%= product.name %></td>
+    <td><%= product.id %></td>
+    <td><%= link_to "#{product.name}", product_path(product.id) %></td>
     <td><%= product.price %></td>
     <td><%= product.quantity %></td>
     <td><%= link_to "Edit this Product", edit_merchant_product_path(@current_merchant, product.id) %></td>
-    <td>Retire button</td>
+    <td>Retire button come here</td>
+  </tr>
+  <% end %>
+</table>
+
+<h6>My Orders: </h6>
+<table>
+  <tr>
+    <th>ID</th>
+    <th>Order ID</th>
+    <th>Product ID</th>
+    <th>Quantity</th>
+    <th>Created At</th>
+  </tr>
+
+  <% @merchant.get_merchant_orders.each do |o| %>
+  <tr>
+    <td><%= o.id %></td>
+    <td><%= o.order_id %></td>
+    <td><%= o.product_id %></td>
+    <td><%= o.quantity %></td>
+    <td><%= o.created_at %></td>
   </tr>
   <% end %>
 </table>

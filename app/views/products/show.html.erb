@@ -12,24 +12,28 @@
   <li class= "link"><%= link_to 'Purchase', orders_path, method: :post %></li>
 </ul>
 
-<ul>
-  <%= form_for [@product, @review] do |f| %>
-  <li class="field">
-    <%= f.label :rating %>
-    <%= f.text_field :rating %>
-  </li>
-  <li class="field">
-    <%= f.label :description %>
-    <%= f.text_field :description %>
-  </li>
-  <li class="actions">
-    <%= f.submit "Submit Review" %>
-  </li>
-  <% end %>
-</ul>
+<% if @product.merchant_id == nil || @product.merchant_id != session[:merchant_id] %>
+  <ul>
+    <%= form_for [@product, @review] do |f| %>
+    <li class="field">
+      <%= f.label :rating %>
+      <%= f.text_field :rating %>
+    </li>
+    <li class="field">
+      <%= f.label :description %>
+      <%= f.text_field :description %>
+    </li>
+    <li class="actions">
+      <%= f.submit "Submit Review" %>
+    </li>
+    <% end %>
+  </ul>
+<% else %>
+  <h6>You can't review your own product.</h6>
+<% end %>
 
 <article class="review">
-  <h1>Reviews</h1>
+  <h3>Reviews</h3>
   <ul>
     <%  @reviews.each do |f| %>
     <li>Rating:<%= f.rating %></li>
