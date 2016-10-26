@@ -10,6 +10,7 @@
 <h3>These are my products:</h3>
 <table>
   <tr>
+    <th>Product ID</th>
     <th>Name</th>
     <th>Price</th>
     <th>Quantity</th>
@@ -19,11 +20,47 @@
 
   <% @merchant.products.each do |product| %>
   <tr>
-    <td><%= product.name %></td>
+
+    <td><%= product.id %></td>
+    <td><%= link_to "#{product.name}", product_path(product.id) %></td>
     <td><%= product.price %></td>
     <td><%= product.quantity %></td>
     <td><%= link_to "Edit this Product", edit_merchant_product_path(@current_merchant, product.id) %></td>
-    <td>Retire button</td>
+    <td>
+      <% if product.active %>
+        <%= form_for [@merchant, product], method: :patch do |f| %>
+        <%= f.hidden_field :active, :value => false %>
+        <%= f.submit "Retire Product" %>
+        <% end %>
+      <% else %>
+        <%= form_for [@merchant, product], method: :patch do |f| %>
+        <%= f.hidden_field :active, :value => true %>
+        <%= f.submit "Reactivate Product" %>
+        <% end %>
+      <% end %>
+    </td>
+  </tr>
+  <% end %>
+</table>
+
+
+<h6>My Orders: </h6>
+<table>
+  <tr>
+    <th>ID</th>
+    <th>Order ID</th>
+    <th>Product ID</th>
+    <th>Quantity</th>
+    <th>Created At</th>
+  </tr>
+
+  <% @merchant.get_merchant_orders.each do |o| %>
+  <tr>
+    <td><%= o.id %></td>
+    <td><%= o.order_id %></td>
+    <td><%= o.product_id %></td>
+    <td><%= o.quantity %></td>
+    <td><%= o.created_at %></td>
   </tr>
   <% end %>
 </table>

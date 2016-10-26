@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161025192138) do
+ActiveRecord::Schema.define(version: 20161026172114) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 20161025192138) do
     t.datetime "updated_at"
   end
 
-  create_table "categories_products", id: false, force: :cascade do |t|
+  create_table "categories_products", force: :cascade do |t|
     t.integer "category_id"
     t.integer "product_id"
   end
@@ -80,6 +80,7 @@ ActiveRecord::Schema.define(version: 20161025192138) do
     t.datetime "updated_at"
     t.string   "image_uid"
     t.boolean  "active",      default: true
+    t.string   "description"
   end
 
   add_index "products", ["merchant_id"], name: "index_products_on_merchant_id"

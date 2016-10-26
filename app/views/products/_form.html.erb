@@ -8,8 +8,18 @@
 </li>
 
 <li class="field">
-<!-- <label for=""></label> -->
-  <%# :categories %>
+  <%= f.label :price %><br />
+  <%= f.text_field :price %>
+</li>
+
+<li class="field">
+  <%= f.label :description %><br>
+  <%= f.text_field :description %>
+</li>
+
+<li class="field">
+  <%= f.label :quantity %><br>
+  <%= f.text_field :quantity %>
 </li>
 
 <li class="field">
@@ -18,13 +28,8 @@
 </li>
 
 <li class="field">
-  <%= f.label :price %><br />
-  <%= f.text_field :price %>
-</li>
-
-<li class="field">
-  <%= f.label :quantity %><br>
-  <%= f.text_field :quantity %>
+  <%= f.label :Category %><br>
+  <%= f.select :category_ids, Category.all.collect{|category| [category.name, category.id]}, {}, {multiple: true}%>
 </li>
 
 <li class="actions">

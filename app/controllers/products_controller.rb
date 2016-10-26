@@ -1,8 +1,6 @@
 class ProductsController < ApplicationController
   before_action :get_product, only: [:show, :edit, :update, :destroy]
 
-  # Kelly: I don't know how to use controller filter here yet. So I will temporarily skip authentication requirements.
-
   before_action :require_login, only: [:new, :create, :edit, :update]
 
   # products_path	GET	/products
@@ -10,12 +8,12 @@ class ProductsController < ApplicationController
   def index
     if params[:category_id] != nil
       category = Category.find(params[:category_id])
-      @products = category.products
+      @products = category.products.where(active: true)
     elsif params[:merchant_id] != nil
       @merchant = Merchant.find(params[:merchant_id])
-      @products = @merchant.products
+      @products = @merchant.products.where(active: true)
     else
-      @products = Product.all
+      @products = Product.where(active: true)
     end
   end
 
@@ -25,7 +23,7 @@ class ProductsController < ApplicationController
     session[:product_id] = @product.id
     @review = Review.new
     @reviews = Review.where product_id: @product.id
-   end
+  end
 
   # new_merchant_product_path	GET	/merchants/:merchant_id/products/new
   def new
@@ -54,18 +52,14 @@ class ProductsController < ApplicationController
 
   # merchant_product_path PATCH/PUT /merchants/:merchant_id/products/:id
   def update
-
     if @product.merchant_id == session[:merchant_id]
       @merchant_product = @product
     else
       render :no_show
     end
 
-    merchant_id = session[:merchant_id]
-
     if @merchant_product.update(product_params)
-      redirect_to merchant_products_path(@current_merchant)
-      # TODO: the form is not working!! shallow routing is better
+      redirect_to merchant_product_path(@current_merchant, @merchant_product.id)
     else
       render :edit
     end
@@ -79,6 +73,6 @@ class ProductsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def product_params
-      params.require(:product).permit(:name, :price, :quantity, :image)
+      params.require(:product).permit(:name, :price, :quantity, :image, :description, category_ids: [])
     end
 end
