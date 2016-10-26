@@ -8,12 +8,12 @@ class ProductsController < ApplicationController
   def index
     if params[:category_id] != nil
       category = Category.find(params[:category_id])
-      @products = category.products
+      @products = category.products.where(active: true)
     elsif params[:merchant_id] != nil
       @merchant = Merchant.find(params[:merchant_id])
-      @products = @merchant.products
+      @products = @merchant.products.where(active: true)
     else
-      @products = Product.all
+      @products = Product.where(active: true)
     end
   end
 

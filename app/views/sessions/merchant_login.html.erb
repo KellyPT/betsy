@@ -1,11 +1,13 @@
 <h4>Welcome, <%= @merchant.user_name %></h4>
 
-<h6><%= link_to "Create a new Category", new_category_path, method: :get %></li>
-</h6>
+<h5>MAIN MENU:</h5>
 
-<h6><%= link_to "Create a new Product", new_merchant_product_path(@current_merchant), method: :get %> </h6>
+<li><%= link_to "Create a new Category", new_category_path, method: :get %></li>
+</br>
 
-<h6>My products:</h6>
+<li><%= link_to "Create a new Product", new_merchant_product_path(@current_merchant), method: :get %> </li>
+
+<h3>These are my products:</h3>
 <table>
   <tr>
     <th>Product ID</th>
@@ -18,15 +20,29 @@
 
   <% @merchant.products.each do |product| %>
   <tr>
+
     <td><%= product.id %></td>
     <td><%= link_to "#{product.name}", product_path(product.id) %></td>
     <td><%= product.price %></td>
     <td><%= product.quantity %></td>
     <td><%= link_to "Edit this Product", edit_merchant_product_path(@current_merchant, product.id) %></td>
-    <td>Retire button come here</td>
+    <td>
+      <% if product.active %>
+        <%= form_for [@merchant, product], method: :patch do |f| %>
+        <%= f.hidden_field :active, :value => false %>
+        <%= f.submit "Retire Product" %>
+        <% end %>
+      <% else %>
+        <%= form_for [@merchant, product], method: :patch do |f| %>
+        <%= f.hidden_field :active, :value => true %>
+        <%= f.submit "Reactivate Product" %>
+        <% end %>
+      <% end %>
+    </td>
   </tr>
   <% end %>
 </table>
+
 
 <h6>My Orders: </h6>
 <table>
