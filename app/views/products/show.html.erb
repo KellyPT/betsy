@@ -19,7 +19,7 @@
     <%= form_for [@product, @review] do |f| %>
     <li class="field">
       <%= f.label :rating %>
-      <%= f.number_field :quantity, :step 5%>
+      <%= f.text_field :rating %>
     </li>
 
     <li class="field">
