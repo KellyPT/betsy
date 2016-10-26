@@ -1,11 +1,17 @@
 <h1>Order Fulfilment Page</h1>
 
+<%= link_to "ALL ORDERS", orders_path %>
+<%= form_for @merchant, method: :get, url: orders_path do |f| %>
+  <%= f.submit "COMPLETED" %>
+  <%= f.submit "PAID" %>
+  <%= f.submit "PENDING" %>
+  <%= f.submit "CANCELLED" %>
+
+<% end %>
+
 <main>
 
   <section>
-
-    <ul>
-      <% @order_items.each do |item| %>
 
       <ul>
         <li>TOTAL REVENUE: <%= OrderItem.sum_total_prices(@order_items)  %> </li>
@@ -15,7 +21,7 @@
           <li>PENDING: <%= OrderItem.sum_total_prices(@pending_orders)  %></li>
           <li>CANCELLED: <%= OrderItem.sum_total_prices(@cancelled_orders)  %></li>
 
-        </uL>
+        </ul>
       </ul>
   </section>
 
@@ -32,5 +38,5 @@
         </uL>
       </ul>
   </section>
-  <%= render partial: "order_list", locals: {order_items: @order_items} %>
+  <%= render partial: "order_list", locals: {order_items: @filtered_orders} %>
 </main>

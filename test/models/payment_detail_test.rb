@@ -115,46 +115,4 @@ class PaymentDetailTest < ActiveSupport::TestCase
     assert_includes pay1.errors, :cc_expiration_date
   end
 
-  test "Purchasing an order decreases the stock of each product in the order" do
-
-    product1 = products(:product_stock1)
-    product2 = products(:product_stock2)
-
-    beginning_stock1 = product1.quantity
-    beginning_stock2 = product2.quantity
-
-    quantity_change1 = order_items(:reduce_quantity1).quantity
-    quantity_change2 = order_items(:reduce_quantity2).quantity
-
-    payment_details(:payment_card).update_products_stock("purchase")
-
-    ending_stock1 = product1.reload.quantity
-    ending_stock2 = product2.reload.quantity
-
-    assert_equal(ending_stock1, beginning_stock1 - quantity_change1)
-    assert_equal(ending_stock2, beginning_stock2 - quantity_change2)
-
-  end
-
-  test "Cancelling an order (after purchasing) increases the stock of each product in the order" do
-
-    product1 = products(:product_stock1)
-    product2 = products(:product_stock2)
-
-    beginning_stock1 = product1.quantity
-    beginning_stock2 = product2.quantity
-
-    quantity_change1 = order_items(:reduce_quantity1).quantity
-    quantity_change2 = order_items(:reduce_quantity2).quantity
-
-    payment_details(:payment_card).update_products_stock("cancelation")
-
-    ending_stock1 = product1.reload.quantity
-    ending_stock2 = product2.reload.quantity
-
-    assert_equal(ending_stock1, beginning_stock1 + quantity_change1)
-    assert_equal(ending_stock2, beginning_stock2 + quantity_change2)
-
-  end
-
 end

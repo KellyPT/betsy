@@ -12,31 +12,21 @@ class Merchant < ApplicationRecord
     return merchant
   end
 
-  def get_merchant_orders
-    merchant_orders = []
-    products = self.products
-    products.each do |product|
-      order_items = product.order_items
-        order_items.each do |item|
-          merchant_orders << item
-        end
-    end
-    return merchant_orders
-  end
+  def get_merchant_orders(status = nil)
+  # "Order" to merchant is the order_items they must fulfill
+    order_items = OrderItem.joins(:order, :product)
+.where('products.merchant_id = ?', self.id)
 
-  def get_merchant_orders_by_status(status)
-    merchant_orders = []
-    products = self.products
-    products.each do |product|
-      order_items = product.order_items
-      order_items.each do |item|
-        order = item.order
-        if order.order_status == status
-          merchant_orders << item
-        end
-      end
+  # narrow the seach to specific status if status is provided
+    if !status.nil? && status != "completed"
+      order_items = order_items.where('orders.order_status = ?', status)
+    elsif status == "completed"
+  # a merchant considers an order complete when they have shipped the item
+      order_items = order_items.where('order_items.shipped = ?', true)
     end
-    return merchant_orders
+
+    return order_items
+
   end
 
 end
