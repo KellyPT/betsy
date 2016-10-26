@@ -6,9 +6,7 @@
 <li><%= link_to "Create a new Category", new_category_path, method: :get %></li>
 </br>
 
-<!-- /merchants/:merchant_id/products -->
-<!-- <li><%# link_to "View my Products", merchant_products_path, method: :get%></li>
-</br> -->
+
 
 <ul>These are my products:
 <% @merchant.products.each do |product| %>
@@ -44,3 +42,43 @@
 
 <ul>View an individual order to see the user's: Name; Email address; Mailing address; Last four digits of their credit card; Credit card expiration date
 </ul>
+
+<li><%= link_to "Create a new Product", new_merchant_product_path(@current_merchant), method: :get %> </li>
+
+<h3>These are my products:</h3>
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Price</th>
+    <th>Quantity</th>
+    <th>Edit</th>
+    <th>Retire</th>
+  </tr>
+
+  <% @merchant.products.each do |product| %>
+  <tr>
+    <td><%= product.name %></td>
+    <td><%= product.price %></td>
+    <td><%= product.quantity %></td>
+    <td><%= link_to "Edit this Product", edit_merchant_product_path(@current_merchant, product.id) %></td>
+    <td>
+
+        <% if product.active %>
+        <%= form_for [@merchant, product], method: :patch do |f| %>
+          <%= f.hidden_field :active, :value => false %>
+          <%= puts "THIS IS THE ACTIVENESS #{product.active}!!!" %>
+          <%= f.submit "Retire Product" %>
+          <% end %>
+        <% else %>
+        <%= form_for [@merchant, product], method: :patch do |f| %>
+          <%= f.hidden_field :active, :value => true %>
+          <%= f.submit "Reactivate Product" %>
+        <% end %>
+      <% end %>
+
+
+
+    </td>
+  </tr>
+  <% end %>
+</table>

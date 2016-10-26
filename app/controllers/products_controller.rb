@@ -10,12 +10,12 @@ class ProductsController < ApplicationController
   def index
     if params[:category_id] != nil
       category = Category.find(params[:category_id])
-      @products = category.products
+      @products = category.products.where(active: true)
     elsif params[:merchant_id] != nil
       @merchant = Merchant.find(params[:merchant_id])
-      @products = @merchant.products
+      @products = @merchant.products.where(active: true)
     else
-      @products = Product.all
+      @products = Product.where(active: true)
     end
   end
 
@@ -25,7 +25,7 @@ class ProductsController < ApplicationController
     session[:product_id] = @product.id
     @review = Review.new
     @reviews = Review.where product_id: @product.id
-   end
+  end
 
   # new_merchant_product_path	GET	/merchants/:merchant_id/products/new
   def new
@@ -76,6 +76,6 @@ class ProductsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def product_params
-      params.require(:product).permit(:name, :price, :quantity, :image)
+      params.require(:product).permit(:name, :price, :quantity, :image, :active)
     end
 end
