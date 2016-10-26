@@ -13,9 +13,6 @@
 
   <section>
 
-    <ul>
-      <% @order_items.each do |item| %>
-
       <ul>
         <li>TOTAL REVENUE: <%= OrderItem.sum_total_prices(@order_items)  %> </li>
         <ul>
@@ -24,7 +21,7 @@
           <li>PENDING: <%= OrderItem.sum_total_prices(@pending_orders)  %></li>
           <li>CANCELLED: <%= OrderItem.sum_total_prices(@cancelled_orders)  %></li>
 
-        </uL>
+        </ul>
       </ul>
   </section>
 

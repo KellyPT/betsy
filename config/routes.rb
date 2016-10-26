@@ -1,10 +1,7 @@
 Rails.application.routes.draw do
   root 'sessions#index_log_out'
 
-  get "/orders/pending", to: 'orders#pending', as: 'pending_orders'
-  get "/orders/paid", to: 'orders#paid', as: 'paid_orders'
-  get "/orders/completed", to: 'orders#completed', as: 'completed_orders'
-  get "/orders/cancelled", to: 'orders#cancelled', as: 'cancelled_orders'
+  patch "/order_items/:id/ship", to: 'order_items#ship', as: 'ship_order_item'
 
   resources :orders do
     resources :order_items, except: [:update, :destroy, :show]

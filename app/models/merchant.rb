@@ -18,8 +18,11 @@ class Merchant < ApplicationRecord
 .where('products.merchant_id = ?', self.id)
 
   # narrow the seach to specific status if status is provided
-    unless status.nil?
+    if !status.nil? && status != "completed"
       order_items = order_items.where('orders.order_status = ?', status)
+    elsif status == "completed"
+  # a merchant considers an order complete when they have shipped the item
+      order_items = order_items.where('order_items.shipped = ?', true)
     end
 
     return order_items
