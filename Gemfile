@@ -40,7 +40,9 @@ end
 
 group :test do
   gem 'minitest-reporters'
+  gem "pry-rails"
 end
+
 gem 'simplecov', :require => false, :group => :test
 
 group :development do

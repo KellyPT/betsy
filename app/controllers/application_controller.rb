@@ -4,7 +4,10 @@ class ApplicationController < ActionController::Base
   before_action :require_login
 
   def current_merchant
-    @current_merchant ||= Merchant.find(session[:merchant_id]) if session[:merchant_id]
+    begin
+      @current_merchant ||= Merchant.find(session[:merchant_id]) if session[:merchant_id]
+    rescue ActiveRecord::RecordNotFound
+    end
   end
 
   def require_login
