@@ -1,47 +1,9 @@
-<h3>MAIN MENU:</h3>
-
 <h4>Welcome, <%= @merchant.user_name %></h4>
-<h5>THIS IS WHAT A MERCHANT CAN DO:</h5>
+
+<h5>MAIN MENU:</h5>
 
 <li><%= link_to "Create a new Category", new_category_path, method: :get %></li>
 </br>
-
-
-
-<ul>These are my products:
-<% @merchant.products.each do |product| %>
-  <li>Product's name: <%= product.name %>, Price: <%= product.price %>, Quantity:<%= product.quantity %></li>
-<% end %>
-</ul>
-
-<li>Create a new product providing:name; description; price; photo URL; stock</li>
-
-<li>Assign my products to any number of categories</li>
-
-<li>Retire a product from being sold, which hides it from browsing</li>
-
-<li>View an account page to edit/update my existing products</li>
-
-<li>View an account page showing my order fulfillment</li>
-
-<ul>On the order fulfillment page:
-<li>Total Revenue</li>
-<li>Total Revenue by status</li>
-<li>Total number of orders by status</li>
-<li>Filter orders displayed by status</li>
-<li>Link to each individual order</li>
-</ul>
-
-<ul>A list of orders including at least one of my products:
-<li>Each order item sold by me with a quantity and line-item subtotal
-<li>A link to the item description page
-<li>DateTime the order was placed
-<li>Link to transition the order item to marked as shipped
-<li>The current status of the order ("pending", "paid", "complete", "cancelled")
-</ul>
-
-<ul>View an individual order to see the user's: Name; Email address; Mailing address; Last four digits of their credit card; Credit card expiration date
-</ul>
 
 <li><%= link_to "Create a new Product", new_merchant_product_path(@current_merchant), method: :get %> </li>
 
@@ -61,24 +23,22 @@
     <td><%= product.price %></td>
     <td><%= product.quantity %></td>
     <td><%= link_to "Edit this Product", edit_merchant_product_path(@current_merchant, product.id) %></td>
-    <td>
-
-        <% if product.active %>
-        <%= form_for [@merchant, product], method: :patch do |f| %>
-          <%= f.hidden_field :active, :value => false %>
-          <%= puts "THIS IS THE ACTIVENESS #{product.active}!!!" %>
-          <%= f.submit "Retire Product" %>
-          <% end %>
-        <% else %>
-        <%= form_for [@merchant, product], method: :patch do |f| %>
-          <%= f.hidden_field :active, :value => true %>
-          <%= f.submit "Reactivate Product" %>
-        <% end %>
+    <td><% if product.active %>
+    <%= form_for [@merchant, product], method: :patch do |f| %>
+      <%= f.hidden_field :active, :value => false %>
+      <%= puts "THIS IS THE ACTIVENESS #{product.active}!!!" %>
+      <%= f.submit "Retire Product" %>
       <% end %>
-
-
-
-    </td>
+    <% else %>
+    <%= form_for [@merchant, product], method: :patch do |f| %>
+      <%= f.hidden_field :active, :value => true %>
+      <%= f.submit "Reactivate Product" %>
+    <% end %>
+  <% end %>
+</td>
   </tr>
   <% end %>
 </table>
+
+
+      
