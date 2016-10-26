@@ -84,9 +84,9 @@ class PaymentDetailTest < ActiveSupport::TestCase
   test "Can record time payment detail was placed" do
     pay = payment_details(:two)
     pay.record_time_placed
-    assert_equal pay.time_placed.day, 25
-    assert_equal pay.time_placed.month, 10
-    assert_equal pay.time_placed.year, 2016
+    assert_equal pay.time_placed.day, Time.now.day
+    assert_equal pay.time_placed.month, Time.now.month
+    assert_equal pay.time_placed.year, Time.now.year
   end
 
   test "Can set four digits of credit card number" do
