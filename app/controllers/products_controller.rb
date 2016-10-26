@@ -1,8 +1,6 @@
 class ProductsController < ApplicationController
   before_action :get_product, only: [:show, :edit, :update, :destroy]
 
-  # Kelly: I don't know how to use controller filter here yet. So I will temporarily skip authentication requirements.
-
   before_action :require_login, only: [:new, :create, :edit, :update]
 
   # products_path	GET	/products

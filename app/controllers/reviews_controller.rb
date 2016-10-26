@@ -1,7 +1,6 @@
 class ReviewsController < ApplicationController
   before_action :get_review, only: [:show, :edit, :update, :destroy]
 
-  # Kelly: I don't know how to use controller filter here yet. So I will temporarily skip authentication requirements.
   skip_before_action :require_login
 
   # product_reviews_path	GET	/products/:product_id/reviews
