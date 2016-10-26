@@ -14,10 +14,11 @@
 <body>
   <div class="container">
     <header>
-      <h3>ROBITS</h3>
+      <h3><%= link_to "ROBITS", root_path %></h3>
+
       <nav>
         <% if session[:merchant_id] %>
-        Login Successful! Welcome! <%= @current_merchant.user_name %>
+        Login Successful! Welcome!
         <%= button_to "Log out", sessions_path, method: :delete %>
         <%= button_to "Merchant Control", sessions_merchant_login_path, method: :get %>
         <% else %>
@@ -27,6 +28,20 @@
         <%= button_to "Log In", "/auth/github", method: :get %>
         <%= button_to "Sign Up", "https://github.com/join?source=header-home", method: :get %>
         <% end %>
+
+        <!-- Start of new code -->
+        <section class="small-12 columns">
+          <ul class="vertical menu medium-horizontal" data-responsive-menu="accordion medium-dropdown">
+            <li><%= link_to "Home", root_path %></li>
+            <li><%= link_to "Shop by Categories", categories_path %>
+              <ul class="dropdown menu" data-dropdown-menu>
+                <li>
+                  <%= link_to "Create a new Category", new_category_path %>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </section>
       </nav>
     </header>
     <%= yield %>
