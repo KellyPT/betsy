@@ -8,6 +8,7 @@ class Product < ApplicationRecord
 
   has_many :categories, through: :categories_products
   has_many :categories_products
+  accepts_nested_attributes_for :categories, reject_if: :all_blank
 
   validates :name, presence: :true, uniqueness: :true
   validates :price, presence: :true, numericality: {greater_than: 0}
