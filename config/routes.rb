@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   end
 
   resources :products, only: [:index, :show] do
-    resources :reviews, except: [:edit, :update, :destroy]
+    resources :reviews, only: [:new, :create]
   end
 
 

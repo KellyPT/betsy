@@ -23,7 +23,7 @@ class ProductsController < ApplicationController
     session[:product_id] = @product.id
     @review = Review.new
     @reviews = Review.where product_id: @product.id
-   end
+  end
 
   # new_merchant_product_path	GET	/merchants/:merchant_id/products/new
   def new
