@@ -11,7 +11,7 @@ class MerchantsController < ApplicationController
   # merchant GET    /merchants/:id
   def show
     # @merchant = @current_user? authentication?
-    @products = @merchant.products
+    @products = @merchant.products.where(active: true)
   end
 
   private

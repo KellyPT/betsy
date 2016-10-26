@@ -10,7 +10,7 @@ class CategoriesController < ApplicationController
 
   # new_category GET    /categories/new
   def show
-    @products = @category.products
+    @products = @category.products.where(active: true)
   end
 
   # GET /categories/new
