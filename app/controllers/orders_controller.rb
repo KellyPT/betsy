@@ -5,40 +5,9 @@ class OrdersController < ApplicationController
 
 
   def index
-#     test = OrderItem.joins(:order, :product)
-# .where('products.merchant_id = ?', @merchant.id).where('order.order_status = ?', "paid")
-#     @order_items = @merchant.get_merchant_orders
-
-
-    @completed_orders = @merchant.get_merchant_orders("completed")
-    @paid_orders = @merchant.get_merchant_orders("paid")
-    @pending_orders = @merchant.get_merchant_orders("pending")
-    @cancelled_orders = @merchant.get_merchant_orders("cancelled")
-    raise
-  end
-
-  def paid
-    @order_items = @merchant.get_merchant_orders("paid")
-
-    render 'filtered_list'
-  end
-
-  def cancelled
-    @order_items = @merchant.get_merchant_orders("cancelled")
-
-    render 'filtered_list'
-  end
-
-  def completed
-    @order_items = @merchant.get_merchant_orders("completed")
-
-    render 'filtered_list'
-  end
-
-  def pending
-      @order_items = @merchant.get_merchant_orders("pending")
-
-    render 'filtered_list'
+    get_all_merchant_orders
+    get_all_merchant_orders_by_status
+    filter_displayed_merchant_orders
   end
 
   def create
@@ -86,6 +55,28 @@ class OrdersController < ApplicationController
 
     def get_merchant
         @merchant = Merchant.find(session[:merchant_id])
+    end
+
+    def get_all_merchant_orders
+    # "Order" to merchant is the order_items they must fulfill
+        @order_items = @merchant.get_merchant_orders
+    end
+
+    def get_all_merchant_orders_by_status
+    # "Order" to merchant is the order_items they must fulfill
+      @completed_orders =   @merchant.get_merchant_orders("completed")
+      @paid_orders = @merchant.get_merchant_orders("paid")
+      @pending_orders =   @merchant.get_merchant_orders("pending")
+      @cancelled_orders =   @merchant.get_merchant_orders("cancelled")
+    end
+
+    def filter_displayed_merchant_orders
+    # "Order" to merchant is the order_items they must fulfill
+      if params["commit"].nil?
+        @filtered_orders = @merchant.get_merchant_orders
+      else
+        @filtered_orders = @merchant.get_merchant_orders(params["commit"].downcase)
+      end
     end
 
      # Before create action, check if there is a cart.  If there is, it is assined in "current_order." If not, we make a new order.

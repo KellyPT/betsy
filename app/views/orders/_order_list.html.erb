@@ -1,10 +1,4 @@
 <section>
-<%= link_to "All Orders", orders_path %>
-<%= link_to "Completed", completed_orders_path %>
-<%= link_to "Paid", paid_orders_path %>
-<%= link_to "Pending", pending_orders_path %>
-<%= link_to "Cancelled", cancelled_orders_path %>
-
   <ul>
       <% order_items.each do |item| %>
       <li> <%= link_to "Ordered #{item.product.name}", order_item_path(item) %></li>

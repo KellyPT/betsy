@@ -1,5 +1,6 @@
 class PaymentDetailsController < ApplicationController
     before_action :get_payment_details, only: [:show]
+    before_action :get_order, only: [:create]
     skip_before_action :require_login
 
   def show
@@ -19,7 +20,7 @@ class PaymentDetailsController < ApplicationController
     if @payment_details.save
       reset_session_values
       update_order_status
-      @payment_details.decrease_products_stock
+      @order.decrease_products_stock
       redirect_to @payment_details
     else
        render :new
@@ -29,6 +30,10 @@ class PaymentDetailsController < ApplicationController
   private
     def get_payment_details
       @payment_details = PaymentDetail.find(params[:id])
+    end
+
+    def get_order
+      @order = Order.find(session[:order_id])
     end
 
     def payment_details_params
