@@ -19,7 +19,7 @@ class PaymentDetailsController < ApplicationController
     if @payment_details.save
       reset_session_values
       update_order_status
-      @payment_details.update_products_stock("purchase")
+      @payment_details.decrease_products_stock("purchase")
       redirect_to @payment_details
     else
        render :new

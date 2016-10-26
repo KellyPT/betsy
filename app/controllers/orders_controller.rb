@@ -5,33 +5,38 @@ class OrdersController < ApplicationController
 
 
   def index
-    @order_items = @merchant.get_merchant_orders
-    @completed_orders = @merchant.get_merchant_orders_by_status("completed")
-    @paid_orders = @merchant.get_merchant_orders_by_status("paid")
-    @pending_orders = @merchant.get_merchant_orders_by_status("pending")
-    @cancelled_orders = @merchant.get_merchant_orders_by_status("cancelled")
+#     test = OrderItem.joins(:order, :product)
+# .where('products.merchant_id = ?', @merchant.id).where('order.order_status = ?', "paid")
+#     @order_items = @merchant.get_merchant_orders
+
+
+    @completed_orders = @merchant.get_merchant_orders("completed")
+    @paid_orders = @merchant.get_merchant_orders("paid")
+    @pending_orders = @merchant.get_merchant_orders("pending")
+    @cancelled_orders = @merchant.get_merchant_orders("cancelled")
+    raise
   end
 
   def paid
-    @order_items = @merchant.get_merchant_orders_by_status("paid")
+    @order_items = @merchant.get_merchant_orders("paid")
 
     render 'filtered_list'
   end
 
   def cancelled
-    @order_items = @merchant.get_merchant_orders_by_status("cancelled")
+    @order_items = @merchant.get_merchant_orders("cancelled")
 
     render 'filtered_list'
   end
 
   def completed
-    @order_items = @merchant.get_merchant_orders_by_status("completed")
+    @order_items = @merchant.get_merchant_orders("completed")
 
     render 'filtered_list'
   end
 
   def pending
-      @order_items = @merchant.get_merchant_orders_by_status("pending")
+      @order_items = @merchant.get_merchant_orders("pending")
 
     render 'filtered_list'
   end
@@ -57,7 +62,7 @@ class OrdersController < ApplicationController
   # adds stock back
     payment_details = @order.payment_detail
     if @order.update(order_status: "cancelled")
-      payment_details.update_products_stock("cancelation")
+      payment_details.increase_products_stock
       redirect_to cancelled_order_path
     else
       flash[:error] = "This order could not be cancelled"
