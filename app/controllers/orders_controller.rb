@@ -31,7 +31,7 @@ class OrdersController < ApplicationController
   # adds stock back
     payment_details = @order.payment_detail
     if @order.update(order_status: "cancelled")
-      payment_details.increase_products_stock
+      @order.increase_products_stock
       redirect_to cancelled_order_path
     else
       flash[:error] = "This order could not be cancelled"
