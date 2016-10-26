@@ -88,6 +88,7 @@ class ProductTest < ActiveSupport::TestCase
 
   test "Can unretire Product" do
     product = Product.new(name: "Test product", merchant_id: 4, quantity: 0, active: false)
+    assert_not product.active
     product.unretire_product
     assert product.active
   end
