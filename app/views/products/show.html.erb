@@ -1,7 +1,11 @@
 <ul>
 <p>
+  <% if @product.image != nil %>
   <strong>Image:</strong>
    <li class="image"><%= @product.image_stored? ? image_tag(@product.image.thumb('300x260').url) : "" %></li>
+   <% elsif %>
+   <li class="image"><%= image_tag "no_image.png", size: "300x260", alt: "Robots" %></li>
+   <% end %>
 </p>
   <li><h3><%= @product.name  %></h3></li>
 </ul>
@@ -9,8 +13,10 @@
 <ul class="product-price-des">
   <li> Price: $<%= @product.price %></li>
   <li>In Stock: <%= @product.quantity %></li>
+  <% if @product.description != nil %>
   <li>Description</li>
   <li><%= @product.description %></li>
+  <%end %>
   <li class= "link"><%= link_to 'Purchase', orders_path, method: :post %></li>
 </ul>
 
@@ -19,9 +25,8 @@
     <%= form_for [@product, @review] do |f| %>
     <li class="field">
       <%= f.label :rating %>
-      <%= f.text_field :rating %>
+      <%= f.number_field :rating,  in: 1..5 %>
     </li>
-
     <li class="field">
       <%= f.label :description %>
       <%= f.text_field :description %>
@@ -39,8 +44,12 @@
   <h3>Reviews</h3>
   <ul>
     <%  @reviews.each do |f| %>
-    <li>Rating:<%= f.rating %></li>
-    <li>Description: <%= f.description %></li>
+      <% f.rating.times do |f| %>
+      <%= image_tag "robot.png", size: "18x18", alt: "Robots" %>
+      <% end %>
+      <% if f.description != nil %>
+      <li><%= f.description %></li>
+    <% end %>
     <% end %>
   </ul>
 </article>
