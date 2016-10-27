@@ -13,7 +13,7 @@ class ProductsControllerTest < ActionController::TestCase
 
   test "should get new" do
     session[:merchant_id] = products(:one).merchant_id
-    get :new, {merchant_id: products(:one).merchant_id}
+    get :new
 
     assert_response :success
 
@@ -30,11 +30,11 @@ class ProductsControllerTest < ActionController::TestCase
     session[:merchant_id] = products(:one).merchant_id
     # assert_difference('Product.count', 1) do
 
-      post :create, { product: { name: "Test", price: "2.0", quantity: "1", active: true, merchant_id: products(:one).merchant_id}, merchant_id: products(:one).merchant_id }
+      post :create, { product: { name: "Test", price: "2.0", quantity: "1", active: true, merchant_id: products(:one).merchant_id} }
     # end
 
     assert_response :redirect
-    assert_redirected_to merchant_products_path
+    assert_redirected_to products_path
   end
 
 
@@ -45,7 +45,7 @@ class ProductsControllerTest < ActionController::TestCase
 
   test "should get edit" do
     session[:merchant_id] = products(:one).merchant_id
-    get :edit, {merchant_id: products(:one).merchant_id, id: products(:one).id}
+    get :edit, {id: products(:one).id}
 
     assert_response :success
   end
