@@ -1,7 +1,7 @@
 class ProductsController < ApplicationController
   before_action :get_product, only: [:show, :edit, :update]
 
-  before_action :require_login, only: [:new, :create, :edit, :update]
+  before_action :require_login, only: [:new, :create, :edit, :create]
 
   # products_path	GET	/products
   # merchant_products_path	GET	/merchants/:merchant_id/products
@@ -69,6 +69,6 @@ class ProductsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def product_params
-      params.require(:product).permit(:name, :price, :quantity, :image, :description, category_ids: [])
+      params.require(:product).permit(:name, :price, :quantity, :image, :description, :active, category_ids: [])
     end
 end

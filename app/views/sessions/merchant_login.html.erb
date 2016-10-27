@@ -29,8 +29,8 @@
     <td>
       <% if product.active %>
         <%= form_for product, method: :patch do |f| %>
-        <%= f.hidden_field :active, :value => false %>
-        <%= f.submit "Retire Product" %>
+          <%= f.hidden_field :active, :value => false %>
+          <%= f.submit "Retire Product" %>
         <% end %>
       <% else %>
         <%= form_for product, method: :patch do |f| %>
