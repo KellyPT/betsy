@@ -5,10 +5,7 @@ class ApplicationController < ActionController::Base
   helper_method :category, :merchant, :current_merchant
 
   def current_merchant
-    begin
       @current_merchant ||= Merchant.find(session[:merchant_id]) if session[:merchant_id]
-    rescue ActiveRecord::RecordNotFound
-    end
   end
 
   def require_login
@@ -17,9 +14,11 @@ class ApplicationController < ActionController::Base
       redirect_to root_path
     end
   end
+
   def category
     Category.all
   end
+
   def merchant
     Merchant.all
   end
