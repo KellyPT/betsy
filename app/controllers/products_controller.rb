@@ -37,7 +37,6 @@ class ProductsController < ApplicationController
     if @product.save
       redirect_to products_path
     else
-      puts "HERE ARE THE ERRORS!!!!#{@merchant_product.errors}"
       render :new
     end
   end

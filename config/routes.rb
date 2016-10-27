@@ -8,7 +8,7 @@ Rails.application.routes.draw do
     resources :payment_details, only: [:new, :create]
   end
 
-  resources :product, except: [:destroy] do
+  resources :products, except: [:destroy] do
     resources :reviews, only: [:new, :create]
   end
 

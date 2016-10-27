@@ -16,11 +16,8 @@ class ProductsControllerTest < ActionController::TestCase
     get :new
 
     assert_response :success
-
-
-    # product = assigns(:product)
-    # #
-    # assert_not_nil(product)
+    product = assigns(:product)
+    assert_not_nil(product)
 
   end
 
@@ -28,10 +25,10 @@ class ProductsControllerTest < ActionController::TestCase
 
   test "should create product" do
     session[:merchant_id] = products(:one).merchant_id
-    # assert_difference('Product.count', 1) do
+    assert_difference('Product.count', 1) do
 
       post :create, { product: { name: "Test", price: "2.0", quantity: "1", active: true, merchant_id: products(:one).merchant_id} }
-    # end
+    end
 
     assert_response :redirect
     assert_redirected_to products_path
@@ -50,10 +47,14 @@ class ProductsControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  # test "should update product" do
-  #   patch product_url(@product), params: { product: {  } }
-  #   assert_redirected_to product_url(@product)
-  # end
-  #
+  test "should update product" do
+    session[:merchant_id] = products(:one).merchant_id
+    product = products(:one)
+    patch :update, { id: product.id, product: {name: "fiddlestick"} }
+    assert_not_equal products(:one).name, Product.find(product.id).name
+    assert_redirected_to product_path
+  end
+
+
 
 end
