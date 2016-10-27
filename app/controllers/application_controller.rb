@@ -5,7 +5,10 @@ class ApplicationController < ActionController::Base
   helper_method :category, :merchant, :current_merchant
 
   def current_merchant
-    @current_merchant ||= Merchant.find(session[:merchant_id]) if session[:merchant_id]
+    begin
+      @current_merchant ||= Merchant.find(session[:merchant_id]) if session[:merchant_id]
+    rescue ActiveRecord::RecordNotFound
+    end
   end
 
   def require_login
