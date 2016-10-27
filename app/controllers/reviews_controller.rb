@@ -4,10 +4,11 @@ class ReviewsController < ApplicationController
 
   # new_product_review_path    GET     /products/:product_id/reviews/new
   def new
+    product = Product.find(params[:product_id])
     if product.merchant_id == session[:merchant_id]
       render :no_show
     else
-      @product_review = product.review.build
+      @product_review = product.reviews.build
     end
   end
 

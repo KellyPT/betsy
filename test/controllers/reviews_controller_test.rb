@@ -1,20 +1,25 @@
 require 'test_helper'
 
 class ReviewsControllerTest < ActionController::TestCase
-  # setup do
-  #   @review = reviews(:one)
-  # end
-  #
+  setup do
+    @review = reviews(:one)
+  end
+
   # test "should get index" do
-  #   get reviews_url
+  #   get :index, {product_id: @review.product.id}
   #   assert_response :success
+  #   assert_template :index
   # end
-  #
-  # test "should get new" do
-  #   get new_review_url
-  #   assert_response :success
-  # end
-  #
+
+  test "should get new" do
+
+    get :new, product_id: reviews(:one).product_id
+
+    assert_response :success
+    # review = assigns(:review)
+    # assert_not_nil(review)
+
+  end
   # test "should create review" do
   #   assert_difference('Review.count') do
   #     post reviews_url, params: { review: {  } }
