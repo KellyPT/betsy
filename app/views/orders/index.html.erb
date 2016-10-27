@@ -6,13 +6,10 @@
   <%= f.submit "PAID" %>
   <%= f.submit "PENDING" %>
   <%= f.submit "CANCELLED" %>
-
 <% end %>
 
 <main>
-
   <section>
-
       <ul>
         <li>TOTAL REVENUE: <%= OrderItem.sum_total_prices(@order_items)  %> </li>
         <ul>
@@ -20,23 +17,37 @@
           <li>PAID: <%= OrderItem.sum_total_prices(@paid_orders)  %></li>
           <li>PENDING: <%= OrderItem.sum_total_prices(@pending_orders)  %></li>
           <li>CANCELLED: <%= OrderItem.sum_total_prices(@cancelled_orders)  %></li>
-
         </ul>
       </ul>
   </section>
 
   <section>
       <ul>
-        <li>TOTAL ORDER COUNT: <%= @order_items.count %> </li>
-        <ul>
-          <li>COMPLETED: <%= @completed_orders.count %> </li>
-          <li>PAID: <%= @paid_orders.count %></li>
-          <li>PENDING: <%= @pending_orders.count %></li>
-          <li>CANCELLED: <%= @cancelled_orders.count %></li>
-
-
-        </uL>
+        <li>
+        TOTAL ORDER COUNT: <%= @order_items.count %>
+          <ul>
+            <li>COMPLETED: <%= @completed_orders.count %> </li>
+            <li>PAID: <%= @paid_orders.count %></li>
+            <li>PENDING: <%= @pending_orders.count %></li>
+            <li>CANCELLED: <%= @cancelled_orders.count %></li>
+          </ul>
+        </li>
       </ul>
   </section>
-  <%= render partial: "order_list", locals: {order_items: @filtered_orders} %>
+
+  <section>
+
+    <ul>
+        <% @filtered_orders.each do |item| %>
+          <p>----</p> <%# this is just space for reading for now%>
+          <li>
+            <%= link_to "Ordered #{item.product.name}", order_item_path(item) %>
+            <%= render partial: "order_details", locals: {order_items: [item] } %>
+          </li>
+          <li> Underlying Order Status: <%= item.order.order_status %></li>
+          <li>Time Placed: <%= order_time_placed(item) %></li>
+          <li class= "link"><%= ship_order(item) %></li>
+        <% end %>
+    </ul>
+  </section>
 </main>
