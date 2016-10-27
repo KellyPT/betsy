@@ -8,6 +8,7 @@ class OrdersController < ApplicationController
     get_all_merchant_orders
     get_all_merchant_orders_by_status
     filter_displayed_merchant_orders
+    raise
   end
 
   def create

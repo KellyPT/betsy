@@ -18,3 +18,21 @@ four:
 
 purchasing_order:
   order_status: "pending"
+
+filter_order_pending:
+  order_status: "pending"
+
+filter_order_complete_shipped:
+  order_status: "complete"
+
+filter_order_complete_not_shipped:
+  order_status: "complete"
+
+filter_order_paid_shipped:
+  order_status: "paid"
+
+filter_order_cancelled:
+  order_status: "cancelled"
+
+filter_order_paid:
+  order_status: "paid"

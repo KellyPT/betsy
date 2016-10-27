@@ -22,3 +22,9 @@ merchant_with_orders:
   email: "sarah@me.com"
   uid: 3
   provider: "github"
+
+filter_merchant:
+    user_name: "Sarah Filter"
+    email: "sarah@me.com"
+    uid: 4
+    provider: "github"

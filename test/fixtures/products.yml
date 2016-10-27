@@ -26,10 +26,16 @@ product_stock1:
   name: stocker
   price: 12.00
   quantity: 2
-  merchant_id: merchant_with_orders
+  merchant: merchant_with_orders
 
 product_stock2:
   name: stockings
   price: 13.00
   quantity: 2
-  merchant_id: merchant_with_orders
+  merchant: merchant_with_orders
+
+filter_product:
+    name: something
+    price: 13.00
+    quantity: 100
+    merchant: filter_merchant
