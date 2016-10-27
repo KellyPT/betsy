@@ -30,8 +30,39 @@ class PaymentDetailTest < ActiveSupport::TestCase
 
   end
 
-  test "Will check for valid credit card number" do
-    #TODO put test here
+  test "Will check for valid credit card number and add an error if invalid credit card number entered." do
+    valid_cc_number = PaymentDetail.new(
+      order_id: 25000,
+      buyer_name: "Ada Lovelace",
+      email: "ada@adadevacademy.com",
+      street: "Fourth Avenue",
+      city: "Seattle",
+      state: "WA",
+      zip: 12345,
+      cc_four_digits: 5105105105105100, #valid CC number
+      cc_expiration_date: "2017-10-24 13:53:49 -0700",
+      time_placed: "2016-10-24 13:53:49 -0700",
+      CVV: 999)
+
+    assert valid_cc_number.save
+
+    invalid_cc_number = PaymentDetail.new(
+      order_id: 25000,
+      buyer_name: "Ada Lovelace",
+      email: "ada@adadevacademy.com",
+      street: "Fourth Avenue",
+      city: "Seattle",
+      state: "WA",
+      zip: 12345,
+      cc_four_digits: 5105105105105101, #invalid CC number (valid CC # + 1)
+      cc_expiration_date: "2017-10-24 13:53:49 -0700",
+      time_placed: "2016-10-24 13:53:49 -0700",
+      CVV: 999)
+
+    assert_not invalid_cc_number.save
+
+    assert_includes invalid_cc_number.errors, :cc_four_digits
+    assert_includes invalid_cc_number.errors.get(:cc_four_digits), "Sorry, an invalid cardNumber Entered"
   end
 
   test "Will check if credit card number is long enough" do

@@ -33,3 +33,9 @@ product_stock2:
   price: 13.00
   quantity: 2
   merchant: merchant_with_orders
+
+filter_product:
+    name: something
+    price: 13.00
+    quantity: 100
+    merchant: filter_merchant
