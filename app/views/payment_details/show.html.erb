@@ -12,7 +12,7 @@
       Order Status: <%= @order.order_status %>
       </li>
       <li>
-        Time placed: <%= @payment_details.time_placed %>
+        Time placed: <%= render_date(@payment_details.time_placed) %>
       </li>
     </ul>
   </section>

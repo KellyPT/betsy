@@ -3,38 +3,11 @@ class OrdersController < ApplicationController
   before_action :get_merchant, except: [:create, :cancel, :update, :destroy]
   skip_before_action :require_login, except: [:index]
 
-  # orders_path	GET	/orders(.:format)
-  # anticpate this will be used to show a Merchant all of their pending orders when logged in.
+
   def index
-    @order_items = @merchant.get_merchant_orders
-    @completed_orders = @merchant.get_merchant_orders_by_status("completed")
-    @paid_orders = @merchant.get_merchant_orders_by_status("paid")
-    @pending_orders = @merchant.get_merchant_orders_by_status("pending")
-    @cancelled_orders = @merchant.get_merchant_orders_by_status("cancelled")
-  end
-
-  def paid
-    @order_items = @merchant.get_merchant_orders_by_status("paid")
-
-    render 'filtered_list'
-  end
-
-  def cancelled
-    @order_items = @merchant.get_merchant_orders_by_status("cancelled")
-
-    render 'filtered_list'
-  end
-
-  def completed
-    @order_items = @merchant.get_merchant_orders_by_status("completed")
-
-    render 'filtered_list'
-  end
-
-  def pending
-      @order_items = @merchant.get_merchant_orders_by_status("pending")
-
-    render 'filtered_list'
+    get_all_merchant_orders
+    get_all_merchant_orders_by_status
+    filter_displayed_merchant_orders
   end
 
   def create
@@ -58,7 +31,7 @@ class OrdersController < ApplicationController
   # adds stock back
     payment_details = @order.payment_detail
     if @order.update(order_status: "cancelled")
-      payment_details.update_products_stock("cancelation")
+      @order.increase_products_stock
       redirect_to cancelled_order_path
     else
       flash[:error] = "This order could not be cancelled"
@@ -84,6 +57,28 @@ class OrdersController < ApplicationController
         @merchant = Merchant.find(session[:merchant_id])
     end
 
+    def get_all_merchant_orders
+    # "Order" to merchant is the order_items they must fulfill
+        @order_items = @merchant.get_merchant_orders
+    end
+
+    def get_all_merchant_orders_by_status
+    # "Order" to merchant is the order_items they must fulfill
+      @completed_orders =   @merchant.get_merchant_orders("completed")
+      @paid_orders = @merchant.get_merchant_orders("paid")
+      @pending_orders =   @merchant.get_merchant_orders("pending")
+      @cancelled_orders =   @merchant.get_merchant_orders("cancelled")
+    end
+
+    def filter_displayed_merchant_orders
+    # "Order" to merchant is the order_items they must fulfill
+      if params["commit"].nil?
+        @filtered_orders = @merchant.get_merchant_orders
+      else
+        @filtered_orders = @merchant.get_merchant_orders(params["commit"].downcase)
+      end
+    end
+
      # Before create action, check if there is a cart.  If there is, it is assined in "current_order." If not, we make a new order.
     def current_order
       @order ||= Order.find(session[:order_id]) if session[:order_id]
@@ -93,7 +88,6 @@ class OrdersController < ApplicationController
       @order = Order.build_order if current_order.nil?
     end
 
-    # maybe make self method? Ask guin
     def in_stock?
       @product = Product.find(session[:product_id])
       # check_availability returns true or false

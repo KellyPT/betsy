@@ -21,8 +21,41 @@ class Order < ApplicationRecord
   end
 
   def complete_order
-    self.order_status = "completed"
+    if self.all_items_shipped?
+      self.order_status = "completed"
+      self.save
+    end
     return self
   end
+
+  def all_items_shipped?
+    # when a merchant ships an order item, check if the order can be marked as complete
+    self.order_items.each do |item|
+      if item.shipped != true
+        return false
+      end
+    end
+
+    return true
+  end
+
+  def decrease_products_stock
+    self.products.each do |product|
+      order_item = product.order_items.where(order_id: self.id).first
+      # pass update_quantity a negative number for purchases
+      stock_change = order_item.quantity
+      product.update_quantity(-stock_change)
+    end
+  end
+
+  def increase_products_stock
+    self.products.each do |product|
+      order_item = product.order_items.where(order_id: self.id).first
+      stock_change = order_item.quantity
+      product.update_quantity(stock_change)
+    end
+  end
+
+
 
 end

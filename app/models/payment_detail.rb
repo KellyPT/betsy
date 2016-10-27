@@ -27,7 +27,7 @@ class PaymentDetail < ActiveRecord::Base
 
     validates :time_placed, presence: true
 
-    validates :CVV, presence: true, length: {is: 3}
+    # validates :CVV, presence: true, length: {is: 3}
 
     def record_time_placed
       self.time_placed = Time.now
@@ -35,26 +35,6 @@ class PaymentDetail < ActiveRecord::Base
 
     def set_order_id(this_order_id)
       self.order_id = this_order_id
-    end
-
-    def update_products_stock(type)
-      this_order = self.order
-      order_id = this_order.id
-      products = this_order.products
-
-      products.each do |product|
-        order_item = product.order_items.where(order_id: order_id).first
-        if type == "purchase"
-        # pass update_quantity a negative number for purchases
-          stock_change = order_item.quantity
-          product.update_quantity(-stock_change)
-        # internet weirdness is if I don't have these next to eachother, the puchase doesn't subtract inventory?
-        elsif type == "cancelation"
-          stock_change = order_item.quantity
-          product.update_quantity(stock_change)
-        end
-
-      end
     end
 
   private

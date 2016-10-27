@@ -1,5 +1,5 @@
 class OrderItemsController < ApplicationController
-  before_action :get_order_item, only: [:update, :destroy, :show]
+  before_action :get_order_item, only: [:update, :destroy, :show, :ship]
   skip_before_action :require_login
 
   def index
@@ -20,6 +20,19 @@ class OrderItemsController < ApplicationController
     end
     redirect_to order_order_items_path(@order_item.order)
   end
+
+  def ship
+  # mark order_item as shipped
+  # check the order that the product belongs to to see if it can be marked as completed (called in complete order method)
+    @order_item.shipped = true
+    @order_item.save
+
+    order = @order_item.order
+    order.complete_order
+
+    redirect_to orders_path
+  end
+
 
   def destroy
     order = @order_item.order

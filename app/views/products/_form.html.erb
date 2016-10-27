@@ -1,18 +1,10 @@
-<%= form_for(@merchant_product, url: merchant_products_path(@current_merchant)) do |f| %>
+<%= form_for(@product, url: products_path(@current_merchant)) do |f| %>
 
 <ul>
 
 <li class="field">
   <%= f.label :name %><br />
   <%= f.text_field :name %>
-</li>
-<li class="field">
-  <%= f.select :category_ids, Category.all.collect{|category| [category.name, category.id]}, {}, {multiple: true}%>
-</li>
-
-<li class="field">
-  <%= f.label :image %><br>
-  <%= f.file_field :image %>
 </li>
 
 <li class="field">
@@ -21,8 +13,23 @@
 </li>
 
 <li class="field">
+  <%= f.label :description %><br>
+  <%= f.text_field :description %>
+</li>
+
+<li class="field">
   <%= f.label :quantity %><br>
   <%= f.text_field :quantity %>
+</li>
+
+<li class="field">
+  <%= f.label :image %><br>
+  <%= f.file_field :image %>
+</li>
+
+<li class="field">
+  <%= f.label :Category %><br>
+  <%= f.select :category_ids, Category.all.collect{|category| [category.name, category.id]}, {}, {multiple: true}%>
 </li>
 
 <li class="actions">

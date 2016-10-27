@@ -1,31 +1,47 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Betsy</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <link href="https://fonts.googleapis.com/css?family=Quando" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Didact+Gothic" rel="stylesheet">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title><%= content_for?(:title) ? yield(:title) : "Untitled" %></title>
+
+  <%= stylesheet_link_tag    "application" %>
+  <%= javascript_include_tag "application", 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 
 <body>
   <div class="container">
     <header>
-      <h3>ROBITS</h3>
+      <h3><%= link_to "ROBITS", root_path %></h3>
+
       <nav>
         <% if session[:merchant_id] %>
-          Login Successful! Welcome! <%# @current_merchant.user_name %>
-          <%= button_to "Log out", sessions_path, method: :delete %>
-          <%= button_to "Merchant Control", sessions_merchant_login_path, method: :get %>
+        Login Successful! Welcome!
+        <%= button_to "Log out", sessions_path, method: :delete %>
+        <%= button_to "Merchant Control", sessions_merchant_login_path, method: :get %>
         <% else %>
-          <% if flash[:error] %>
-            <%= flash[:error] %>
-          <% end %>
-          <%= button_to "Log In", "/auth/github", method: :get %>
-          <%= button_to "Sign Up", "https://github.com/join?source=header-home", method: :get %>
+        <% if flash[:error] %>
+        <%= flash[:error] %>
         <% end %>
+        <%= button_to "Log In", "/auth/github", method: :get %>
+        <%= button_to "Sign Up", "https://github.com/join?source=header-home", method: :get %>
+        <% end %>
+
+        <!-- Start of new code -->
+        <section class="small-12 columns">
+          <ul class="vertical menu medium-horizontal" data-responsive-menu="accordion medium-dropdown">
+            <ul class="dropdown menu" data-dropdown-menu>
+              <li>
+                <a href="#">Shop by Merchants</a>
+                <ul class="menu">
+                  <% link_to "cathegories_path()" %>
+                </ul>
+              </li>
+            </ul>
+          </ul>
+        </section>
       </nav>
     </header>
     <%= yield %>
