@@ -25,7 +25,7 @@ class ProductsControllerTest < ActionController::TestCase
     session[:merchant_id] = products(:one).merchant_id
     assert_difference('Product.count', 1) do
 
-      post :create, { product: { name: "Test", price: "2.0", quantity: "1", active: true, merchant_id: products(:one).merchant_id} }
+      post :create, { product: { name: "Test", price: 2.0, quantity: 1, active: true, merchant_id: products(:one).merchant_id} }
     end
 
     assert_response :redirect
