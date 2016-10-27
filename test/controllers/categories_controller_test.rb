@@ -22,14 +22,8 @@ class CategoriesControllerTest < ActionController::TestCase
   end
 
   test "should get the new form when creating a new category" do
-    # This is working
-    # session[:merchant_id] = merchants(:one).id
-
-    # This is not working
-    # login_a_user
-    # session[:merchant_id]
+    session[:merchant_id] = merchants(:one).id
     get :new
-    
     assert_response :success
     assert_template :new
 
