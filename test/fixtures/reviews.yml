@@ -5,11 +5,11 @@
 # below each fixture, per the syntax in the comments below
 #
 one:
-  product_id: 37
+  product: one
   rating: 1
   description: "Worst Product Ever"
 
 two:
-  product_id: 42
+  product: one
   rating: 5
   description: ""

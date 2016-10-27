@@ -1,5 +1,6 @@
 class CategoriesController < ApplicationController
-  before_action :get_category, only: [:show, :edit, :update, :destroy]
+  before_action :get_category, only: [:show]
+  
   #only logged in Merchant user can create a new Category
   skip_before_action :require_login, except: [:new, :create]
 
@@ -18,20 +19,16 @@ class CategoriesController < ApplicationController
     @category = Category.new
   end
 
-  # def edit; end
-
   # categories POST   /categories
   def create
     @category = Category.new(category_params)
 
     if @category.save
       redirect_to categories_path
-
     else
       render :new
     end
   end
-
 
   private
     # Use callbacks to share common setup or constraints between actions.
