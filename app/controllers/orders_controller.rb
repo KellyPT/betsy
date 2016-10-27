@@ -8,7 +8,6 @@ class OrdersController < ApplicationController
     get_all_merchant_orders
     get_all_merchant_orders_by_status
     filter_displayed_merchant_orders
-    raise
   end
 
   def create
@@ -73,7 +72,7 @@ class OrdersController < ApplicationController
 
     def filter_displayed_merchant_orders
     # "Order" to merchant is the order_items they must fulfill
-      if params["commit"].nil?
+      if params['commit'].nil?
         @filtered_orders = @merchant.get_merchant_orders
       else
         @filtered_orders = @merchant.get_merchant_orders(params["commit"].downcase)

@@ -36,3 +36,6 @@ filter_order_cancelled:
 
 filter_order_paid:
   order_status: "paid"
+
+order_to_be_shipped:
+  order_status: "paid"

@@ -88,4 +88,38 @@ class OrderTest < ActiveSupport::TestCase
     assert_equal(ending_stock2, beginning_stock2 +quantity_change2)
 
   end
+
+  test "When an order item is associate with an order, the order is not marked as complete until all the order items have shipped" do
+
+    order = orders(:order_to_be_shipped)
+    item1 = order_items(:not_shipped_item1)
+    item2 = order_items(:not_shipped_item2)
+
+    assert_equal order.order_status, "paid"
+
+    order.complete_order
+
+    assert_equal order.order_status, "paid"
+
+
+    item1.shipped = true
+    item1.save
+    item1.reload
+
+    order.reload
+
+    order.complete_order
+    assert_equal order.order_status, "paid"
+
+    item2.shipped = true
+    item2.save
+    item2.reload
+
+    order.reload
+
+    order.complete_order
+    order.reload
+    assert_equal order.order_status, "completed"
+
+  end
 end
