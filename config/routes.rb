@@ -8,13 +8,13 @@ Rails.application.routes.draw do
     resources :payment_details, only: [:new, :create]
   end
 
-  resources :products, only: [:index, :show] do
+  resources :products, except: [:destroy] do
     resources :reviews, only: [:new, :create]
   end
 
 
+
   resources :merchants, only: [:index, :show] do
-    resources :products, except: [:destroy]
   end
 
   resources :categories, except: [:edit, :update, :destroy]

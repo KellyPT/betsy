@@ -1,48 +1,60 @@
 require 'test_helper'
 
-class ProductsControllerTest < ActionDispatch::IntegrationTest
+class ProductsControllerTest < ActionController::TestCase
   setup do
     @product = products(:one)
   end
 
   test "should get index" do
-    get products_url
+    get :index
     assert_response :success
+    assert_template :index
   end
 
   test "should get new" do
-    get new_product_url
+    session[:merchant_id] = products(:one).merchant_id
+    get :new
+
     assert_response :success
+    product = assigns(:product)
+    assert_not_nil(product)
+
   end
+
+
 
   test "should create product" do
-    assert_difference('Product.count') do
-      post products_url, params: { product: {  } }
+    session[:merchant_id] = products(:one).merchant_id
+    assert_difference('Product.count', 1) do
+
+      post :create, { product: { name: "Test", price: "2.0", quantity: "1", active: true, merchant_id: products(:one).merchant_id} }
     end
 
-    assert_redirected_to product_url(Product.last)
+    assert_response :redirect
+    assert_redirected_to products_path
   end
 
+
   test "should show product" do
-    get product_url(@product)
+    get :show, {id: products(:one).id}
     assert_response :success
   end
 
   test "should get edit" do
-    get edit_product_url(@product)
+    session[:merchant_id] = products(:one).merchant_id
+    get :edit, {id: products(:one).id}
+
     assert_response :success
   end
 
   test "should update product" do
-    patch product_url(@product), params: { product: {  } }
-    assert_redirected_to product_url(@product)
+    session[:merchant_id] = products(:one).merchant_id
+    product = products(:one)
+    patch :update, { id: product.id, product: {name: "fiddlestick"} }
+    assert_not_equal products(:one).name, Product.find(product.id).name
+    assert_redirected_to product_path
   end
 
-  test "should destroy product" do
-    assert_difference('Product.count', -1) do
-      delete product_url(@product)
-    end
 
-    assert_redirected_to products_url
-  end
+
 end
