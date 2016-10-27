@@ -8,19 +8,19 @@
 one:
   user_name: "Gandalf"
   email: "wizard@middleearth.com"
-  uid: 1
+  uid: 123
   provider: "github"
 
 two:
   user_name: "Dumbledore"
   email: "wizard@hogwarts.com"
-  uid: 2
+  uid: 456
   provider: "github"
 
 merchant_with_orders:
   user_name: "Sarah"
   email: "sarah@me.com"
-  uid: 3
+  uid: 789
   provider: "github"
 
 filter_merchant:
