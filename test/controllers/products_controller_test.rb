@@ -21,8 +21,6 @@ class ProductsControllerTest < ActionController::TestCase
 
   end
 
-
-
   test "should create product" do
     session[:merchant_id] = products(:one).merchant_id
     assert_difference('Product.count', 1) do
@@ -54,7 +52,5 @@ class ProductsControllerTest < ActionController::TestCase
     assert_not_equal products(:one).name, Product.find(product.id).name
     assert_redirected_to product_path
   end
-
-
 
 end
