@@ -1,6 +1,12 @@
 require 'test_helper'
 
 class MerchantTest < ActiveSupport::TestCase
+  test "A new merchant is built with the auth_hash from GitHub" do
+    merchant = Merchant.build_from_github({ uid: "12345", "info" => { "nickname" => "kelly", "email" => "kelly@we.com" } })
+
+    assert merchant.valid?
+  end
+
   test "Create a Merchant with valid data" do
     merchant = merchants(:one)
     assert merchant.valid?
