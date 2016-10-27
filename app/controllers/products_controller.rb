@@ -37,7 +37,8 @@ class ProductsController < ApplicationController
     if @product.save
       redirect_to products_path
     else
-      render :new
+      #TODO Put flash notice here maybe.
+      render :new, status: 400
     end
   end
 

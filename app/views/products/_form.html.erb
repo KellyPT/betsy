@@ -1,3 +1,13 @@
+<ul>
+  <% @product.errors.each do |column, message| %>
+  <li>
+    <%= column %>
+    <%= message %>
+  </li>
+  <% end %>
+</ul>
+
+
 <%= form_for(@product, url: products_path(@current_merchant)) do |f| %>
 
 <ul>
