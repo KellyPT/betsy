@@ -1,4 +1,4 @@
-<h4>Welcome, <%= @merchant.user_name %></h4>
+<h4>Welcome, <%= @current_merchant.user_name %></h4>
 
 <h5>MAIN MENU:</h5>
 
@@ -18,7 +18,7 @@
     <th>Retire</th>
   </tr>
 
-  <% @merchant.products.each do |product| %>
+  <% @current_merchant.products.each do |product| %>
   <tr>
 
     <td><%= product.id %></td>

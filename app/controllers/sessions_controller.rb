@@ -34,6 +34,6 @@ class SessionsController < ApplicationController
   end
 
   def merchant_login
-    @merchant = Merchant.find(session[:merchant_id])
+    # @merchant = Merchant.find(session[:merchant_id])
   end
 end
