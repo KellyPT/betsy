@@ -16,7 +16,6 @@
 //= require turbolinks
 //= require_tree .
 
-// If it doesn't work, we take out line 20
 $(function(){ $(document).foundation(); });
 
 //= require foundation

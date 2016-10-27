@@ -1,6 +1,18 @@
 require 'test_helper'
 
 class OrderItemTest < ActiveSupport::TestCase
+  test "A new order item is added to an order and associated with a product and give a quantity of 1" do
+    order = orders(:purchasing_order)
+    product = products(:product_stock1)
+
+    # pass this method the product and order item IDs
+    order_item = OrderItem.add_order_item_to_order(order.id, product.id)
+
+    assert_equal order_item.order_id, order.id
+    assert_equal order_item.product_id, product.id
+    assert_equal order_item.quantity, 1
+  end
+
   test "Create an OrderItem with valid data" do
     order_item = order_items(:one)
     assert order_item.valid?

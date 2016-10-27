@@ -1,6 +1,14 @@
 require 'test_helper'
 
 class OrderTest < ActiveSupport::TestCase
+
+  test "An order builds itself with a status of pending" do
+      new_order = Order.build_order
+
+      assert_equal new_order.order_status, "pending"
+
+  end
+
   test "Create an Order with valid data" do
     order = orders(:one)
     assert order.valid?

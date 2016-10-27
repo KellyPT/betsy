@@ -1,48 +1,29 @@
 require 'test_helper'
 
-class MerchantsControllerTest < ActionDispatch::IntegrationTest
+class MerchantsControllerTest < ActionController::TestCase
   # setup do
   #   @merchant = merchants(:one)
   # end
-  #
-  # test "should get index" do
-  #   get merchants_url
-  #   assert_response :success
-  # end
-  #
-  # test "should get new" do
-  #   get new_merchant_url
-  #   assert_response :success
-  # end
-  #
-  # test "should create merchant" do
-  #   assert_difference('Merchant.count') do
-  #     post merchants_url, params: { merchant: {  } }
-  #   end
-  #
-  #   assert_redirected_to merchant_url(Merchant.last)
-  # end
-  #
-  # test "should show merchant" do
-  #   get merchant_url(@merchant)
-  #   assert_response :success
-  # end
-  #
-  # test "should get edit" do
-  #   get edit_merchant_url(@merchant)
-  #   assert_response :success
-  # end
-  #
-  # test "should update merchant" do
-  #   patch merchant_url(@merchant), params: { merchant: {  } }
-  #   assert_redirected_to merchant_url(@merchant)
-  # end
-  #
-  # test "should destroy merchant" do
-  #   assert_difference('Merchant.count', -1) do
-  #     delete merchant_url(@merchant)
-  #   end
-  #
-  #   assert_redirected_to merchants_url
-  # end
+
+  test "should get index" do
+    get :index
+    assert_response :success
+    assert_template :index
+  end
+
+  test "should show merchant" do
+    merchant_id = merchants(:one).id
+    get :show, { id: merchant_id }
+    assert_response :success
+    assert_template :show
+  end
+
+  test "should show the requested merchant" do
+    merchant_id = merchants(:one).id
+    get :show, { id: merchant_id }
+    assert_response :success
+    assert_template :show
+    assert_equal assigns(:merchant), merchants(:one)
+  end
+
 end

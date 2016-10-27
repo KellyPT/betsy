@@ -1,60 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title><%= content_for?(:title) ? yield(:title) : "Untitled" %></title>
+    <title><%= content_for?(:title) ? yield(:title) : "Untitled" %></title>
 
-  <%= stylesheet_link_tag    "application" %>
-  <%= javascript_include_tag "application", 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-</head>
+    <%= stylesheet_link_tag    "application" %>
+    <%= javascript_include_tag "application", 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+  </head>
 
-<body>
-  <div class="container">
+  <body>
     <header>
       <h3><%= link_to "ROBITS", root_path %></h3>
 
-      <nav>
-        <% if session[:merchant_id] %>
-        Login Successful! Welcome <%= "#{current_merchant.user_name}" %>!
-        <%= button_to "Log out", sessions_path, method: :delete %>
-        <%= button_to "Merchant Control", sessions_merchant_login_path, method: :get %>
-        <% else %>
-        <% if flash[:error] %>
-        <%= flash[:error] %>
-        <% end %>
-        <%= button_to "Log In", "/auth/github", method: :get %>
-        <%= button_to "Sign Up", "https://github.com/join?source=header-home", method: :get %>
-        <% end %>
+    <!-- Navigation row for top Menu -->
+    <nav class="row">
 
-        <!-- Start of new code -->
+    <!-- log in stuff -->
+    <section>
+
+      <% if session[:merchant_id] %>
+      Login Successful! Welcome <%= "#{current_merchant.user_name}" %>!
+      <%= button_to "Log out", sessions_path, method: :delete %>
+      <%= button_to "Merchant Control", sessions_merchant_login_path, method: :get %>
+      <% else %>
+      <% if flash[:error] %>
+      <%= flash[:error] %>
+      <% end %>
+      <%= button_to "Log In", "/auth/github", method: :get %>
+      <%= button_to "Sign Up", "https://github.com/join?source=header-home", method: :get %>
+      <% end %>
+    </section>
+
+
         <section class="small-12 columns">
-          <ul class="vertical menu medium-horizontal" data-responsive-menu="accordion medium-dropdown">
+          <!-- Make this unordered list horizontal at medium and larger screens & verticle on small ones  -->
+        <ul class="vertical menu medium-horizontal" data-responsive-menu="accordion medium-dropdown">
+
+          <li>
+            CATEGORIES
+            <!-- Submenu of Categories -->
             <ul class="menu vertical">
+              <% category.each do |f| %>
               <li>
-                <% category.each do |f| %>
                 <%= link_to "#{f.name}", category_path(f.id) %>
-                <% end %>
               </li>
+              <% end %>
             </ul>
-          </ul>
-        </section>
-        <section class="small-12 columns">
-          <ul class="vertical menu medium-horizontal" data-responsive-menu="accordion medium-dropdown">
+          </li>
+          <li>
+            MERCHANTS
+            <!-- Submenu of Merchants -->
             <ul class="menu vertical">
+              <% merchant.each do |f| %>
               <li>
-                <% merchant.each do |f| %>
-                <%= link_to "#{f.user_name}", category_path(f.id) %>
-                <% end %>
+                <%= link_to "#{f.user_name}", merchant_path(f.id) %>
               </li>
+              <% end %>
+
             </ul>
-          </ul>
-        </section>
-      </nav>
-    </header>
+          </li>
+      <li><%= link_to "Google", "https://www.google.com" %>
+        <ul class="menu">
+          <li><%= link_to "Google Drive", "https://drive.google.com" %></li>
+        </ul>
+      </li>
+      <li><%= link_to "Facebook", "https://www.facebook.com" %></li>
+      <li><%= link_to "Log in via Github", "auth/github" %></li>
+    </ul>
+    </section>
+    </nav>
+
     <%= yield %>
-  </div>
-</body>
+
+  </body>
 </html>
