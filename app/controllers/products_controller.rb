@@ -27,15 +27,15 @@ class ProductsController < ApplicationController
 
   # new_merchant_product_path	GET	/merchants/:merchant_id/products/new
   def new
-    @merchant_product = @current_merchant.products.new
+    @product = @current_merchant.products.new
   end
 
 
   # merchant_products_path POST	/merchants/:merchant_id/products
   def create
-    @merchant_product = @current_merchant.products.new(product_params)
-    if @merchant_product.save
-      redirect_to merchant_products_path
+    @product = @current_merchant.products.new(product_params)
+    if @product.save
+      redirect_to products_path
     else
       render :new
     end
@@ -43,23 +43,19 @@ class ProductsController < ApplicationController
 
   # edit_merchant_product_path	GET	/merchants/:merchant_id/products/:id/edit
   def edit
-    if @product.merchant_id == session[:merchant_id]
-      @merchant_product = @product
-    else
+    if @product.merchant_id != session[:merchant_id]
       render :no_show
     end
   end
 
   # merchant_product_path PATCH/PUT /merchants/:merchant_id/products/:id
   def update
-    if @product.merchant_id == session[:merchant_id]
-      @merchant_product = @product
-    else
+    if @product.merchant_id != session[:merchant_id]
       render :no_show
     end
 
-    if @merchant_product.update(product_params)
-      redirect_to merchant_product_path(@current_merchant, @merchant_product.id)
+    if @product.update(product_params)
+      redirect_to product_path(@product.id)
     else
       render :edit
     end
