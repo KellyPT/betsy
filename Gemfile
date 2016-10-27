@@ -5,7 +5,6 @@ gem 'dragonfly'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.7'
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3'
 # Use Puma as the app server
 gem 'puma', '~> 3.0'
 # Use SCSS for stylesheets
@@ -36,6 +35,7 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
   gem 'dotenv-rails'
+   gem 'sqlite3'
 end
 
 group :test do
@@ -66,3 +66,8 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'foundation-rails'
 # Required due to an incompatibility between TurboLinks and Foundation.
 gem 'jquery-turbolinks'
+
+group :production do
+  gem 'pg'
+  gem 'rails_12factor'
+end
