@@ -40,6 +40,7 @@
 
 <li class="field">
   <%= f.label :Category %><br>
+  <li>Hold command and shift to select more than one category</li>
   <%= f.select :category_ids, Category.all.collect{|category| [category.name, category.id]}, {}, {multiple: true}%>
 </li>
 
