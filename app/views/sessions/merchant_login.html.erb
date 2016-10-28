@@ -1,12 +1,11 @@
 <h4>Welcome, <%= @current_merchant.user_name %></h4>
 
 <section class="body-text">
-  <h5>Available Functions:</h5>
+  <h5>Available Functions</h5>
 
-  <p><%= link_to "Create a new Category", new_category_path, method: :get %></p>
-  </br>
+  <p><%= link_to "Create a new Category", new_category_path, method: :get, class: "button", id: "white-link" %></p>
 
-  <p><%= link_to "Create a new Product", new_product_path(@current_merchant), method: :get %> </p>
+  <p><%= link_to "Create a new Product", new_product_path(@current_merchant), method: :get, class: "button", id: "white-link" %> </p>
 
   <h5>Product Management</h5>
   <table>
