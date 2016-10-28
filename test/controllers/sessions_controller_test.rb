@@ -37,7 +37,7 @@ class SessionsControllerTest < ActionController::TestCase
 
   test "a logged-out Merchant user will get redirected to Homepage" do
     login_a_user
-    delete :destroy, id: session[:merchant_id]
+    delete :destroy
     assert_response :redirect
     assert_redirected_to sessions_log_out_path
     assert_nil session[:merchant_id]
