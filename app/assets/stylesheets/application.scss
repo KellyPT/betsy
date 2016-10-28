@@ -15,6 +15,11 @@
  *= require foundation_and_overrides
 
  */
+
+.container {
+   margin: 20px;
+}
+
 body {
   background-color: rgba(245,242,225, 0.5);
   font-family: 'Rubik', sans-serif;
@@ -86,7 +91,7 @@ h2 {
 h3 {
   font-family: 'Chelsea Market', cursive;
   margin-top: 2rem;
-  
+
 }
 
 .product-info {
@@ -101,4 +106,16 @@ h3 {
 
 .body-text a {
   color: #8895c2;
+}
+
+.body-text a:hover {
+  color: rgba(255, 0, 0, 0.66);
+}
+
+.button {
+  background-color: #8895c2;
+}
+
+#white-link{
+  color: white;
 }
