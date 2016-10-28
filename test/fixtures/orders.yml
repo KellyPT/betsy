@@ -39,3 +39,7 @@ filter_order_paid:
 
 order_to_be_shipped:
   order_status: "paid"
+
+order_to_be_shipped2:
+  order_status: "paid"
+  

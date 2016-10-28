@@ -1,13 +1,12 @@
-<ul>
-  <% @products.each do |product| %>
-  <% if product.image != nil %>
-  <strong>Image:</strong>
-  <li class="image"><%= product.image_stored? ? image_tag(product.image.thumb('80x60').url) : "" %></li>
-  <% elsif %>
-  <li class="image"><%= image_tag "no_image.png", size: "80x60", alt: "Robots"  %></li>
-  <% end %>
-  <li><%= link_to product.name, product_path(product.id) %></li>
-  <li> Price: <%= product.price %></li>
-  <li>In Stock: <%= product.quantity %></li>
-  <% end %>
-</ul>
+  <ul class='row small-up-4'>
+    <% @products.each do |product| %>
+    <li class="column text-center">
+      <%= product_image(product) %>
+      <ul 'row small-up-3' >
+        <li class="column text-center"><h2><%= link_to product.name, product_path(product.id) %></h2></li>
+        <li class="product-info column text-center"> $ <%= product.price %>0</li>
+        <li class="product-info notice column text-center">Only <%= product.quantity %> left!</li>
+      </ul>
+    </li>
+    <% end %>
+  </ul>

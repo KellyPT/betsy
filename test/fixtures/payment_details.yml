@@ -51,4 +51,16 @@ controller_test_card:
   cc_expiration_date: ????
   time_placed: "2016-10-24 12:53:49 -0700"
   CVV: ???
-  
+
+three:
+  order_id: 2
+  buyer_name: "Kelly"
+  email: "kelly@mama.com"
+  street: "Hauptstrasse"
+  city: "Hamburg"
+  state: "Germany"
+  zip: 54321
+  cc_four_digits: 5105
+  cc_expiration_date: "2017-10-24 13:53:49 -0700"
+  time_placed: "2016-10-24 12:53:49 -0700"
+  CVV: 111

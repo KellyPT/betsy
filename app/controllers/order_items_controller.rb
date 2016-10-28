@@ -30,7 +30,7 @@ class OrderItemsController < ApplicationController
     order = @order_item.order
     order.complete_order
 
-    redirect_to orders_path
+    redirect_to order_order_items_path(@order_item.order)
   end
 
 
@@ -46,6 +46,6 @@ class OrderItemsController < ApplicationController
     end
 
     def order_item_params
-      params.require(:order_item).permit(:quantity)
+      params.require(:order_item).permit(:quantity, :shipped)
     end
 end

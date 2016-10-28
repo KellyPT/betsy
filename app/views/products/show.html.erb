@@ -47,6 +47,11 @@
     <% f.rating.times do |f| %>
     <%= image_tag "robot.png", size: "18x18", alt: "Robots" %>
     <% end %>
+    <% if current_merchant %>
+    <li>By: <%= "#{current_merchant.user_name}"%> </li>
+    <% else %>
+    <li>By: Anonymous</li>
+    <% end %>
     <% if f.description != nil %>
     <li><%= f.description %></li>
     <% end %>
