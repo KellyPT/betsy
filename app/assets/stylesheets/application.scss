@@ -15,6 +15,11 @@
  *= require foundation_and_overrides
 
  */
+
+.container {
+  margin: 20px;
+}
+
 body {
   background-color: rgba(245,242,225, 0.5);
   font-family: 'Rubik', sans-serif;
@@ -104,3 +109,15 @@ h2 {
 .button {
   background-color: #8895c2;
 }
+
+#white-link{
+  color: white;
+}
+
+// .button a {
+//   text-decoration-color: white;
+// }
+// .body-text a.button-white {
+//   text-color: #e6e6e6;
+//   background-color: #8895c2;
+// }
