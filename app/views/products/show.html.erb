@@ -1,24 +1,20 @@
-<ul>
-  <p>
-    <% if @product.image != nil %>
-    <strong>Image:</strong>
-    <li class="image"><%= @product.image_stored? ? image_tag(@product.image.thumb('300x260').url) : "" %></li>
-    <% else %>
-    <li class="image"><%= image_tag "no_image.png", size: "300x260", alt: "Robots" %></li>
-    <% end %>
-  </p>
-  <li><h3><%= @product.name %></h3></li>
+<ul class='row small-up-1'>
+  <li class="column text-center">
+    <%= product_image(@product, "300x260") %>
+    <ul 'row small-up-3' >
+      <li class="column text-center"><h2><%= link_to @product.name%></h2></li>
+
+      <% if @product.description != nil %>
+      <li class="product-info column text-center"><%= @product.description %></li>
+      <%end %>
+
+      <li class="product-info column text-center"> $ <%= @product.price %>0</li>
+      <li class="product-info notice column text-center">Only <%= @product.quantity %> left!</li>
+      <li class="product-info notice column text-center"><%= link_to 'Add to Cart', orders_path, method: :post %></li>
+    </ul>
+  </li>
 </ul>
 
-<ul class="product-price-des">
-  <li> Price: $<%= @product.price %></li>
-  <li>In Stock: <%= @product.quantity %></li>
-  <% if @product.description != nil %>
-  <li>Description</li>
-  <li><%= @product.description %></li>
-  <%end %>
-  <li class= "link"><%= link_to 'Purchase', orders_path, method: :post %></li>
-</ul>
 
 <% if @product.merchant_id == nil || @product.merchant_id != session[:merchant_id] %>
 <ul>

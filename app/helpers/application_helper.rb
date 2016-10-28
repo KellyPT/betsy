@@ -18,7 +18,8 @@ module ApplicationHelper
     if session[:merchant_id].nil?
       sign_up_button
     else
-      "Logged in as #{user_name}"
+    # if a Merchant is logged in they can see their dashboard
+      link_to "#{user_name.upcase}'S Dashboard", sessions_merchant_login_path, method: :get
     end
   end
 
@@ -44,14 +45,24 @@ module ApplicationHelper
     link_to text, path, method: method, **kwargs
   end
 
-  def product_image(product, **kwargs)
+  def cart_button(**kwargs)
+    order = session[:order_id]
+    if !order.nil?
+      text = "Cart"
+      path = order_order_items_path(order)
+      method = :get
+    link_to text, path, method: method, **kwargs
+    end
+  end
+
+  def product_image(product, pic_size, **kwargs)
     if product.image.nil?
       path = "no_image.png"
-      dimensions = "80x60"
+      dimensions = pic_size
       text = "Robits"
     else
-      path = (product.image_stored? ? product.image.thumb('80x60').url : "")
-      dimensions = "80x60"
+      path = (product.image_stored? ? product.image.thumb(pic_size).url : "")
+      dimensions = pic_size
       text = "Buy Me"
     end
     image_tag path, size: dimensions, alt: text

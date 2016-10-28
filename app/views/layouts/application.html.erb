@@ -56,21 +56,22 @@
                   <%= link_to "#{f.user_name}", merchant_path(f.id) %>
                 </li>
                 <% end %>
-
               </ul>
             </li>
+
+            <li>
+              <%= cart_button %>
+            </li>
+
           </section>
 
           <section>
-          <% if session[:merchant_id] %>
-             <%= button_to "Merchant Control", sessions_merchant_login_path, method: :get %>
-           <% end %>
-          <ul class="menu top-bar-right">
-            <li><%= login_status %></li>
-            <li><%= login_button %></li>
-          </ul>
-        </section>
-    </div>
+            <ul class="menu top-bar-right">
+              <li><%= login_status %></li>
+              <li><%= login_button %></li>
+            </ul>
+          </section>
+        </div>
 
       </nav>
 
