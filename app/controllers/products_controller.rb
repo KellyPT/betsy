@@ -30,7 +30,6 @@ class ProductsController < ApplicationController
     @product = @current_merchant.products.new
   end
 
-
   # merchant_products_path POST	/merchants/:merchant_id/products
   def create
     @product = @current_merchant.products.new(product_params)
