@@ -16,7 +16,38 @@
 
  */
 
-body {
-  background-image: url(cute_robots.jpg);
+h1, .title-area, .name {
+  margin: 0 0;
+  background-color: rgb(245,242,225)
+}
+
+.name {
+  list-style: none;
+}
+
+a {
+  color: #e6e6e6;
+}
+
+a:hover {
+  color: #cacaca;
+}
+
+.top-bar, .top-bar ul {
+    background-color: rgb(136,149,194);
+    padding: 0;
+}
+
+.dropdown.menu.medium-horizontal > li.is-dropdown-submenu-parent > a::after {
+    border-top-color: #e6e6e6;
+}
+
+.logo-name {
+  position: absolute;
+  left: 8.5rem;
+  top: 2rem;
+  color: rgb(136, 149, 194);
+  text-shadow: 2px 2px 3px rgb(82, 82, 142);
+  font-family: 'Chelsea Market', cursive;
 
 }
