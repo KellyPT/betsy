@@ -2,9 +2,9 @@
   <% @products.each do |product| %>
   <% if product.image != nil %>
   <strong>Image:</strong>
-  <li class="image"><%= product.image_stored? ? image_tag(product.image.thumb('80x60').url) : "" %></li>
-  <% elsif %>
-  <li class="image"><%= image_tag "no_image.png", size: "80x60", alt: "Robots"  %></li>
+  <li class="image"><%= link_to product.image_stored? ? image_tag(product.image.thumb('80x60').url) : "" , product_path(product.id) %></li>
+  <% else %>
+  <li class="image"><%= link_to (image_tag "no_image.png", size: "80x60", alt: "Robots"), product_path(product.id)  %></li>
   <% end %>
   <li><%= link_to product.name, product_path(product.id) %></li>
   <li> Price: <%= product.price %></li>
