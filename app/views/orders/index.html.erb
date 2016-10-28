@@ -36,19 +36,23 @@
     <% end %>
   </section>
 
-  <section class="body-text row small-up-3">
+  <section class="body-text">
 
-    <ul class="column">
       <% @filtered_orders.each do |item| %>
-      <p>----</p> <%# this is just space for reading for now%>
-      <li>
+    <ul class="row">
+
+      <li class="columns small-4">
         <%= link_to "Ordered #{item.product.name}", order_item_path(item) %>
         <%= render partial: "order_details", locals: {order_items: [item] } %>
       </li>
-      <li> Underlying Order Status: <%= item.order.order_status %></li>
-      <li>Time Placed: <%= order_time_placed(item) %></li>
-      <li class= "link"><%= ship_order(item) %></li>
-      <% end %>
+      <li class="columns small-8">
+        <ul>
+          <li class="column"> Underlying Order Status: <%=  item.order.order_status %></li>
+          <li class="column">Time Placed: <%= order_time_placed(item) %></li>
+          <li class= "column"><%= ship_order(item) %></li>
+        </ul>
+      </li>
     </ul>
+      <% end %>
   </section>
 </main>
