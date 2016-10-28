@@ -30,7 +30,7 @@ class OrderItemsController < ApplicationController
     order = @order_item.order
     order.complete_order
 
-    redirect_to orders_path
+    redirect_to order_order_items_path(@order_item.order)
   end
 
 

@@ -31,9 +31,9 @@ class OrderItemsControllerTest < ActionController::TestCase
   end
 
   test "should mark order_item as shipped" do
-    order_item = order_items(:filter_complete_not_shipped)
+    order_item = order_items(:not_shipped_item3)
     patch :update, { id: order_item.id, order_item: { shipped: true } }
-    assert_not_equal order_items(:filter_complete_not_shipped).shipped, OrderItem.find(order_item.id).shipped
-    assert_redirected_to orders_path
+    assert_not_equal order_items(:not_shipped_item3).shipped, OrderItem.find(order_item.id).shipped
+    assert_redirected_to order_order_items_path(order_item.order)
   end
 end
