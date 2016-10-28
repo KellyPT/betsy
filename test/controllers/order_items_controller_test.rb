@@ -1,48 +1,39 @@
 require 'test_helper'
 
 class OrderItemsControllerTest < ActionController::TestCase
-  # setup do
-  #   @order_item = order_items(:one)
-  # end
-  #
-  # test "should get index" do
-  #   get order_items_url
-  #   assert_response :success
-  # end
-  #
-  # test "should get new" do
-  #   get new_order_item_url
-  #   assert_response :success
-  # end
-  #
-  # test "should create order_item" do
-  #   assert_difference('OrderItem.count') do
-  #     post order_items_url, params: { order_item: {  } }
-  #   end
-  #
-  #   assert_redirected_to order_item_url(OrderItem.last)
-  # end
-  #
-  # test "should show order_item" do
-  #   get order_item_url(@order_item)
-  #   assert_response :success
-  # end
-  #
-  # test "should get edit" do
-  #   get edit_order_item_url(@order_item)
-  #   assert_response :success
-  # end
-  #
-  # test "should update order_item" do
-  #   patch order_item_url(@order_item), params: { order_item: {  } }
-  #   assert_redirected_to order_item_url(@order_item)
-  # end
-  #
-  # test "should destroy order_item" do
-  #   assert_difference('OrderItem.count', -1) do
-  #     delete order_item_url(@order_item)
-  #   end
-  #
-  #   assert_redirected_to order_items_url
-  # end
+
+  test "should get index" do
+    session[:order_id] = order_items(:reduce_quantity2).order_id
+    get :index, order_id: order_items(:reduce_quantity2).order_id
+    assert_template :index
+    assert_response :success
+  end
+
+  test "should show order_item" do
+    get :show, id: order_items(:reduce_quantity2).id
+    assert_template :show
+    assert_response :success
+  end
+
+  test "should update order_item" do
+    order_item = order_items(:reduce_quantity2)
+    patch :update, { id: order_item.id, order_item: { quantity: 10} }
+    assert_not_equal order_items(:reduce_quantity2).quantity, OrderItem.find(order_item.id).quantity
+    assert_redirected_to order_order_items_path(order_item.order)
+  end
+
+  test "should destroy order_item" do
+    order_item = order_items(:reduce_quantity2)
+    assert_difference('OrderItem.count', -1) do
+      delete :destroy, id: order_item.id
+    end
+    assert_redirected_to order_order_items_path(order_item.order)
+  end
+
+  test "should mark order_item as shipped" do
+    order_item = order_items(:filter_complete_not_shipped)
+    patch :update, { id: order_item.id, order_item: { shipped: true } }
+    assert_not_equal order_items(:filter_complete_not_shipped).shipped, OrderItem.find(order_item.id).shipped
+    assert_redirected_to orders_path
+  end
 end
