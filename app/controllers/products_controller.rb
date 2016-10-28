@@ -37,27 +37,28 @@ class ProductsController < ApplicationController
     if @product.save
       redirect_to products_path
     else
-      render :new
+      #TODO Put flash notice here maybe.
+      render :new, status: 400
     end
   end
 
   # edit_merchant_product_path	GET	/merchants/:merchant_id/products/:id/edit
   def edit
     if @product.merchant_id != session[:merchant_id]
-      render :no_show
+      render :no_show, status: 400
     end
   end
 
   # merchant_product_path PATCH/PUT /merchants/:merchant_id/products/:id
   def update
     if @product.merchant_id != session[:merchant_id]
-      render :no_show
+      render :no_show, status: 400
     end
 
     if @product.update(product_params)
       redirect_to product_path(@product.id)
     else
-      render :edit
+      render :edit, status: 400
     end
   end
 

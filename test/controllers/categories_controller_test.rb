@@ -16,12 +16,7 @@ class CategoriesControllerTest < ActionController::TestCase
     assert_equal assigns(:category), categories(:one)
   end
 
-  def login_a_user
-    request.env['omniauth.auth'] = OmniAuth.config.mock_auth[:github]
-    get :create, { provider: "github" }
-  end
-
-  test "should get the new form when creating a new category" do
+  test "should get the new form when a logged-in User create a new category" do
     session[:merchant_id] = merchants(:one).id
     get :new
     assert_response :success
@@ -32,7 +27,23 @@ class CategoriesControllerTest < ActionController::TestCase
     assert_nil category.name
   end
 
+  test "should create a new Category after a logged-in User fill in the form and submit" do
+    session[:merchant_id] = merchants(:one).id
+    assert_difference('Category.count', 1) do
+      post_params = { category: { name: "Phone"}}
+      post :create, post_params
+    end
+    assert_redirected_to categories_path
+    assert_response :redirect
+  end
 
-
-
+  test "cannot create an new Category without valid inputs and will render the new form" do
+    session[:merchant_id] = merchants(:one).id
+    assert_no_difference('Category.count') do
+      post_params = { category: { name: nil }}
+      post :create, post_params
+    end
+    assert_template :new
+    assert_response :success
+  end
 end

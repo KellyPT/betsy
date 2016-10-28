@@ -62,13 +62,15 @@
           </section>
 
           <section>
-
-            <ul class="menu top-bar-right">
-              <li><%= login_status %></li>
-              <li><%= login_button %></li>
-            </ul>
-          </section>
-        </div>
+          <% if session[:merchant_id] %>
+             <%= button_to "Merchant Control", sessions_merchant_login_path, method: :get %>
+           <% end %>
+          <ul class="menu top-bar-right">
+            <li><%= login_status %></li>
+            <li><%= login_button %></li>
+          </ul>
+        </section>
+    </div>
 
       </nav>
 
