@@ -1,14 +1,18 @@
 require 'test_helper'
 
 class OrdersControllerTest < ActionController::TestCase
-  # setup do
-  #   @order = orders(:one)
-  # end
-  #
-  # test "should get index" do
-  #   get orders_url
-  #   assert_response :success
-  # end
+  setup do
+    @order = orders(:one)
+  end
+
+#   test "get index shows all orders" do
+#    session[:merchant_id] = merchants(:one).id
+#    order_one = orders(:one)
+#
+#    assert_response :success
+#    assert_template :index
+#
+# end
   #
   # test "should get new" do
   #   get new_order_url
