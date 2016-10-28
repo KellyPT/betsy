@@ -5,12 +5,10 @@
   background-color: rgba(245,242,225, 1);
   border-radius: .25rem;
   border: 1px solid #cacaca;
-  color: rgb(136, 149, 194);
 }
 
 .button:hover {
   background-color: rgba(245,242,225, 0.3);
-  color: rgb(82, 82, 142);
 }
 
 .all-items, label {
@@ -32,8 +30,4 @@
 
 .all-items, li {
   list-style: none;
-}
-.link, a {
-  color: rgb(82, 82, 142);
-  font-size: 1rem;
 }
