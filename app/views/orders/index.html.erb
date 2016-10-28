@@ -39,7 +39,7 @@
   <section class="body-text">
 
       <% @filtered_orders.each do |item| %>
-    <ul class="row">
+    <ul class="row purchases-list">
 
       <li class="columns small-4">
         <%= link_to "Ordered #{item.product.name}", order_item_path(item) %>
