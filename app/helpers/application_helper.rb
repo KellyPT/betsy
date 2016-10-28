@@ -44,6 +44,21 @@ module ApplicationHelper
     link_to text, path, method: method, **kwargs
   end
 
+  def product_image(product, **kwargs)
+    if product.image.nil?
+      path = "no_image.png"
+      dimensions = "80x60"
+      text = "Robits"
+    else
+      path = (product.image_stored? ? product.image.thumb('80x60').url : "")
+      dimensions = "80x60"
+      text = "Buy Me"
+    end
+    image_tag path, size: dimensions, alt: text
+  end
+
+
+
   def render_date(date)
     ("<span class='date'>" + date.strftime("%A, %b %d %Y") +  "</span>").html_safe
   end
