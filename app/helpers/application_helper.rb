@@ -57,7 +57,7 @@ module ApplicationHelper
 
   def product_image(product, pic_size, **kwargs)
     if product.image.nil?
-      path = "no_image.png"
+      path = ["robot.png", "baby_robot .jpg", "ran_rob.png", "ran_robot_2.png", "ran-robot.png"].sample
       dimensions = pic_size
       text = "Robits"
     else
@@ -67,8 +67,6 @@ module ApplicationHelper
     end
     image_tag path, size: dimensions, alt: text
   end
-
-
 
   def render_date(date)
     ("<span class='date'>" + date.strftime("%A, %b %d %Y") +  "</span>").html_safe
