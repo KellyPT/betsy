@@ -10,7 +10,7 @@ class OrdersControllerTest < ActionController::TestCase
 #    order_one = orders(:one)
 #
 #    assert_response :success
-#    assert_template :index
+#   #  assert_template :index
 #
 # end
   #

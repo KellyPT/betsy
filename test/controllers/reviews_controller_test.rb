@@ -23,5 +23,16 @@ class ReviewsControllerTest < ActionController::TestCase
     assert_redirected_to product_path(product_id)
   end
 
-  
+  test "cannot review own product" do
+    session[:merchant_id] = merchants(:one).id
+    product = products(:one)
+
+    post :create, {review: { rating: 3, product_id: product.id}, product_id: product.id }
+
+    assert_template :no_show
+    assert_response :success
+
+  end
+
+
 end
