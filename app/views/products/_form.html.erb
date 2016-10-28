@@ -1,3 +1,4 @@
+<% if @product.errors.any? %>
 <ul>
   <% @product.errors.each do |column, message| %>
   <li>
@@ -6,9 +7,9 @@
   </li>
   <% end %>
 </ul>
+<% end %>
 
-
-<%= form_for(@product, url: products_path(@current_merchant)) do |f| %>
+<%= form_for @product, method: action_name do |f| %>
 
 <ul>
 

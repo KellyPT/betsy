@@ -1,46 +1,5 @@
 <h1>Editing Product</h1>
 
-<!-- <%# render 'form', product: @merchant_product, url: {action: "update"} %> -->
-
-<%= form_for @product, url: {action: "update"} do |f| %>
-
-<ul>
-
-  <li class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </li>
-
-  <li class="field">
-    <%= f.label :price %><br />
-    <%= f.text_field :price %>
-  </li>
-
-  <li class="field">
-    <%= f.label :description %><br>
-    <%= f.text_field :description %>
-  </li>
-
-  <li class="field">
-    <%= f.label :quantity %><br>
-    <%= f.text_field :quantity %>
-  </li>
-
-  <li class="field">
-    <%= f.label :image %><br>
-    <%= f.file_field :image %>
-  </li>
-
-  <li class="field">
-    <%= f.label :Category %><br>
-    <%= f.select :category_ids, Category.all.collect{|category| [category.name, category.id]}, {}, {multiple: true}%>
-  </li>
-
-  <li class="actions">
-    <%= f.submit %>
-  </li>
-  <% end %>
-  </ul>
-
+<%= render partial: "form", locals: {action_name: :patch} %>
 <%= link_to 'Show', @product %> |
 <%= link_to 'Back', products_path %>
