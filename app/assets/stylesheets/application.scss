@@ -17,7 +17,7 @@
  */
 
 .container {
-  margin: 20px;
+   margin: 20px;
 }
 
 body {
@@ -76,7 +76,7 @@ li.column, li.field {
   list-style: none;
 }
 
-.small-up-4 > li {
+.small-up-4 > li, .small-up-3 > li {
   margin-bottom: 2.25rem;
   margin-top: 2rem;
 }
@@ -86,6 +86,12 @@ h2 {
   color: rgb(136, 149, 194);
   text-shadow: 2px 2px 3px rgb(82, 82, 142);
   font-family: 'Chelsea Market', cursive;
+}
+
+h3 {
+  font-family: 'Chelsea Market', cursive;
+  margin-top: 2rem;
+
 }
 
 .product-info {
@@ -113,11 +119,3 @@ h2 {
 #white-link{
   color: white;
 }
-
-// .button a {
-//   text-decoration-color: white;
-// }
-// .body-text a.button-white {
-//   text-color: #e6e6e6;
-//   background-color: #8895c2;
-// }

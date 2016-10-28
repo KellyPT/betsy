@@ -12,7 +12,7 @@ class SessionsController < ApplicationController
   def create
     auth_hash = request.env['omniauth.auth']
     redirect_to login_failure_path unless auth_hash['uid']
-
+    # raise 
     @merchant = Merchant.find_by(uid: auth_hash[:uid], provider: 'github')
     if @merchant.nil?
       @merchant = Merchant.build_from_github(auth_hash)

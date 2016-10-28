@@ -1,18 +1,17 @@
-<h1>Order Fulfilment Page</h1>
-
-<section class="body-text">
-  <%= link_to "ALL ORDERS", orders_path %>
+<h2>Order Fulfilment Page</h2>
+</section>
   <%= form_for @merchant, method: :get, url: orders_path do |f| %>
-  <%= f.submit "COMPLETED" %>
-  <%= f.submit "PAID" %>
-  <%= f.submit "PENDING" %>
-  <%= f.submit "CANCELLED" %>
+  <%= f.button "ALL ORDERS", class: "button" %>
+  <%= f.submit "COMPLETED", class: "button"  %>
+  <%= f.submit "PAID", class: "button"  %>
+  <%= f.submit "PENDING", class: "button"  %>
+  <%= f.submit "CANCELLED", class: "button"  %>
   <% end %>
 </section>
 
 <main>
-  <section>
-    <ul>
+  <section class="row small-up-2">
+    <ul class="column">
       <li>TOTAL REVENUE: <%= OrderItem.sum_total_prices(@order_items)  %>
         <ul>
           <li>COMPLETED: <%= OrderItem.sum_total_prices(@completed_orders)  %>  </li>
@@ -22,10 +21,8 @@
         </ul>
       </li>
     </ul>
-  </section>
 
-  <section>
-    <ul>
+    <ul class="column">
       <li>
         TOTAL ORDER COUNT: <%= @order_items.count %>
         <ul>
