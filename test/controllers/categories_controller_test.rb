@@ -16,11 +16,6 @@ class CategoriesControllerTest < ActionController::TestCase
     assert_equal assigns(:category), categories(:one)
   end
 
-  def login_a_user
-    request.env['omniauth.auth'] = OmniAuth.config.mock_auth[:github]
-    get :create, { provider: "github" }
-  end
-
   test "should get the new form when a logged-in User create a new category" do
     session[:merchant_id] = merchants(:one).id
     get :new
