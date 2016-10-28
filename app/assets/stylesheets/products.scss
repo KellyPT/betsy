@@ -10,3 +10,37 @@
   color: rgb(82, 82, 142);
   font-size: 2rem;
 }
+
+.reviews-output {
+  padding-left: 5rem;
+}
+
+.reviews-input {
+  padding-left: 5rem;
+  padding-right: 5rem;
+}
+
+h4, h3 {
+  font-size: 2rem;
+}
+
+#review_rating, #review_description, .button {
+  background-color: rgba(245,242,225, 0.7);
+  border-radius: .25rem;
+}
+
+.button {
+  background-color: rgba(245,242,225, 1);
+  border-radius: .25rem;
+  border: 1px solid #cacaca;
+  color: rgb(136, 149, 194);
+}
+
+.button:hover {
+  background-color: rgba(245,242,225, 0.3);
+  color: rgb(82, 82, 142);
+}
+
+.all-reviews, label {
+  color: rgb(136, 149, 194);
+}
