@@ -36,10 +36,23 @@ payment_card:
   zip: 12345
   cc_four_digits: xxxx
   cc_expiration_date: ????
-  time_placed: $$$$
+  time_placed: "2016-10-24 12:53:49 -0700"
   CVV: ???
 
-two:
+controller_test_card:
+  order: filter_order_complete_shipped
+  buyer_name: "Ada Lovelace"
+  email: "ada@adadevacademy.com"
+  street: "Fourth Avenue"
+  city: "Seattle"
+  state: "WA"
+  zip: 12345
+  cc_four_digits: xxxx
+  cc_expiration_date: ????
+  time_placed: "2016-10-24 12:53:49 -0700"
+  CVV: ???
+
+three:
   order_id: 2
   buyer_name: "Kelly"
   email: "kelly@mama.com"
