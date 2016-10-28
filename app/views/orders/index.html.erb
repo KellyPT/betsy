@@ -1,18 +1,9 @@
 <h2>Order Fulfilment Page</h2>
-</section>
-  <%= form_for @merchant, method: :get, url: orders_path do |f| %>
-  <%= f.button "ALL ORDERS", class: "button" %>
-  <%= f.submit "COMPLETED", class: "button"  %>
-  <%= f.submit "PAID", class: "button"  %>
-  <%= f.submit "PENDING", class: "button"  %>
-  <%= f.submit "CANCELLED", class: "button"  %>
-  <% end %>
-</section>
 
 <main>
-  <section class="row small-up-2">
-    <ul class="column">
-      <li>TOTAL REVENUE: <%= OrderItem.sum_total_prices(@order_items)  %>
+  <section class="row">
+    <ul class="columns small-3">
+      <li><span class="totals">TOTAL REVENUE: <%= OrderItem.sum_total_prices(@order_items)  %></span>
         <ul>
           <li>COMPLETED: <%= OrderItem.sum_total_prices(@completed_orders)  %>  </li>
           <li>PAID: <%= OrderItem.sum_total_prices(@paid_orders)  %></li>
@@ -22,9 +13,9 @@
       </li>
     </ul>
 
-    <ul class="column">
+    <ul class="columns small-8">
       <li>
-        TOTAL ORDER COUNT: <%= @order_items.count %>
+        <span class="totals">TOTAL ORDER COUNT: <%= @order_items.count %></span>
         <ul>
           <li>COMPLETED: <%= @completed_orders.count %> </li>
           <li>PAID: <%= @paid_orders.count %></li>
@@ -35,9 +26,19 @@
     </ul>
   </section>
 
-  <section class="body-text">
+  </section class="row">
+    <%= form_for @merchant, method: :get, url: orders_path do |f| %>
+    <%= f.button "ALL ORDERS", class: "button" %>
+    <%= f.submit "COMPLETED", class: "button"  %>
+    <%= f.submit "PAID", class: "button"  %>
+    <%= f.submit "PENDING", class: "button"  %>
+    <%= f.submit "CANCELLED", class: "button"  %>
+    <% end %>
+  </section>
 
-    <ul>
+  <section class="body-text row small-up-3">
+
+    <ul class="column">
       <% @filtered_orders.each do |item| %>
       <p>----</p> <%# this is just space for reading for now%>
       <li>
