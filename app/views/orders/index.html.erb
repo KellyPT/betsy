@@ -1,54 +1,56 @@
 <h1>Order Fulfilment Page</h1>
 
-<%= link_to "ALL ORDERS", orders_path %>
-<%= form_for @merchant, method: :get, url: orders_path do |f| %>
+<section class="body-text">
+  <%= link_to "ALL ORDERS", orders_path %>
+  <%= form_for @merchant, method: :get, url: orders_path do |f| %>
   <%= f.submit "COMPLETED" %>
   <%= f.submit "PAID" %>
   <%= f.submit "PENDING" %>
   <%= f.submit "CANCELLED" %>
-<% end %>
+  <% end %>
+</section>
 
 <main>
   <section>
-      <ul>
-        <li>TOTAL REVENUE: <%= OrderItem.sum_total_prices(@order_items)  %>
-          <ul>
-            <li>COMPLETED: <%= OrderItem.sum_total_prices(@completed_orders)  %>  </li>
-            <li>PAID: <%= OrderItem.sum_total_prices(@paid_orders)  %></li>
-            <li>PENDING: <%= OrderItem.sum_total_prices(@pending_orders)  %></li>
-            <li>CANCELLED: <%= OrderItem.sum_total_prices(@cancelled_orders)    %></li>
-          </ul>
-        </li>
-      </ul>
+    <ul>
+      <li>TOTAL REVENUE: <%= OrderItem.sum_total_prices(@order_items)  %>
+        <ul>
+          <li>COMPLETED: <%= OrderItem.sum_total_prices(@completed_orders)  %>  </li>
+          <li>PAID: <%= OrderItem.sum_total_prices(@paid_orders)  %></li>
+          <li>PENDING: <%= OrderItem.sum_total_prices(@pending_orders)  %></li>
+          <li>CANCELLED: <%= OrderItem.sum_total_prices(@cancelled_orders)    %></li>
+        </ul>
+      </li>
+    </ul>
   </section>
 
   <section>
-      <ul>
-        <li>
+    <ul>
+      <li>
         TOTAL ORDER COUNT: <%= @order_items.count %>
-          <ul>
-            <li>COMPLETED: <%= @completed_orders.count %> </li>
-            <li>PAID: <%= @paid_orders.count %></li>
-            <li>PENDING: <%= @pending_orders.count %></li>
-            <li>CANCELLED: <%= @cancelled_orders.count %></li>
-          </ul>
-        </li>
-      </ul>
+        <ul>
+          <li>COMPLETED: <%= @completed_orders.count %> </li>
+          <li>PAID: <%= @paid_orders.count %></li>
+          <li>PENDING: <%= @pending_orders.count %></li>
+          <li>CANCELLED: <%= @cancelled_orders.count %></li>
+        </ul>
+      </li>
+    </ul>
   </section>
 
-  <section>
+  <section class="body-text">
 
     <ul>
-        <% @filtered_orders.each do |item| %>
-          <p>----</p> <%# this is just space for reading for now%>
-          <li>
-            <%= link_to "Ordered #{item.product.name}", order_item_path(item) %>
-            <%= render partial: "order_details", locals: {order_items: [item] } %>
-          </li>
-          <li> Underlying Order Status: <%= item.order.order_status %></li>
-          <li>Time Placed: <%= order_time_placed(item) %></li>
-          <li class= "link"><%= ship_order(item) %></li>
-        <% end %>
+      <% @filtered_orders.each do |item| %>
+      <p>----</p> <%# this is just space for reading for now%>
+      <li>
+        <%= link_to "Ordered #{item.product.name}", order_item_path(item) %>
+        <%= render partial: "order_details", locals: {order_items: [item] } %>
+      </li>
+      <li> Underlying Order Status: <%= item.order.order_status %></li>
+      <li>Time Placed: <%= order_time_placed(item) %></li>
+      <li class= "link"><%= ship_order(item) %></li>
+      <% end %>
     </ul>
   </section>
 </main>
