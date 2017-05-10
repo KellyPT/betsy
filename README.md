@@ -1,4 +1,13 @@
-# bEtsy
+# How to explore this code base:
+- This is a four-person project built in Ruby on Rails in 2 weeks. 
+- To view my code's contribution, please browse commit history. 
+- My main contributions:
+    - Built seed data
+    - Created oAuth functionalities for user authentication
+    - Created multiple Views
+    - Created tests for controllers' methods
+
+# Project Name: bEtsy
 [b]Etsy will be an online store where a wide variety of products can be listed and sold by any user. In this project we will focus on reinforcing the major components of Rails, Model Validation, as well as introducing some more complex logic such as user authentication.
 
 ## Project Learning Goals
